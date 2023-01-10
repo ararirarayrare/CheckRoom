@@ -12,7 +12,7 @@ class MainViewController: ViewController {
     private let logoImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.image = UIImage(named: "logo")
+        imageView.image = Icons.logo
         imageView.contentMode = .scaleAspectFit
         
         return imageView
@@ -36,26 +36,19 @@ class MainViewController: ViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-                
-        setup()
-        layout()
-        
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         navigationController?.navigationBar.prefersLargeTitles = false
     }
 
-    private func setup() {
-        view.backgroundColor = .white
+    override func setup() {
+        super.setup()
         headerView.coordinator = self.coordinator
     }
     
-    private func layout() {
+    override func layout() {
+        super.layout()
         view.addSubview(logoImageView)
         view.addSubview(headerView)
         

@@ -21,6 +21,18 @@ class ViewController: UIViewController {
         return false
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        setup()
+        layout()
+    }
+    
+    func setup() {
+        view.backgroundColor = .white
+    }
+    
+    func layout() { }
 }
 
 class NavigationController: UINavigationController {

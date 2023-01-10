@@ -1,27 +1,27 @@
 //
-//  CategoryViewController.swift
+//  SeasonViewController.swift
 //  CheckRoom
 //
-//  Created by mac on 09.01.2023.
+//  Created by mac on 10.01.2023.
 //
 
 import UIKit
 
-class CategoryViewController: ViewController {
+class SeasonViewController: ViewController {
     
     private let collectionView: CategoryCollectionView = {
         let images = [
-            UIImage(named: "top-category"),
-            UIImage(named: "bottom-category"),
-            UIImage(named: "shoes-category"),
-            UIImage(named: "accesories-category")
+            UIImage(named: "winter-season"),
+            UIImage(named: "summer-season"),
+            UIImage(named: "spring-season"),
+            UIImage(named: "autumn-season")
         ]
         
         let activeImages = [
-            UIImage(named: "top-category-active"),
-            UIImage(named: "bottom-category-active"),
-            UIImage(named: "shoes-category-active"),
-            UIImage(named: "accesories-category-active")
+            UIImage(named: "winter-season-active"),
+            UIImage(named: "summer-season-active"),
+            UIImage(named: "spring-season-active"),
+            UIImage(named: "autumn-season-active")
         ]
         
         let collectionView = CategoryCollectionView(defaultImages: images)
@@ -59,19 +59,32 @@ class CategoryViewController: ViewController {
         return button
     }()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    let coordinator: AddItemCoordinator
+    
+    init(coordinator: AddItemCoordinator) {
+        self.coordinator = coordinator
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    
+    @objc
+    private func saveTapped() {
+        coordinator.eventOccured(.saved)
+    }
+    
+    override func setup() {
+        super.setup()
+        title = "Choose a season"
         
-        setup()
-        layout()
+        saveButton.addTarget(self, action: #selector(saveTapped), for: .touchUpInside)
     }
     
-    private func setup() {
-        view.backgroundColor = .white
-        title = "Add to category"
-    }
-    
-    private func layout() {
+    override func layout() {
+        super.layout()
         view.addSubview(collectionView)
         view.addSubview(shadowView)
         view.addSubview(saveButton)
@@ -97,3 +110,5 @@ class CategoryViewController: ViewController {
         ])
     }
 }
+
+

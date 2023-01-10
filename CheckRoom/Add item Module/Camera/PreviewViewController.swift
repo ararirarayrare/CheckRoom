@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CameraViewController: ViewController {
+class PreviewViewController: ViewController {
     
     private let imageView: UIImageView = {
         let imageView = UIImageView()
@@ -32,27 +32,33 @@ class CameraViewController: ViewController {
         return button
     }()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        setup()
-        layout()
+    let coordinator: AddItemCoordinator
+    
+    init(coordinator: AddItemCoordinator) {
+        self.coordinator = coordinator
+        super.init(nibName: nil, bundle: nil)
     }
     
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+
         
-        let vc = CategoryViewController()
+        navigationController?.navigationBar.prefersLargeTitles = true
         
-        navigationController?.pushViewController(vc, animated: true)
+        if imageView.image == nil {
+            let imagePicker = UIImagePickerController()
+            imagePicker.modalPresentationStyle = .overFullScreen
+            imagePicker.allowsEditing = false
+            imagePicker.sourceType = .camera
+            imagePicker.delegate = self
+
+            present(imagePicker, animated: true)
+        }
         
-//        let imagePicker = UIImagePickerController()
-//        imagePicker.modalPresentationStyle = .overFullScreen
-//        imagePicker.allowsEditing = false
-//        imagePicker.sourceType = .camera
-//        imagePicker.delegate = self
-//
-//        present(imagePicker, animated: true)
     }
     
     @objc
@@ -62,14 +68,11 @@ class CameraViewController: ViewController {
     
     @objc
     private func saveTapped() {
-        let vc = CategoryViewController()
-        navigationController?.pushViewController(vc, animated: true)
+        coordinator.eventOccured(.category)
     }
     
-    private func setup() {
-        view.backgroundColor = .white
-
-        navigationController?.navigationBar.prefersLargeTitles = true
+    override func setup() {
+        super.setup()
         
         title = "Preview"
         
@@ -83,7 +86,8 @@ class CameraViewController: ViewController {
         saveButton.addTarget(self, action: #selector(saveTapped), for: .touchUpInside)
     }
     
-    private func layout() {
+    override func layout() {
+        super.layout()
         view.addSubview(saveButton)
         view.addSubview(imageView)
         
@@ -106,7 +110,7 @@ class CameraViewController: ViewController {
     
 }
 
-extension CameraViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+extension PreviewViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: false)
         navigationController?.popViewController(animated: true)
