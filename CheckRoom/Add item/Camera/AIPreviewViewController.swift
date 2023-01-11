@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PreviewViewController: ViewController {
+class AIPreviewViewController: ViewController {
     
     private let imageView: UIImageView = {
         let imageView = UIImageView()
@@ -32,9 +32,9 @@ class PreviewViewController: ViewController {
         return button
     }()
     
-    let coordinator: AddItemCoordinator
+    let coordinator: AICoordinator
     
-    init(coordinator: AddItemCoordinator) {
+    init(coordinator: AICoordinator) {
         self.coordinator = coordinator
         super.init(nibName: nil, bundle: nil)
     }
@@ -110,7 +110,7 @@ class PreviewViewController: ViewController {
     
 }
 
-extension PreviewViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+extension AIPreviewViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: false)
         navigationController?.popViewController(animated: true)

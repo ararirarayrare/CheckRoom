@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SubcategoryViewController: ViewController {
+class AISubcategoryViewController: ViewController {
     
     private let collectionView: CategoryCollectionView = {
         let images = [
@@ -55,9 +55,9 @@ class SubcategoryViewController: ViewController {
         return button
     }()
     
-    let coordinator: AddItemCoordinator
+    let coordinator: AICoordinator
     
-    init(coordinator: AddItemCoordinator) {
+    init(coordinator: AICoordinator) {
         self.coordinator = coordinator
         super.init(nibName: nil, bundle: nil)
     }

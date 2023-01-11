@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SavedViewController: ViewController {
+class SuccessViewController: ViewController {
     
     private let imageView: UIImageView = {
         let imageView = UIImageView()
@@ -47,9 +47,9 @@ class SavedViewController: ViewController {
         return button
     }()
     
-    let coordinator: AddItemCoordinator
+    let coordinator: AICoordinator
     
-    init(title: String, coordinator: AddItemCoordinator) {
+    init(title: String, coordinator: AICoordinator) {
         self.coordinator = coordinator
         super.init(nibName: nil, bundle: nil)
         
@@ -58,15 +58,6 @@ class SavedViewController: ViewController {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-//        UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0) {
-//            self.menuButtonWidthConstraint?.constant = 240
-//            self.view.layoutIfNeeded()
-//        }
     }
 
     @objc

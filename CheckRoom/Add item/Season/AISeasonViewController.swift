@@ -1,28 +1,17 @@
 //
-//  CategoryViewController.swift
+//  SeasonViewController.swift
 //  CheckRoom
 //
-//  Created by mac on 09.01.2023.
+//  Created by mac on 10.01.2023.
 //
 
 import UIKit
 
-class CategoryViewController: ViewController {
+class AISeasonViewController: ViewController {
     
     private let collectionView: CategoryCollectionView = {
-        let images = [
-            UIImage(named: "top-category"),
-            UIImage(named: "bottom-category"),
-            UIImage(named: "shoes-category"),
-            UIImage(named: "accesories-category")
-        ]
-        
-        let activeImages = [
-            UIImage(named: "top-category-active"),
-            UIImage(named: "bottom-category-active"),
-            UIImage(named: "shoes-category-active"),
-            UIImage(named: "accesories-category-active")
-        ]
+        let images = Season.allCases.compactMap { $0.image }
+        let activeImages = Season.allCases.compactMap { $0.imageActive }
         
         let collectionView = CategoryCollectionView(defaultImages: images)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -59,9 +48,9 @@ class CategoryViewController: ViewController {
         return button
     }()
     
-    let coordinator: AddItemCoordinator
+    let coordinator: AICoordinator
     
-    init(coordinator: AddItemCoordinator) {
+    init(coordinator: AICoordinator) {
         self.coordinator = coordinator
         super.init(nibName: nil, bundle: nil)
     }
@@ -70,20 +59,15 @@ class CategoryViewController: ViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
+    
     @objc
     private func saveTapped() {
-        if collectionView.selectedItem == 0 {
-            coordinator.eventOccured(.subcatecoryTop)
-        } else if collectionView.selectedItem == 3 {
-            coordinator.eventOccured(.accessory)
-        } else {
-            coordinator.eventOccured(.season)
-        }
+        coordinator.eventOccured(.saved)
     }
     
     override func setup() {
         super.setup()
-        title = "Add to category"
+        title = "Choose a season"
         
         saveButton.addTarget(self, action: #selector(saveTapped), for: .touchUpInside)
     }
@@ -115,3 +99,5 @@ class CategoryViewController: ViewController {
         ])
     }
 }
+
+

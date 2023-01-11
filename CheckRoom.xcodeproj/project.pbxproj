@@ -7,15 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		04309BEA296F353400A439D4 /* COLooksCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04309BE9296F353400A439D4 /* COLooksCollectionView.swift */; };
 		04C9C3A5296C6C20005C7003 /* Icons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C9C3A4296C6C20005C7003 /* Icons.swift */; };
-		04C9C3A8296C7487005C7003 /* PreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C9C3A7296C7487005C7003 /* PreviewViewController.swift */; };
+		04C9C3A8296C7487005C7003 /* AIPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C9C3A7296C7487005C7003 /* AIPreviewViewController.swift */; };
 		04C9C3AA296C7E0C005C7003 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C9C3A9296C7E0C005C7003 /* ViewController.swift */; };
-		04C9C3B0296C8460005C7003 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C9C3AF296C8460005C7003 /* CategoryViewController.swift */; };
+		04C9C3B0296C8460005C7003 /* AICategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C9C3AF296C8460005C7003 /* AICategoryViewController.swift */; };
 		04C9C3B2296C849A005C7003 /* CategoryCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C9C3B1296C849A005C7003 /* CategoryCollectionView.swift */; };
-		04C9C3BB296DE856005C7003 /* SubcategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C9C3BA296DE856005C7003 /* SubcategoryViewController.swift */; };
-		04C9C3BD296DE91E005C7003 /* AccessoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C9C3BC296DE91E005C7003 /* AccessoryViewController.swift */; };
-		04C9C3C0296DE9EB005C7003 /* SeasonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C9C3BF296DE9EB005C7003 /* SeasonViewController.swift */; };
-		04C9C3C3296DEA7D005C7003 /* SavedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C9C3C2296DEA7D005C7003 /* SavedViewController.swift */; };
+		04C9C3BB296DE856005C7003 /* AISubcategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C9C3BA296DE856005C7003 /* AISubcategoryViewController.swift */; };
+		04C9C3BD296DE91E005C7003 /* AIAccessoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C9C3BC296DE91E005C7003 /* AIAccessoryViewController.swift */; };
+		04C9C3C0296DE9EB005C7003 /* AISeasonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C9C3BF296DE9EB005C7003 /* AISeasonViewController.swift */; };
+		04C9C3C3296DEA7D005C7003 /* SuccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C9C3C2296DEA7D005C7003 /* SuccessViewController.swift */; };
+		04C9C3D7296F0F68005C7003 /* COSeasonsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C9C3D6296F0F68005C7003 /* COSeasonsViewController.swift */; };
+		04C9C3DA296F12C2005C7003 /* OopsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C9C3D9296F12C2005C7003 /* OopsViewController.swift */; };
+		04C9C3DC296F12F1005C7003 /* COLooksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C9C3DB296F12F1005C7003 /* COLooksViewController.swift */; };
+		04C9C3DE296F131D005C7003 /* COPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C9C3DD296F131D005C7003 /* COPreviewViewController.swift */; };
+		04C9C3E4296F2FFC005C7003 /* Season.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C9C3E3296F2FFC005C7003 /* Season.swift */; };
+		04C9C3E8296F30CD005C7003 /* COLooksCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C9C3E7296F30CD005C7003 /* COLooksCollectionViewCell.swift */; };
 		04E6B81B296C539C00E50AA8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E6B81A296C539C00E50AA8 /* AppDelegate.swift */; };
 		04E6B81D296C539C00E50AA8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E6B81C296C539C00E50AA8 /* SceneDelegate.swift */; };
 		04E6B81F296C539C00E50AA8 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E6B81E296C539C00E50AA8 /* MainViewController.swift */; };
@@ -27,15 +34,22 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		04309BE9296F353400A439D4 /* COLooksCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = COLooksCollectionView.swift; sourceTree = "<group>"; };
 		04C9C3A4296C6C20005C7003 /* Icons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icons.swift; sourceTree = "<group>"; };
-		04C9C3A7296C7487005C7003 /* PreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewViewController.swift; sourceTree = "<group>"; };
+		04C9C3A7296C7487005C7003 /* AIPreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIPreviewViewController.swift; sourceTree = "<group>"; };
 		04C9C3A9296C7E0C005C7003 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		04C9C3AF296C8460005C7003 /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
+		04C9C3AF296C8460005C7003 /* AICategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AICategoryViewController.swift; sourceTree = "<group>"; };
 		04C9C3B1296C849A005C7003 /* CategoryCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionView.swift; sourceTree = "<group>"; };
-		04C9C3BA296DE856005C7003 /* SubcategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubcategoryViewController.swift; sourceTree = "<group>"; };
-		04C9C3BC296DE91E005C7003 /* AccessoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessoryViewController.swift; sourceTree = "<group>"; };
-		04C9C3BF296DE9EB005C7003 /* SeasonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeasonViewController.swift; sourceTree = "<group>"; };
-		04C9C3C2296DEA7D005C7003 /* SavedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedViewController.swift; sourceTree = "<group>"; };
+		04C9C3BA296DE856005C7003 /* AISubcategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AISubcategoryViewController.swift; sourceTree = "<group>"; };
+		04C9C3BC296DE91E005C7003 /* AIAccessoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIAccessoryViewController.swift; sourceTree = "<group>"; };
+		04C9C3BF296DE9EB005C7003 /* AISeasonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AISeasonViewController.swift; sourceTree = "<group>"; };
+		04C9C3C2296DEA7D005C7003 /* SuccessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessViewController.swift; sourceTree = "<group>"; };
+		04C9C3D6296F0F68005C7003 /* COSeasonsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = COSeasonsViewController.swift; sourceTree = "<group>"; };
+		04C9C3D9296F12C2005C7003 /* OopsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OopsViewController.swift; sourceTree = "<group>"; };
+		04C9C3DB296F12F1005C7003 /* COLooksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = COLooksViewController.swift; sourceTree = "<group>"; };
+		04C9C3DD296F131D005C7003 /* COPreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = COPreviewViewController.swift; sourceTree = "<group>"; };
+		04C9C3E3296F2FFC005C7003 /* Season.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Season.swift; sourceTree = "<group>"; };
+		04C9C3E7296F30CD005C7003 /* COLooksCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = COLooksCollectionViewCell.swift; sourceTree = "<group>"; };
 		04E6B817296C539C00E50AA8 /* CheckRoom.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CheckRoom.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04E6B81A296C539C00E50AA8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		04E6B81C296C539C00E50AA8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -59,23 +73,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		04C9C3A6296C7471005C7003 /* Add item Module */ = {
+		04C9C3A6296C7471005C7003 /* Add item */ = {
 			isa = PBXGroup;
 			children = (
 				04C9C3B1296C849A005C7003 /* CategoryCollectionView.swift */,
 				04C9C3AB296C83DB005C7003 /* Camera */,
 				04C9C3AC296C83E2005C7003 /* Category */,
 				04C9C3AD296C8420005C7003 /* Subcategory */,
-				04C9C3AE296C842C005C7003 /* Accessory */,
-				04C9C3BE296DE9D1005C7003 /* Season */,
+				04C9C3DF296F1394005C7003 /* Accessory */,
+				04C9C3E0296F139E005C7003 /* Season */,
 			);
-			path = "Add item Module";
+			path = "Add item";
 			sourceTree = "<group>";
 		};
 		04C9C3AB296C83DB005C7003 /* Camera */ = {
 			isa = PBXGroup;
 			children = (
-				04C9C3A7296C7487005C7003 /* PreviewViewController.swift */,
+				04C9C3A7296C7487005C7003 /* AIPreviewViewController.swift */,
 			);
 			path = Camera;
 			sourceTree = "<group>";
@@ -83,7 +97,7 @@
 		04C9C3AC296C83E2005C7003 /* Category */ = {
 			isa = PBXGroup;
 			children = (
-				04C9C3AF296C8460005C7003 /* CategoryViewController.swift */,
+				04C9C3AF296C8460005C7003 /* AICategoryViewController.swift */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -91,33 +105,70 @@
 		04C9C3AD296C8420005C7003 /* Subcategory */ = {
 			isa = PBXGroup;
 			children = (
-				04C9C3BA296DE856005C7003 /* SubcategoryViewController.swift */,
+				04C9C3BA296DE856005C7003 /* AISubcategoryViewController.swift */,
 			);
 			path = Subcategory;
 			sourceTree = "<group>";
 		};
-		04C9C3AE296C842C005C7003 /* Accessory */ = {
+		04C9C3C1296DEA6B005C7003 /* Success */ = {
 			isa = PBXGroup;
 			children = (
-				04C9C3BC296DE91E005C7003 /* AccessoryViewController.swift */,
+				04C9C3C2296DEA7D005C7003 /* SuccessViewController.swift */,
+			);
+			path = Success;
+			sourceTree = "<group>";
+		};
+		04C9C3D5296F0E45005C7003 /* Create outfit */ = {
+			isa = PBXGroup;
+			children = (
+				04C9C3E1296F2FB6005C7003 /* Seasons */,
+				04C9C3E2296F2FBC005C7003 /* Looks */,
+				04C9C3DD296F131D005C7003 /* COPreviewViewController.swift */,
+				04C9C3E3296F2FFC005C7003 /* Season.swift */,
+			);
+			path = "Create outfit";
+			sourceTree = "<group>";
+		};
+		04C9C3D8296F12B2005C7003 /* Oops */ = {
+			isa = PBXGroup;
+			children = (
+				04C9C3D9296F12C2005C7003 /* OopsViewController.swift */,
+			);
+			path = Oops;
+			sourceTree = "<group>";
+		};
+		04C9C3DF296F1394005C7003 /* Accessory */ = {
+			isa = PBXGroup;
+			children = (
+				04C9C3BC296DE91E005C7003 /* AIAccessoryViewController.swift */,
 			);
 			path = Accessory;
 			sourceTree = "<group>";
 		};
-		04C9C3BE296DE9D1005C7003 /* Season */ = {
+		04C9C3E0296F139E005C7003 /* Season */ = {
 			isa = PBXGroup;
 			children = (
-				04C9C3BF296DE9EB005C7003 /* SeasonViewController.swift */,
+				04C9C3BF296DE9EB005C7003 /* AISeasonViewController.swift */,
 			);
 			path = Season;
 			sourceTree = "<group>";
 		};
-		04C9C3C1296DEA6B005C7003 /* Saved */ = {
+		04C9C3E1296F2FB6005C7003 /* Seasons */ = {
 			isa = PBXGroup;
 			children = (
-				04C9C3C2296DEA7D005C7003 /* SavedViewController.swift */,
+				04C9C3D6296F0F68005C7003 /* COSeasonsViewController.swift */,
 			);
-			path = Saved;
+			path = Seasons;
+			sourceTree = "<group>";
+		};
+		04C9C3E2296F2FBC005C7003 /* Looks */ = {
+			isa = PBXGroup;
+			children = (
+				04C9C3DB296F12F1005C7003 /* COLooksViewController.swift */,
+				04309BE9296F353400A439D4 /* COLooksCollectionView.swift */,
+				04C9C3E7296F30CD005C7003 /* COLooksCollectionViewCell.swift */,
+			);
+			path = Looks;
 			sourceTree = "<group>";
 		};
 		04E6B80E296C539C00E50AA8 = {
@@ -141,9 +192,11 @@
 			children = (
 				04E6B81A296C539C00E50AA8 /* AppDelegate.swift */,
 				04E6B81C296C539C00E50AA8 /* SceneDelegate.swift */,
-				04C9C3A6296C7471005C7003 /* Add item Module */,
+				04C9C3D5296F0E45005C7003 /* Create outfit */,
+				04C9C3A6296C7471005C7003 /* Add item */,
 				04E6B834296C550F00E50AA8 /* Main */,
-				04C9C3C1296DEA6B005C7003 /* Saved */,
+				04C9C3C1296DEA6B005C7003 /* Success */,
+				04C9C3D8296F12B2005C7003 /* Oops */,
 				04E6B82E296C53F000E50AA8 /* Builder */,
 				04E6B82F296C53F800E50AA8 /* Coordinator */,
 				04E6B825296C539F00E50AA8 /* LaunchScreen.storyboard */,
@@ -250,21 +303,28 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				04C9C3B0296C8460005C7003 /* CategoryViewController.swift in Sources */,
+				04C9C3B0296C8460005C7003 /* AICategoryViewController.swift in Sources */,
+				04C9C3DE296F131D005C7003 /* COPreviewViewController.swift in Sources */,
+				04C9C3D7296F0F68005C7003 /* COSeasonsViewController.swift in Sources */,
+				04C9C3E8296F30CD005C7003 /* COLooksCollectionViewCell.swift in Sources */,
 				04E6B831296C540800E50AA8 /* Coordinator.swift in Sources */,
 				04E6B81F296C539C00E50AA8 /* MainViewController.swift in Sources */,
-				04C9C3C3296DEA7D005C7003 /* SavedViewController.swift in Sources */,
+				04C9C3C3296DEA7D005C7003 /* SuccessViewController.swift in Sources */,
 				04E6B81B296C539C00E50AA8 /* AppDelegate.swift in Sources */,
 				04C9C3AA296C7E0C005C7003 /* ViewController.swift in Sources */,
-				04C9C3BB296DE856005C7003 /* SubcategoryViewController.swift in Sources */,
+				04C9C3BB296DE856005C7003 /* AISubcategoryViewController.swift in Sources */,
 				04C9C3B2296C849A005C7003 /* CategoryCollectionView.swift in Sources */,
 				04C9C3A5296C6C20005C7003 /* Icons.swift in Sources */,
 				04E6B81D296C539C00E50AA8 /* SceneDelegate.swift in Sources */,
-				04C9C3A8296C7487005C7003 /* PreviewViewController.swift in Sources */,
-				04C9C3BD296DE91E005C7003 /* AccessoryViewController.swift in Sources */,
-				04C9C3C0296DE9EB005C7003 /* SeasonViewController.swift in Sources */,
+				04C9C3E4296F2FFC005C7003 /* Season.swift in Sources */,
+				04C9C3A8296C7487005C7003 /* AIPreviewViewController.swift in Sources */,
+				04C9C3BD296DE91E005C7003 /* AIAccessoryViewController.swift in Sources */,
+				04C9C3DC296F12F1005C7003 /* COLooksViewController.swift in Sources */,
+				04C9C3DA296F12C2005C7003 /* OopsViewController.swift in Sources */,
+				04C9C3C0296DE9EB005C7003 /* AISeasonViewController.swift in Sources */,
 				04E6B836296C593600E50AA8 /* MainHeaderView.swift in Sources */,
 				04E6B833296C542D00E50AA8 /* Builder.swift in Sources */,
+				04309BEA296F353400A439D4 /* COLooksCollectionView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

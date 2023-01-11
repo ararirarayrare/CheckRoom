@@ -1,5 +1,5 @@
 //
-//  SeasonViewController.swift
+//  AccessoryViewController.swift
 //  CheckRoom
 //
 //  Created by mac on 10.01.2023.
@@ -7,21 +7,21 @@
 
 import UIKit
 
-class SeasonViewController: ViewController {
+class AIAccessoryViewController: ViewController {
     
     private let collectionView: CategoryCollectionView = {
         let images = [
-            UIImage(named: "winter-season"),
-            UIImage(named: "summer-season"),
-            UIImage(named: "spring-season"),
-            UIImage(named: "autumn-season")
+            UIImage(named: "hats-accessory"),
+            UIImage(named: "jewelery-accessory"),
+            UIImage(named: "scarves-accessory"),
+            UIImage(named: "glasses-accessory")
         ]
         
         let activeImages = [
-            UIImage(named: "winter-season-active"),
-            UIImage(named: "summer-season-active"),
-            UIImage(named: "spring-season-active"),
-            UIImage(named: "autumn-season-active")
+            UIImage(named: "hats-accessory-active"),
+            UIImage(named: "jewelery-accessory-active"),
+            UIImage(named: "scarves-accessory-active"),
+            UIImage(named: "glasses-accessory-active")
         ]
         
         let collectionView = CategoryCollectionView(defaultImages: images)
@@ -59,9 +59,9 @@ class SeasonViewController: ViewController {
         return button
     }()
     
-    let coordinator: AddItemCoordinator
+    let coordinator: AICoordinator
     
-    init(coordinator: AddItemCoordinator) {
+    init(coordinator: AICoordinator) {
         self.coordinator = coordinator
         super.init(nibName: nil, bundle: nil)
     }
@@ -70,15 +70,14 @@ class SeasonViewController: ViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
-    
     @objc
     private func saveTapped() {
-        coordinator.eventOccured(.saved)
+        coordinator.eventOccured(.season)
     }
     
     override func setup() {
         super.setup()
-        title = "Choose a season"
+        title = "Add accessory to"
         
         saveButton.addTarget(self, action: #selector(saveTapped), for: .touchUpInside)
     }
@@ -110,5 +109,4 @@ class SeasonViewController: ViewController {
         ])
     }
 }
-
 

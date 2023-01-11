@@ -7,7 +7,13 @@
 
 import UIKit
 
+protocol CategoryCollectionViewDelegateSelection: AnyObject {
+    func collectionView(_ collectionView: CategoryCollectionView, didSelectItemAt index: Int)
+}
+
 class CategoryCollectionView: UICollectionView {
+    
+    weak var selectionDelegate: CategoryCollectionViewDelegateSelection?
     
     let defaultImages: [UIImage?]
     
@@ -29,6 +35,8 @@ class CategoryCollectionView: UICollectionView {
         layout.scrollDirection = .vertical
         
         super.init(frame: .zero, collectionViewLayout: layout)
+        
+        backgroundColor = .clear
         
         contentInset.bottom = 160
         
@@ -72,7 +80,12 @@ extension CategoryCollectionView: UICollectionViewDelegate, UICollectionViewData
         
         cell.actionHandler = { [weak self] in
             self?.selectedItem = indexPath.item
-            self?.reloadData()
+            
+            if let self = self, let selectionDelegate = self.selectionDelegate {
+                selectionDelegate.collectionView(self, didSelectItemAt: indexPath.item)
+            } else {
+                self?.reloadData()
+            }
         }
         
         return cell

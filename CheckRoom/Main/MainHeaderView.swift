@@ -43,12 +43,14 @@ class MainHeaderView: UIView {
     private func setup() {
         let addItemView = MainHeaderViewButton(title: "Add an item",
                                                image: Icons.addItem) { [weak self] in
+            
             self?.coordinator?.eventOccured(.addItem)
         }
         
         let createOutfitView = MainHeaderViewButton(title: "Create outfit",
-                                                    image: Icons.createOutfit) {
+                                                    image: Icons.createOutfit) { [weak self] in
             
+            self?.coordinator?.eventOccured(.createOutfit)
         }
         let myOutfitsView = MainHeaderViewButton(title: "My outfits",
                                                  image: Icons.myOutfits) {

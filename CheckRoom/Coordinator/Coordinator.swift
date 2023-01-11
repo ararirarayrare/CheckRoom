@@ -22,7 +22,7 @@ protocol Coordinator: AnyObject {
 class MainCoordinator: Coordinator {
     
     enum Event {
-        case addItem
+        case addItem, createOutfit
     }
     
     private let builder: MainBuilder
@@ -41,9 +41,15 @@ class MainCoordinator: Coordinator {
     func eventOccured(_ event: Event) {
         switch event {
         case .addItem:
-            let builder = builder.createAddItemBuilder()
-            let coordinator = AddItemCoordinator(builder: builder,
+            let builder = builder.createAIBuilder()
+            let coordinator = AICoordinator(builder: builder,
                                                  navigationController: navigationController)
+            coordinator.parent = self
+            coordinator.start()
+        case .createOutfit:
+            let builder = builder.createCOBuilder()
+            let coordinator = COCoordinator(builder: builder,
+                                            navigationController: navigationController)
             coordinator.parent = self
             coordinator.start()
         }
@@ -57,7 +63,7 @@ class MainCoordinator: Coordinator {
     
 }
 
-class AddItemCoordinator: Coordinator {
+class AICoordinator: Coordinator {
     
     enum Event {
         case category, subcatecoryTop, accessory, season, saved, pop
@@ -69,9 +75,9 @@ class AddItemCoordinator: Coordinator {
     
     var navigationController: NavigationController?
     
-    let builder: AddItemBuilder
+    let builder: AIBuilder
     
-    init(builder: AddItemBuilder, navigationController: NavigationController?) {
+    init(builder: AIBuilder, navigationController: NavigationController?) {
         self.window = navigationController?.view.window
         self.navigationController = navigationController
         self.builder = builder
@@ -92,7 +98,7 @@ class AddItemCoordinator: Coordinator {
             let vc = builder.createSeason(coordinator: self)
             navigationController?.pushViewController(vc, animated: true)
         case .saved:
-            let vc = builder.createSaved(coordinator: self)
+            let vc = builder.createSuccess(coordinator: self)
             vc.modalTransitionStyle = .crossDissolve
             vc.modalPresentationStyle = .overFullScreen
             navigationController?.present(vc, animated: true)
@@ -104,8 +110,45 @@ class AddItemCoordinator: Coordinator {
     }
     
     func start() {
-        let vc = builder.createCamera(coordinator: self)
+        let vc = builder.createPreview(coordinator: self)
         navigationController?.pushViewController(vc, animated: false)
     }
+    
+}
+
+
+class COCoordinator: Coordinator {
+    
+    enum Event {
+        case looks(Season)
+    }
+    
+    var parent: Coordinator?
+    
+    var window: UIWindow?
+    
+    var navigationController: NavigationController?
+    
+    let builder: COBuilder
+    
+    init(builder: COBuilder, navigationController: NavigationController?) {
+        self.builder = builder
+        self.navigationController = navigationController
+        self.window = navigationController?.view.window
+    }
+    
+    func eventOccured(_ event: Event) {
+        switch event {
+        case .looks(let season):
+            let vc = builder.createLooks(forSeason: season, coordinator: self)
+            navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+    
+    func start() {
+        let vc = builder.createSeasons(coordinator: self)
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
     
 }

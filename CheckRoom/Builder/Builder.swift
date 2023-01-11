@@ -9,50 +9,71 @@ import UIKit
 
 class MainBuilder {
     
-    private var addItemBuilder: AddItemBuilder?
+    private var aiBuilder: AIBuilder?
+    private var coBuilder: COBuilder?
     
     func createMain(coordinator: MainCoordinator) -> MainViewController {
         let vc = MainViewController(coordinator: coordinator)
         return vc
     }
     
-    func createAddItemBuilder() -> AddItemBuilder {
-        let builder = AddItemBuilder()
-        self.addItemBuilder = builder
+    func createAIBuilder() -> AIBuilder {
+        let builder = AIBuilder()
+        self.aiBuilder = builder
+        return builder
+    }
+    
+    func createCOBuilder() -> COBuilder {
+        let builder = COBuilder()
+        self.coBuilder = builder
         return builder
     }
 }
 
-class AddItemBuilder {
+class AIBuilder {
     
-    func createPreview(coordinator: AddItemCoordinator) -> PreviewViewController {
-        let vc = PreviewViewController(coordinator: coordinator)
+    func createPreview(coordinator: AICoordinator) -> AIPreviewViewController {
+        let vc = AIPreviewViewController(coordinator: coordinator)
         return vc
     }
     
-    func createCategory(coordinator: AddItemCoordinator) -> CategoryViewController {
-        let vc = CategoryViewController(coordinator: coordinator)
+    func createCategory(coordinator: AICoordinator) -> AICategoryViewController {
+        let vc = AICategoryViewController(coordinator: coordinator)
         return vc
     }
     
-    func createSubcategory(coordinator: AddItemCoordinator) -> SubcategoryViewController {
-        let vc = SubcategoryViewController(coordinator: coordinator)
+    func createSubcategory(coordinator: AICoordinator) -> AISubcategoryViewController {
+        let vc = AISubcategoryViewController(coordinator: coordinator)
         return vc
     }
     
-    func createAccessory(coordinator: AddItemCoordinator) -> AccessoryViewController {
-        let vc = AccessoryViewController(coordinator: coordinator)
+    func createAccessory(coordinator: AICoordinator) -> AIAccessoryViewController {
+        let vc = AIAccessoryViewController(coordinator: coordinator)
         return vc
     }
     
-    func createSeason(coordinator: AddItemCoordinator) -> SeasonViewController {
-        let vc = SeasonViewController(coordinator: coordinator)
+    func createSeason(coordinator: AICoordinator) -> AISeasonViewController {
+        let vc = AISeasonViewController(coordinator: coordinator)
         return vc
     }
     
-    func createSaved(coordinator: AddItemCoordinator) -> SavedViewController {
-        let vc = SavedViewController(title: "Congratulations, the item was saved!",
+    func createSuccess(coordinator: AICoordinator) -> SuccessViewController {
+        let vc = SuccessViewController(title: "Congratulations, the item was saved!",
                                      coordinator: coordinator)
         return vc
     }
+}
+
+class COBuilder {
+    
+    func createSeasons(coordinator: COCoordinator) -> COSeasonsViewController {
+        let vc = COSeasonsViewController(coordinator: coordinator)
+        return vc
+    }
+    
+    func createLooks(forSeason season: Season, coordinator: COCoordinator) -> COLooksViewController {
+        let vc = COLooksViewController(coordinator: coordinator, season: season)
+        return vc
+    }
+    
 }

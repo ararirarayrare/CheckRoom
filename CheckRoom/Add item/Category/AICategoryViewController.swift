@@ -1,27 +1,27 @@
 //
-//  AccessoryViewController.swift
+//  CategoryViewController.swift
 //  CheckRoom
 //
-//  Created by mac on 10.01.2023.
+//  Created by mac on 09.01.2023.
 //
 
 import UIKit
 
-class AccessoryViewController: ViewController {
+class AICategoryViewController: ViewController {
     
     private let collectionView: CategoryCollectionView = {
         let images = [
-            UIImage(named: "hats-accessory"),
-            UIImage(named: "jewelery-accessory"),
-            UIImage(named: "scarves-accessory"),
-            UIImage(named: "glasses-accessory")
+            UIImage(named: "top-category"),
+            UIImage(named: "bottom-category"),
+            UIImage(named: "shoes-category"),
+            UIImage(named: "accesories-category")
         ]
         
         let activeImages = [
-            UIImage(named: "hats-accessory-active"),
-            UIImage(named: "jewelery-accessory-active"),
-            UIImage(named: "scarves-accessory-active"),
-            UIImage(named: "glasses-accessory-active")
+            UIImage(named: "top-category-active"),
+            UIImage(named: "bottom-category-active"),
+            UIImage(named: "shoes-category-active"),
+            UIImage(named: "accesories-category-active")
         ]
         
         let collectionView = CategoryCollectionView(defaultImages: images)
@@ -59,9 +59,9 @@ class AccessoryViewController: ViewController {
         return button
     }()
     
-    let coordinator: AddItemCoordinator
+    let coordinator: AICoordinator
     
-    init(coordinator: AddItemCoordinator) {
+    init(coordinator: AICoordinator) {
         self.coordinator = coordinator
         super.init(nibName: nil, bundle: nil)
     }
@@ -72,12 +72,18 @@ class AccessoryViewController: ViewController {
 
     @objc
     private func saveTapped() {
-        coordinator.eventOccured(.season)
+        if collectionView.selectedItem == 0 {
+            coordinator.eventOccured(.subcatecoryTop)
+        } else if collectionView.selectedItem == 3 {
+            coordinator.eventOccured(.accessory)
+        } else {
+            coordinator.eventOccured(.season)
+        }
     }
     
     override func setup() {
         super.setup()
-        title = "Add accessory to"
+        title = "Add to category"
         
         saveButton.addTarget(self, action: #selector(saveTapped), for: .touchUpInside)
     }
@@ -109,4 +115,3 @@ class AccessoryViewController: ViewController {
         ])
     }
 }
-
