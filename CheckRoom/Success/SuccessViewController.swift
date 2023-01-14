@@ -47,9 +47,9 @@ class SuccessViewController: ViewController {
         return button
     }()
     
-    let coordinator: AICoordinator
+    let coordinator: Coordinator
     
-    init(title: String, coordinator: AICoordinator) {
+    init(title: String, coordinator: Coordinator) {
         self.coordinator = coordinator
         super.init(nibName: nil, bundle: nil)
         
@@ -62,7 +62,7 @@ class SuccessViewController: ViewController {
 
     @objc
     private func menuTapped() {
-        coordinator.eventOccured(.pop)
+        coordinator.pop()
     }
     
     override func setup() {

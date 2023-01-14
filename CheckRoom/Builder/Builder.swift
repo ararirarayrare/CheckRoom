@@ -10,7 +10,7 @@ import UIKit
 class MainBuilder {
     
     private var aiBuilder: AIBuilder?
-    private var coBuilder: COBuilder?
+    private var toBuilder: TOBuilder?
     
     func createMain(coordinator: MainCoordinator) -> MainViewController {
         let vc = MainViewController(coordinator: coordinator)
@@ -23,9 +23,9 @@ class MainBuilder {
         return builder
     }
     
-    func createCOBuilder() -> COBuilder {
-        let builder = COBuilder()
-        self.coBuilder = builder
+    func createTOBuilder() -> TOBuilder {
+        let builder = TOBuilder()
+        self.toBuilder = builder
         return builder
     }
 }
@@ -57,22 +57,34 @@ class AIBuilder {
         return vc
     }
     
-    func createSuccess(coordinator: AICoordinator) -> SuccessViewController {
+    func createSuccess(coordinator: Coordinator) -> SuccessViewController {
         let vc = SuccessViewController(title: "Congratulations, the item was saved!",
                                      coordinator: coordinator)
         return vc
     }
 }
 
-class COBuilder {
+class TOBuilder {
     
-    func createSeasons(coordinator: COCoordinator) -> COSeasonsViewController {
-        let vc = COSeasonsViewController(coordinator: coordinator)
+    func createSeasons(coordinator: TOCoordinator) -> TOSeasonsViewController {
+        let vc = TOSeasonsViewController(coordinator: coordinator)
         return vc
     }
     
-    func createLooks(forSeason season: Season, coordinator: COCoordinator) -> COLooksViewController {
-        let vc = COLooksViewController(coordinator: coordinator, season: season)
+    func createLooks(forSeason season: Season, coordinator: TOCoordinator) -> TOLooksViewController {
+        let vc = TOLooksViewController(coordinator: coordinator, season: season)
+        return vc
+    }
+    
+    func createPreview(forLook image: UIImage?, coordinator: TOCoordinator) -> TOPreviewViewController {
+        let vc = TOPreviewViewController(coordinator: coordinator)
+        vc.imageView.image = image
+        return vc
+    }
+    
+    func createSuccess(coordinator: Coordinator) -> SuccessViewController {
+        let vc = SuccessViewController(title: "Congratulations, your outfit has been saved for tomorrow!",
+                                     coordinator: coordinator)
         return vc
     }
     

@@ -17,12 +17,20 @@ protocol Coordinator: AnyObject {
     
     func start()
     
+    func pop()
+}
+
+extension Coordinator {
+    func pop() {
+        navigationController?.presentedViewController?.dismiss(animated: false)
+        navigationController?.popToRootViewController(animated: true)
+    }
 }
 
 class MainCoordinator: Coordinator {
     
     enum Event {
-        case addItem, createOutfit
+        case addItem, tomorrowOutfit
     }
     
     private let builder: MainBuilder
@@ -46,9 +54,10 @@ class MainCoordinator: Coordinator {
                                                  navigationController: navigationController)
             coordinator.parent = self
             coordinator.start()
-        case .createOutfit:
-            let builder = builder.createCOBuilder()
-            let coordinator = COCoordinator(builder: builder,
+            
+        case .tomorrowOutfit:
+            let builder = builder.createTOBuilder()
+            let coordinator = TOCoordinator(builder: builder,
                                             navigationController: navigationController)
             coordinator.parent = self
             coordinator.start()
@@ -66,7 +75,7 @@ class MainCoordinator: Coordinator {
 class AICoordinator: Coordinator {
     
     enum Event {
-        case category, subcatecoryTop, accessory, season, saved, pop
+        case category, subcatecoryTop, accessory, season, saved
     }
     
     weak var parent: Coordinator?
@@ -99,13 +108,10 @@ class AICoordinator: Coordinator {
             navigationController?.pushViewController(vc, animated: true)
         case .saved:
             let vc = builder.createSuccess(coordinator: self)
-            vc.modalTransitionStyle = .crossDissolve
+            vc.modalTransitionStyle = .coverVertical
             vc.modalPresentationStyle = .overFullScreen
             navigationController?.present(vc, animated: true)
 //            navigationController?.pushViewController(vc, animated: true)
-        case .pop:
-            navigationController?.presentedViewController?.dismiss(animated: false)
-            navigationController?.popToRootViewController(animated: true)
         }
     }
     
@@ -117,10 +123,10 @@ class AICoordinator: Coordinator {
 }
 
 
-class COCoordinator: Coordinator {
+class TOCoordinator: Coordinator {
     
     enum Event {
-        case looks(Season)
+        case looks(Season), preview(UIImage?), saved
     }
     
     var parent: Coordinator?
@@ -129,9 +135,9 @@ class COCoordinator: Coordinator {
     
     var navigationController: NavigationController?
     
-    let builder: COBuilder
+    let builder: TOBuilder
     
-    init(builder: COBuilder, navigationController: NavigationController?) {
+    init(builder: TOBuilder, navigationController: NavigationController?) {
         self.builder = builder
         self.navigationController = navigationController
         self.window = navigationController?.view.window
@@ -142,6 +148,16 @@ class COCoordinator: Coordinator {
         case .looks(let season):
             let vc = builder.createLooks(forSeason: season, coordinator: self)
             navigationController?.pushViewController(vc, animated: true)
+        case .preview(let image):
+            let vc = builder.createPreview(forLook: image, coordinator: self)
+            navigationController?.pushViewController(vc, animated: true)
+            
+            
+        case .saved:
+            let vc = builder.createSuccess(coordinator: self)
+            vc.modalTransitionStyle = .coverVertical
+            vc.modalPresentationStyle = .overFullScreen
+            navigationController?.present(vc, animated: true)
         }
     }
     

@@ -48,17 +48,19 @@ class MainHeaderView: UIView {
         }
         
         let createOutfitView = MainHeaderViewButton(title: "Create outfit",
-                                                    image: Icons.createOutfit) { [weak self] in
+                                                    image: Icons.createOutfit) {
             
-            self?.coordinator?.eventOccured(.createOutfit)
+            
         }
+        
         let myOutfitsView = MainHeaderViewButton(title: "My outfits",
                                                  image: Icons.myOutfits) {
             
         }
         let tomorrowOutfit = MainHeaderViewButton(title: "Choose outfit for tomorrow",
-                                                  image: Icons.tomorrowOutfit) {
+                                                  image: Icons.tomorrowOutfit) { [weak self] in
             
+            self?.coordinator?.eventOccured(.tomorrowOutfit)
         }
         
         [addItemView, createOutfitView, myOutfitsView, tomorrowOutfit].enumerated().forEach { index, view in

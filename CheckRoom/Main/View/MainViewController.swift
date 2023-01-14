@@ -49,6 +49,7 @@ class MainViewController: ViewController {
     
     override func layout() {
         super.layout()
+        
         view.addSubview(logoImageView)
         view.addSubview(headerView)
         

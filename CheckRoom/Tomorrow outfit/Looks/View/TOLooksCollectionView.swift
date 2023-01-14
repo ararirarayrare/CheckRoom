@@ -7,8 +7,13 @@
 
 import UIKit
 
-class COLooksCollectionView: UICollectionView {
+protocol TOLooksCollectionViewDelegateSelection: AnyObject {
+    func collectionView(_ collectionView: TOLooksCollectionView, didSelectImage image: UIImage?)
+}
+
+class TOLooksCollectionView: UICollectionView {
     
+    weak var selectionDelegate: TOLooksCollectionViewDelegateSelection?
     
     let looks: [UIImage?]
     
@@ -28,10 +33,20 @@ class COLooksCollectionView: UICollectionView {
         delegate = self
         dataSource = self
         
-        let cellClass = COLooksCollectionViewCell.self
+        let cellClass = TOLooksCollectionViewCell.self
         let identifier = String(describing: cellClass)
         
         register(cellClass, forCellWithReuseIdentifier: identifier)
+    }
+    
+    @objc
+    private func cellTapped(_ sender: UITapGestureRecognizer) {
+        
+        guard let image = (sender.view as? UIImageView)?.image else {
+            return
+        }
+        
+        selectionDelegate?.collectionView(self, didSelectImage: image)
     }
     
     required init?(coder: NSCoder) {
@@ -40,7 +55,7 @@ class COLooksCollectionView: UICollectionView {
     
 }
 
-extension COLooksCollectionView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension TOLooksCollectionView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return looks.count
@@ -48,13 +63,17 @@ extension COLooksCollectionView: UICollectionViewDelegate, UICollectionViewDataS
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let identifier = String(describing: COLooksCollectionViewCell.self)
+        let identifier = String(describing: TOLooksCollectionViewCell.self)
         
-        guard let cell = dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as? COLooksCollectionViewCell else {
-            return COLooksCollectionViewCell()
+        guard let cell = dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as? TOLooksCollectionViewCell else {
+            return TOLooksCollectionViewCell()
         }
         
         cell.imageView.image = looks[indexPath.item]
+        cell.imageView.isUserInteractionEnabled = true
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(cellTapped(_:)))
+        cell.imageView.addGestureRecognizer(tapGesture)
         
         return cell
     }

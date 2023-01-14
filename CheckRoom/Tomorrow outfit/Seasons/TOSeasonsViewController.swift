@@ -7,7 +7,7 @@
 
 import UIKit
 
-class COSeasonsViewController: ViewController {
+class TOSeasonsViewController: ViewController {
     
     private let collectionView: CategoryCollectionView = {
         let images = Season.allCases.compactMap { $0.image }
@@ -36,9 +36,9 @@ class COSeasonsViewController: ViewController {
         return view
     }()
     
-    let coordinator: COCoordinator
+    let coordinator: TOCoordinator
     
-    init(coordinator: COCoordinator) {
+    init(coordinator: TOCoordinator) {
         self.coordinator = coordinator
         super.init(nibName: nil, bundle: nil)
     }
@@ -82,7 +82,7 @@ class COSeasonsViewController: ViewController {
     }
 }
 
-extension COSeasonsViewController: CategoryCollectionViewDelegateSelection {
+extension TOSeasonsViewController: CategoryCollectionViewDelegateSelection {
     func collectionView(_ collectionView: CategoryCollectionView, didSelectItemAt index: Int) {
         let season = Season.allCases[index]
         
