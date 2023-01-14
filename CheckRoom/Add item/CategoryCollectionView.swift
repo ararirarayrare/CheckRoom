@@ -137,9 +137,11 @@ class CategoryCollectionViewCell: UICollectionViewCell {
     
     
     private func setup() {
-        layer.shadowColor = UIColor.darkGray.cgColor
-        layer.shadowRadius = 12
-        layer.shadowOpacity = 0.15
+        backgroundColor = .clear
+        
+//        layer.shadowColor = UIColor.darkGray.cgColor
+//        layer.shadowRadius = 12
+//        layer.shadowOpacity = 0.15
         
         button.addTarget(self, action: #selector(selected), for: .touchUpInside)
     }
