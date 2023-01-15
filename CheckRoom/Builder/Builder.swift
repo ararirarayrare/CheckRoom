@@ -7,9 +7,21 @@
 
 import UIKit
 
-class MainBuilder {
+protocol Builder {
+
+}
+
+extension Builder {
+    func createSuccess(title: String, coordinator: Coordinator) -> SuccessViewController {
+        let vc = SuccessViewController(title: title, coordinator: coordinator)
+        return vc
+    }
+}
+
+class MainBuilder: Builder {
     
     private var aiBuilder: AIBuilder?
+    private var coBuilder: COBuilder?
     private var toBuilder: TOBuilder?
     
     func createMain(coordinator: MainCoordinator) -> MainViewController {
@@ -23,6 +35,12 @@ class MainBuilder {
         return builder
     }
     
+    func createCOBuilder() -> COBuilder {
+        let builder = COBuilder()
+        self.coBuilder = builder
+        return builder
+    }
+    
     func createTOBuilder() -> TOBuilder {
         let builder = TOBuilder()
         self.toBuilder = builder
@@ -30,7 +48,7 @@ class MainBuilder {
     }
 }
 
-class AIBuilder {
+class AIBuilder: Builder {
     
     func createPreview(coordinator: AICoordinator) -> AIPreviewViewController {
         let vc = AIPreviewViewController(coordinator: coordinator)
@@ -56,15 +74,9 @@ class AIBuilder {
         let vc = AISeasonViewController(coordinator: coordinator)
         return vc
     }
-    
-    func createSuccess(coordinator: Coordinator) -> SuccessViewController {
-        let vc = SuccessViewController(title: "Congratulations, the item was saved!",
-                                     coordinator: coordinator)
-        return vc
-    }
 }
 
-class TOBuilder {
+class TOBuilder: Builder {
     
     func createSeasons(coordinator: TOCoordinator) -> TOSeasonsViewController {
         let vc = TOSeasonsViewController(coordinator: coordinator)
@@ -82,10 +94,23 @@ class TOBuilder {
         return vc
     }
     
-    func createSuccess(coordinator: Coordinator) -> SuccessViewController {
-        let vc = SuccessViewController(title: "Congratulations, your outfit has been saved for tomorrow!",
-                                     coordinator: coordinator)
+}
+
+class COBuilder: Builder {
+    
+    func createSeasons(coordinator: COCoordinator) -> COSeasonsViewController {
+        let vc = COSeasonsViewController(coordinator: coordinator)
         return vc
     }
     
+    func createItems(forSeason season: Season, coordinator: COCoordinator) -> COItemsViewController {
+        let vc = COItemsViewController(season: season, coordinator: coordinator)
+        return vc
+    }
+    
+    func createPreview(forLook image: UIImage?, coordinator: COCoordinator) -> COPreviewViewController {
+        let vc = COPreviewViewController(coordinator: coordinator)
+        vc.imageView.image = image
+        return vc
+    }
 }
