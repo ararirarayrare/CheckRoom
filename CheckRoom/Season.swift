@@ -8,7 +8,26 @@
 import UIKit
 
 enum Season: CaseIterable {
+    
     case summer, autumn, winter, spring
+    
+    static var current: Self {
+        let month = Calendar.current.dateComponents([.month], from: Date()).month ?? -1
+        
+        switch month {
+        case 12, 0...2:
+            return .winter
+        case 3...5:
+            return .autumn
+        case 6...8:
+            return .summer
+        case 9...11:
+            return .spring
+            
+        default:
+            return .summer
+        }
+    }
     
     var title: String {
         switch self {

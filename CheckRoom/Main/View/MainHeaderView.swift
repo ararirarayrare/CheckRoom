@@ -54,8 +54,9 @@ class MainHeaderView: UIView {
         }
         
         let myOutfitsView = MainHeaderViewButton(title: "My outfits",
-                                                 image: Icons.myOutfits) {
+                                                 image: Icons.myOutfits) { [weak self] in
             
+            self?.coordinator?.eventOccured(.myOutfits)
         }
         let tomorrowOutfit = MainHeaderViewButton(title: "Choose outfit for tomorrow",
                                                   image: Icons.tomorrowOutfit) { [weak self] in

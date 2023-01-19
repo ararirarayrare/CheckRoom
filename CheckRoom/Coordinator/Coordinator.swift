@@ -29,7 +29,7 @@ extension Coordinator {
 class MainCoordinator: Coordinator {
     
     enum Event {
-        case addItem, createOutfit, tomorrowOutfit
+        case addItem, createOutfit, tomorrowOutfit, myOutfits
     }
     
     private let builder: MainBuilder
@@ -64,6 +64,13 @@ class MainCoordinator: Coordinator {
         case .tomorrowOutfit:
             let builder = builder.createTOBuilder()
             let coordinator = TOCoordinator(builder: builder,
+                                            navigationController: navigationController)
+            coordinator.parent = self
+            coordinator.start()
+            
+        case .myOutfits:
+            let builder = builder.createMOBuilder()
+            let coordinator = MOCoordinator(builder: builder,
                                             navigationController: navigationController)
             coordinator.parent = self
             coordinator.start()

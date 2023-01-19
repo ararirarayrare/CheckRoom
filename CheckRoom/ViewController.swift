@@ -54,3 +54,9 @@ class NavigationController: UINavigationController {
     
     
 }
+
+extension UINavigationController {
+    var rootViewController: UIViewController? {
+        return viewControllers.first
+    }
+}
