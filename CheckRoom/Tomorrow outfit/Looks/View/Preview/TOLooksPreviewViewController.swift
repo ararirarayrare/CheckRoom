@@ -135,7 +135,7 @@ class TOLooksPreviewViewController: ViewController {
     
     private func animateHiding() {
         
-        UIView.animate(withDuration: 0.25) {
+        UIView.animate(withDuration: 0.2) {
             
             self.containerView.frame.size = self.imageModel.size
             self.containerView.frame.origin = self.imageModel.origin

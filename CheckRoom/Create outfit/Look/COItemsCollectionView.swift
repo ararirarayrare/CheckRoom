@@ -17,17 +17,18 @@ class COItemsCollectionView: UICollectionView {
     
     let items: [UIImage?]
     
-    init(items: [UIImage?]) {
+    init(items: [UIImage?], frame: CGRect) {
         self.items = items
         
-        let layout = UICollectionViewFlowLayout()
+        let layout = CarouselFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.minimumLineSpacing = 20
+        layout.itemSize = CGSize(width: frame.width * 0.5,
+                                 height: frame.height)
         
-        super.init(frame: .zero, collectionViewLayout: layout)
-        
-        backgroundColor = .clear
-        
+        super.init(frame: frame, collectionViewLayout: layout)
+                
+        contentInset = .zero
+
         showsVerticalScrollIndicator = false
         showsHorizontalScrollIndicator = false
         
@@ -66,19 +67,32 @@ extension COItemsCollectionView: UICollectionViewDelegate, UICollectionViewDataS
         return cell
     }
     
+    
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+//    
+//        return UIEdgeInsets(top: 0, left: bounds.width / 4, bottom: 0, right: 0)
+//    }
+    
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//
+//        return CGSize(width: bounds.width * 0.5,
+//                      height: bounds.height)
+//    }
 }
 
 class COItemsCollectionViewCell: UICollectionViewCell {
     
     let imageView: UIImageView = {
         let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.contentMode = .scaleAspectFit
         
         return imageView
     }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+
         layout()
     }
     

@@ -10,6 +10,7 @@
 		04309BEA296F353400A439D4 /* TOLooksCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04309BE9296F353400A439D4 /* TOLooksCollectionView.swift */; };
 		04309C1429733BF700A439D4 /* TOLooksPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04309C1329733BF700A439D4 /* TOLooksPreviewViewController.swift */; };
 		04309C1629733C8200A439D4 /* TOLookImageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04309C1529733C8200A439D4 /* TOLookImageModel.swift */; };
+		04439443297962E000FAFD09 /* Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04439442297962E000FAFD09 /* Layout.swift */; };
 		04C9C3A5296C6C20005C7003 /* Icons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C9C3A4296C6C20005C7003 /* Icons.swift */; };
 		04C9C3A8296C7487005C7003 /* AIPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C9C3A7296C7487005C7003 /* AIPreviewViewController.swift */; };
 		04C9C3AA296C7E0C005C7003 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C9C3A9296C7E0C005C7003 /* ViewController.swift */; };
@@ -46,6 +47,7 @@
 		04309BE9296F353400A439D4 /* TOLooksCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TOLooksCollectionView.swift; sourceTree = "<group>"; };
 		04309C1329733BF700A439D4 /* TOLooksPreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TOLooksPreviewViewController.swift; sourceTree = "<group>"; };
 		04309C1529733C8200A439D4 /* TOLookImageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TOLookImageModel.swift; sourceTree = "<group>"; };
+		04439442297962E000FAFD09 /* Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Layout.swift; sourceTree = "<group>"; };
 		04C9C3A4296C6C20005C7003 /* Icons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icons.swift; sourceTree = "<group>"; };
 		04C9C3A7296C7487005C7003 /* AIPreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIPreviewViewController.swift; sourceTree = "<group>"; };
 		04C9C3A9296C7E0C005C7003 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -254,6 +256,7 @@
 			children = (
 				04D480AD2974229C00A961EE /* COItemsViewController.swift */,
 				04D480AF2974231700A961EE /* COItemsCollectionView.swift */,
+				04439442297962E000FAFD09 /* Layout.swift */,
 			);
 			path = Look;
 			sourceTree = "<group>";
@@ -407,6 +410,7 @@
 				04D480B6297447FE00A961EE /* COCoordinator.swift in Sources */,
 				04C9C3DE296F131D005C7003 /* TOPreviewViewController.swift in Sources */,
 				04C9C3D7296F0F68005C7003 /* TOSeasonsViewController.swift in Sources */,
+				04439443297962E000FAFD09 /* Layout.swift in Sources */,
 				04D480B4297447F200A961EE /* TOCoordinator.swift in Sources */,
 				04C9C3E8296F30CD005C7003 /* TOLooksCollectionViewCell.swift in Sources */,
 				04D480AA29741CDF00A961EE /* COSeasonViewController.swift in Sources */,

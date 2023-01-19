@@ -9,11 +9,29 @@ import UIKit
 
 class COItemsViewController: ViewController {
     
-    private lazy var topCollectionView = createCollectionView(withItems: [])
+    private lazy var topCollectionView = createCollectionView(
+        withItems: Array(repeating: UIImage(named: "top-item"), count: 4),
+        frame: CGRect(x: 0,
+                      y: 120,
+                      width: view.bounds.width,
+                      height: (view.bounds.height - 120)  * 0.25)
+    )
     
-    private lazy var bottomCollectionView = createCollectionView(withItems: [])
+    private lazy var bottomCollectionView = createCollectionView(
+        withItems: Array(repeating: UIImage(named: "bottom-item"), count: 4),
+        frame: CGRect(x: 0,
+                      y: topCollectionView.frame.maxY + 4,
+                      width: view.bounds.width,
+                      height: (view.bounds.height - 120) * 0.4)
+    )
     
-    private lazy var shoesCollectionView = createCollectionView(withItems: [])
+    private lazy var shoesCollectionView = createCollectionView(
+        withItems: Array(repeating: UIImage(named: "shoe-item"), count: 4),
+        frame: CGRect(x: 0,
+                      y: bottomCollectionView.frame.maxY + 4,
+                      width: view.bounds.width,
+                      height: (view.bounds.height - 120) * 0.15)
+    )
     
     
     let coordinator: COCoordinator
@@ -29,6 +47,7 @@ class COItemsViewController: ViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
     
     override func setup() {
         super.setup()
@@ -56,27 +75,51 @@ class COItemsViewController: ViewController {
         view.addSubview(shoesCollectionView)
         
         
-        NSLayoutConstraint.activate([
-            topCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            topCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            topCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            topCollectionView.heightAnchor.constraint(equalTo: view.heightAnchor,
-                                                      multiplier: 0.25),
-            
-            
-            bottomCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            bottomCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            bottomCollectionView.topAnchor.constraint(equalTo: topCollectionView.bottomAnchor),
-            bottomCollectionView.heightAnchor.constraint(equalTo: view.heightAnchor,
-                                                         multiplier: 0.5),
-            
-            
-            shoesCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            shoesCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            shoesCollectionView.topAnchor.constraint(equalTo: bottomCollectionView.bottomAnchor),
-            shoesCollectionView.heightAnchor.constraint(equalTo: view.heightAnchor,
-                                                        multiplier: 0.1)
-        ])
+//        topCollectionView.frame = CGRect(x: 0,
+//                                         y: 0,
+//                                         width: view.bounds.width,
+//                                         height: view.bounds.height * 0.3)
+        
+//        bottomCollectionView.frame = CGRect(x: 0,
+//                                            y: topCollectionView.frame.maxY,
+//                                            width: view.bounds.width,
+//                                            height: view.bounds.height * 0.5)
+        
+//        shoesCollectionView.frame = CGRect(x: 0,
+//                                           y: bottomCollectionView.frame.maxY,
+//                                           width: view.bounds.width,
+//                                           height: view.bounds.height * 0.15)
+        
+        
+//        NSLayoutConstraint.activate([
+//            topCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+//            topCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+//            topCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+//            topCollectionView.heightAnchor.constraint(equalTo: view.heightAnchor,
+//                                                      multiplier: 0.25),
+//
+//
+////            bottomCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+////            bottomCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+////            bottomCollectionView.topAnchor.constraint(equalTo: topCollectionView.bottomAnchor),
+////            bottomCollectionView.bottomAnchor.constraint(equalTo: shoesCollectionView.topAnchor),
+////            bottomCollectionView.heightAnchor.constraint(equalTo: view.heightAnchor,
+////                                                         multiplier: 0.5),
+//
+//
+//            shoesCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+//            shoesCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+////            shoesCollectionView.topAnchor.constraint(equalTo: bottomCollectionView.bottomAnchor),
+//            shoesCollectionView.heightAnchor.constraint(equalTo: view.heightAnchor,
+//                                                        multiplier: 0.15),
+//            shoesCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+//
+//
+//            bottomCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+//            bottomCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+//            bottomCollectionView.topAnchor.constraint(equalTo: topCollectionView.bottomAnchor),
+//            bottomCollectionView.bottomAnchor.constraint(equalTo: shoesCollectionView.topAnchor),
+//        ])
     }
     
     @objc
@@ -85,9 +128,9 @@ class COItemsViewController: ViewController {
         coordinator.eventOccured(.preview(look))
     }
     
-    private func createCollectionView(withItems items: [UIImage?]) -> COItemsCollectionView {
-        let collectionView = COItemsCollectionView(items: items)
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
+    private func createCollectionView(withItems items: [UIImage?], frame: CGRect) -> COItemsCollectionView {
+        let collectionView = COItemsCollectionView(items: items, frame: frame)
+//        collectionView.translatesAutoresizingMaskIntoConstraints = false
         
         return collectionView
     }
