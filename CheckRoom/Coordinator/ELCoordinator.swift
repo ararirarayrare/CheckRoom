@@ -1,19 +1,19 @@
 //
-//  COCoordinator.swift
+//  ELCoordinator.swift
 //  CheckRoom
 //
-//  Created by mac on 15.01.2023.
+//  Created by mac on 20.01.2023.
 //
 
 import UIKit
 
-class COCoordinator: Coordinator {
+class ELCoordinator: Coordinator {
     
     enum Event {
-        case items(Season), preview(UIImage?), saved
+        case preview(UIImage?), addItems(UIImage?), outwear(UIImage?), saved
     }
     
-    weak var parent: Coordinator?
+    var parent: Coordinator?
     
     var children: [Coordinator]?
     
@@ -21,31 +21,39 @@ class COCoordinator: Coordinator {
     
     var navigationController: NavigationController?
     
-    let builder: COBuilder
+    let builder: ELBuilder
     
-    init(builder: COBuilder, navigationController: NavigationController?) {
+    init(builder: ELBuilder, navigationController: NavigationController?) {
         self.builder = builder
         self.navigationController = navigationController
         self.window = navigationController?.view.window
     }
     
     func start() {
-        let vc = builder.createSeasons(coordinator: self)
+        fatalError("Method is not implemented! Use start(withLook:)")
+    }
+    
+    func start(withLook look: UIImage?) {
+        let vc = builder.createEdit(look: look, coordinator: self)
         navigationController?.pushViewController(vc, animated: true)
     }
     
     func eventOccured(_ event: Event) {
         switch event {
-        case .items(let season):
-            let vc = builder.createItems(forSeason: season, coordinator: self)
+        case .preview(let look):
+            let vc = builder.createPreview(look: look, coordinator: self)
             navigationController?.pushViewController(vc, animated: true)
             
-        case .preview(let look):
-            let vc = builder.createPreview(forLook: look, coordinator: self)
+        case .addItems(let look):
+            let vc = builder.createAddItems(look: look, coordinator: self)
+            navigationController?.pushViewController(vc, animated: true)
+            
+        case .outwear(let look):
+            let vc = builder.createOutwear(look: look, coordinator: self)
             navigationController?.pushViewController(vc, animated: true)
             
         case .saved:
-            let vc = builder.createSuccess(title: "Congratulations, your outfit was saved!",
+            let vc = builder.createSuccess(title: "Congratulations, the item was saved!",
                                            coordinator: self)
             
             vc.modalTransitionStyle = .coverVertical

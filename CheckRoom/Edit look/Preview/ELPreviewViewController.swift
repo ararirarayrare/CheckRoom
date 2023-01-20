@@ -1,13 +1,13 @@
 //
-//  MOPreviewViewController.swift
+//  ELPreviewViewController.swift
 //  CheckRoom
 //
-//  Created by mac on 19.01.2023.
+//  Created by mac on 20.01.2023.
 //
 
 import UIKit
 
-class MOPreviewViewController: ViewController {
+class ELPreviewViewController: ViewController {
     
     let imageView: UIImageView = {
         let imageView = UIImageView()
@@ -23,31 +23,37 @@ class MOPreviewViewController: ViewController {
         return imageView
     }()
     
-    private let editButton: UIButton = {
+    private let addItemsButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         
+        button.backgroundColor = .clear
         button.titleLabel?.font = .boldSystemFont(ofSize: 22)
         button.setTitleColor(.black, for: .normal)
-        button.setTitle("Edit look", for: .normal)
-                
+        button.setTitle("Add items", for: .normal)
+        
+        button.layer.cornerRadius = 28
+        
         return button
     }()
     
-    private let changeSeasonButton: UIButton = {
+    private let saveButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         
+        button.backgroundColor = .black
         button.titleLabel?.font = .boldSystemFont(ofSize: 22)
-        button.setTitleColor(.black, for: .normal)
-        button.setTitle("Change season", for: .normal)
-                
+        button.setTitleColor(.white, for: .normal)
+        button.setTitle("Save", for: .normal)
+        
+        button.layer.cornerRadius = 28
+        
         return button
     }()
     
-    let coordinator: MOCoordinator
+    let coordinator: ELCoordinator
     
-    init(coordinator: MOCoordinator) {
+    init(coordinator: ELCoordinator, look: UIImage?) {
         self.coordinator = coordinator
         super.init(nibName: nil, bundle: nil)
     }
@@ -61,33 +67,30 @@ class MOPreviewViewController: ViewController {
         
         title = "Preview"
         
-        changeSeasonButton.addTarget(self, action: #selector(changeSeasonTapped), for: .touchUpInside)
-        editButton.addTarget(self, action: #selector(editTapped), for: .touchUpInside)
+        addItemsButton.addTarget(self, action: #selector(addItemsTapped), for: .touchUpInside)
+        saveButton.addTarget(self, action: #selector(saveTapped), for: .touchUpInside)
     }
     
     override func layout() {
         super.layout()
         
         view.addSubview(imageView)
-        view.addSubview(editButton)
-        view.addSubview(changeSeasonButton)
+        view.addSubview(addItemsButton)
+        view.addSubview(saveButton)
         
         NSLayoutConstraint.activate([
-            changeSeasonButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor,
-                                                       constant: -32),
-            changeSeasonButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            changeSeasonButton.leadingAnchor.constraint(equalTo: view.leadingAnchor,
-                                                        constant: 32),
-            changeSeasonButton.trailingAnchor.constraint(equalTo: view.trailingAnchor,
-                                                         constant: -32),
+            saveButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor,
+                                               constant: -32),
+            saveButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            saveButton.widthAnchor.constraint(equalToConstant: 140),
+            saveButton.heightAnchor.constraint(equalToConstant: 56),
             
             
-            editButton.bottomAnchor.constraint(equalTo: changeSeasonButton.topAnchor,
+            addItemsButton.bottomAnchor.constraint(equalTo: saveButton.topAnchor,
                                                constant: -16),
-            editButton.widthAnchor.constraint(equalToConstant: 140),
-            editButton.heightAnchor.constraint(equalToConstant: 56),
-            editButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            
+            addItemsButton.widthAnchor.constraint(equalToConstant: 140),
+            addItemsButton.heightAnchor.constraint(equalToConstant: 56),
+            addItemsButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
             
             imageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,
@@ -96,19 +99,24 @@ class MOPreviewViewController: ViewController {
                                                constant: 20),
             imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor,
                                                 constant: -20),
-            imageView.bottomAnchor.constraint(equalTo: editButton.topAnchor,
+            imageView.bottomAnchor.constraint(equalTo: addItemsButton.topAnchor,
                                               constant: -32)
         ])
     }
     
     @objc
-    private func editTapped() {
+    private func addItemsTapped() {
+        let look = UIImage(named: "look-example")
         
+        coordinator.eventOccured(.addItems(look))
     }
     
     @objc
-    private func changeSeasonTapped() {
-        coordinator.eventOccured(.seasons(forEditedLook: imageView.image))
+    private func saveTapped() {
+//        let look = UIImage(named: "look-example")
+        
+        coordinator.eventOccured(.saved)
     }
-}
 
+    
+}

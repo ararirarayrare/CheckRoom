@@ -13,7 +13,9 @@ class MOCoordinator: Coordinator {
         case preview(UIImage?), looks(Season), seasons(forEditedLook: UIImage? = nil)
     }
     
-    var parent: Coordinator?
+    weak var parent: Coordinator?
+    
+    var children: [Coordinator]?
     
     var window: UIWindow?
     

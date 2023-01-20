@@ -7,19 +7,19 @@
 
 import UIKit
 
-class CarouselFlowLayout: UICollectionViewFlowLayout {
+class ItemsCollectionViewLayout: UICollectionViewFlowLayout {
     
     enum CarouselFlowLayoutSpacingMode {
         case fixed(spacing: CGFloat)
         case overlap(visibleOffset: CGFloat)
     }
-
+    
     
     fileprivate struct LayoutState: Equatable {
         var size: CGSize = .zero
         var direction: UICollectionView.ScrollDirection = .horizontal
     }
-        
+    
     var sideItemScale: CGFloat = 0.6
     var sideItemAlpha: CGFloat = 0.7
     var sideItemShift: CGFloat = 0.0
@@ -40,7 +40,7 @@ class CarouselFlowLayout: UICollectionViewFlowLayout {
         if state != currentState {
             setupCollectionView()
             updateLayout()
-
+            
             state = currentState
         }
     }
@@ -58,7 +58,7 @@ class CarouselFlowLayout: UICollectionViewFlowLayout {
         guard let collectionView = self.collectionView else {
             return
         }
-                
+        
         let collectionSize = collectionView.bounds.size
         let isHorizontal = (self.scrollDirection == .horizontal)
         
@@ -70,7 +70,6 @@ class CarouselFlowLayout: UICollectionViewFlowLayout {
         let scaledItemOffset =  (side - side * self.sideItemScale) / 2
         
         self.minimumLineSpacing = self.spacing - scaledItemOffset
-
     }
     
     override open func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
@@ -112,7 +111,6 @@ class CarouselFlowLayout: UICollectionViewFlowLayout {
         } else {
             attributes.center.x = attributes.center.x + shift
         }
-
         return attributes
     }
     
@@ -137,7 +135,7 @@ class CarouselFlowLayout: UICollectionViewFlowLayout {
             let closest = layoutAttributes.sorted { abs($0.center.y - proposedContentOffsetCenterOrigin) < abs($1.center.y - proposedContentOffsetCenterOrigin) }.first ?? UICollectionViewLayoutAttributes()
             targetContentOffset = CGPoint(x: proposedContentOffset.x, y: floor(closest.center.y - midSide))
         }
-    
+        
         return targetContentOffset
     }
 }

@@ -1,13 +1,14 @@
 //
-//  COLookViewController.swift
+//  ELViewController.swift
 //  CheckRoom
 //
-//  Created by mac on 15.01.2023.
+//  Created by mac on 20.01.2023.
 //
 
 import UIKit
 
-class COItemsViewController: ViewController {
+
+class ELViewController: ViewController {
     
     private lazy var topCollectionView = createCollectionView(
         withItems: Array(repeating: UIImage(named: "top-item"), count: 4),
@@ -32,14 +33,10 @@ class COItemsViewController: ViewController {
                       width: view.bounds.width,
                       height: (view.bounds.height - 120) * 0.15)
     )
+        
+    let coordinator: ELCoordinator
     
-    
-    let coordinator: COCoordinator
-    
-    let season: Season
-    
-    init(season: Season, coordinator: COCoordinator) {
-        self.season = season
+    init(coordinator: ELCoordinator, look: UIImage?) {
         self.coordinator = coordinator
         super.init(nibName: nil, bundle: nil)
     }
@@ -47,7 +44,6 @@ class COItemsViewController: ViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
     
     override func setup() {
         super.setup()
@@ -78,6 +74,7 @@ class COItemsViewController: ViewController {
     @objc
     private func nextTapped() {
         let look = UIImage(named: "look-example")
+        
         coordinator.eventOccured(.preview(look))
     }
     

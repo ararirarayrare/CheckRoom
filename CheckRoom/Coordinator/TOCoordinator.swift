@@ -13,7 +13,9 @@ class TOCoordinator: Coordinator {
         case looks(Season), preview(UIImage?), saved
     }
     
-    var parent: Coordinator?
+    weak var parent: Coordinator?
+    
+    var children: [Coordinator]?
     
     var window: UIWindow?
     

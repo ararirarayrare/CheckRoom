@@ -25,6 +25,8 @@ class MainBuilder: Builder {
     private var toBuilder: TOBuilder?
     private var moBuilder: MOBuilder?
     
+    private var elBuilder: ELBuilder?
+    
     func createMain(coordinator: MainCoordinator) -> MainViewController {
         let vc = MainViewController(coordinator: coordinator)
         return vc
@@ -51,6 +53,12 @@ class MainBuilder: Builder {
     func createMOBuilder() -> MOBuilder {
         let builder = MOBuilder()
         self.moBuilder = builder
+        return builder
+    }
+    
+    func createELBuilder() -> ELBuilder {
+        let builder = ELBuilder()
+        self.elBuilder = builder
         return builder
     }
 }

@@ -10,7 +10,6 @@
 		04309BEA296F353400A439D4 /* TOLooksCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04309BE9296F353400A439D4 /* TOLooksCollectionView.swift */; };
 		04309C1429733BF700A439D4 /* TOLooksPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04309C1329733BF700A439D4 /* TOLooksPreviewViewController.swift */; };
 		04309C1629733C8200A439D4 /* TOLookImageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04309C1529733C8200A439D4 /* TOLookImageModel.swift */; };
-		04439443297962E000FAFD09 /* Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04439442297962E000FAFD09 /* Layout.swift */; };
 		0443944629799D2600FAFD09 /* MOSeasonsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0443944529799D2600FAFD09 /* MOSeasonsViewController.swift */; };
 		0443944829799DBB00FAFD09 /* COBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0443944729799DBB00FAFD09 /* COBuilder.swift */; };
 		0443944A29799DDA00FAFD09 /* TOBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0443944929799DDA00FAFD09 /* TOBuilder.swift */; };
@@ -19,6 +18,14 @@
 		044394502979A7D500FAFD09 /* MOCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0443944F2979A7D500FAFD09 /* MOCoordinator.swift */; };
 		044394542979AED700FAFD09 /* MOLooksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044394532979AED700FAFD09 /* MOLooksViewController.swift */; };
 		044394572979B25400FAFD09 /* MOPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044394562979B25400FAFD09 /* MOPreviewViewController.swift */; };
+		0443945A297B2D0F00FAFD09 /* ELViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04439459297B2D0F00FAFD09 /* ELViewController.swift */; };
+		0443945C297B2D2000FAFD09 /* ELBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0443945B297B2D2000FAFD09 /* ELBuilder.swift */; };
+		0443945E297B2D7500FAFD09 /* ELCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0443945D297B2D7500FAFD09 /* ELCoordinator.swift */; };
+		04439463297B302B00FAFD09 /* ELPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04439462297B302B00FAFD09 /* ELPreviewViewController.swift */; };
+		04439466297B310000FAFD09 /* ELAddItemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04439465297B310000FAFD09 /* ELAddItemsViewController.swift */; };
+		04439469297B31C100FAFD09 /* ELOutwearViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04439468297B31C100FAFD09 /* ELOutwearViewController.swift */; };
+		04980075297B358600069BEA /* ItemsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04980074297B358600069BEA /* ItemsCollectionView.swift */; };
+		04980077297B35BD00069BEA /* ItemsCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04980076297B35BD00069BEA /* ItemsCollectionViewLayout.swift */; };
 		04C9C3A5296C6C20005C7003 /* Icons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C9C3A4296C6C20005C7003 /* Icons.swift */; };
 		04C9C3A8296C7487005C7003 /* AIPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C9C3A7296C7487005C7003 /* AIPreviewViewController.swift */; };
 		04C9C3AA296C7E0C005C7003 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C9C3A9296C7E0C005C7003 /* ViewController.swift */; };
@@ -36,7 +43,6 @@
 		04C9C3E8296F30CD005C7003 /* TOLooksCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C9C3E7296F30CD005C7003 /* TOLooksCollectionViewCell.swift */; };
 		04D480AA29741CDF00A961EE /* COSeasonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D480A929741CDF00A961EE /* COSeasonViewController.swift */; };
 		04D480AE2974229C00A961EE /* COItemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D480AD2974229C00A961EE /* COItemsViewController.swift */; };
-		04D480B02974231700A961EE /* COItemsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D480AF2974231700A961EE /* COItemsCollectionView.swift */; };
 		04D480B2297447C800A961EE /* AICoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D480B1297447C800A961EE /* AICoordinator.swift */; };
 		04D480B4297447F200A961EE /* TOCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D480B3297447F200A961EE /* TOCoordinator.swift */; };
 		04D480B6297447FE00A961EE /* COCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D480B5297447FE00A961EE /* COCoordinator.swift */; };
@@ -55,7 +61,6 @@
 		04309BE9296F353400A439D4 /* TOLooksCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TOLooksCollectionView.swift; sourceTree = "<group>"; };
 		04309C1329733BF700A439D4 /* TOLooksPreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TOLooksPreviewViewController.swift; sourceTree = "<group>"; };
 		04309C1529733C8200A439D4 /* TOLookImageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TOLookImageModel.swift; sourceTree = "<group>"; };
-		04439442297962E000FAFD09 /* Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Layout.swift; sourceTree = "<group>"; };
 		0443944529799D2600FAFD09 /* MOSeasonsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MOSeasonsViewController.swift; sourceTree = "<group>"; };
 		0443944729799DBB00FAFD09 /* COBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = COBuilder.swift; sourceTree = "<group>"; };
 		0443944929799DDA00FAFD09 /* TOBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TOBuilder.swift; sourceTree = "<group>"; };
@@ -64,6 +69,14 @@
 		0443944F2979A7D500FAFD09 /* MOCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MOCoordinator.swift; sourceTree = "<group>"; };
 		044394532979AED700FAFD09 /* MOLooksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MOLooksViewController.swift; sourceTree = "<group>"; };
 		044394562979B25400FAFD09 /* MOPreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MOPreviewViewController.swift; sourceTree = "<group>"; };
+		04439459297B2D0F00FAFD09 /* ELViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ELViewController.swift; sourceTree = "<group>"; };
+		0443945B297B2D2000FAFD09 /* ELBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ELBuilder.swift; sourceTree = "<group>"; };
+		0443945D297B2D7500FAFD09 /* ELCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ELCoordinator.swift; sourceTree = "<group>"; };
+		04439462297B302B00FAFD09 /* ELPreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ELPreviewViewController.swift; sourceTree = "<group>"; };
+		04439465297B310000FAFD09 /* ELAddItemsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ELAddItemsViewController.swift; sourceTree = "<group>"; };
+		04439468297B31C100FAFD09 /* ELOutwearViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ELOutwearViewController.swift; sourceTree = "<group>"; };
+		04980074297B358600069BEA /* ItemsCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsCollectionView.swift; sourceTree = "<group>"; };
+		04980076297B35BD00069BEA /* ItemsCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsCollectionViewLayout.swift; sourceTree = "<group>"; };
 		04C9C3A4296C6C20005C7003 /* Icons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icons.swift; sourceTree = "<group>"; };
 		04C9C3A7296C7487005C7003 /* AIPreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIPreviewViewController.swift; sourceTree = "<group>"; };
 		04C9C3A9296C7E0C005C7003 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -81,7 +94,6 @@
 		04C9C3E7296F30CD005C7003 /* TOLooksCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TOLooksCollectionViewCell.swift; sourceTree = "<group>"; };
 		04D480A929741CDF00A961EE /* COSeasonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = COSeasonViewController.swift; sourceTree = "<group>"; };
 		04D480AD2974229C00A961EE /* COItemsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = COItemsViewController.swift; sourceTree = "<group>"; };
-		04D480AF2974231700A961EE /* COItemsCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = COItemsCollectionView.swift; sourceTree = "<group>"; };
 		04D480B1297447C800A961EE /* AICoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AICoordinator.swift; sourceTree = "<group>"; };
 		04D480B3297447F200A961EE /* TOCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TOCoordinator.swift; sourceTree = "<group>"; };
 		04D480B5297447FE00A961EE /* COCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = COCoordinator.swift; sourceTree = "<group>"; };
@@ -185,6 +197,58 @@
 				044394562979B25400FAFD09 /* MOPreviewViewController.swift */,
 			);
 			path = Preview;
+			sourceTree = "<group>";
+		};
+		04439458297B2CFD00FAFD09 /* Edit look */ = {
+			isa = PBXGroup;
+			children = (
+				04439460297B2FFA00FAFD09 /* Edit look */,
+				04439461297B301100FAFD09 /* Preview */,
+				04439464297B30EE00FAFD09 /* Add items */,
+				04439467297B31AB00FAFD09 /* Outwear */,
+			);
+			path = "Edit look";
+			sourceTree = "<group>";
+		};
+		04439460297B2FFA00FAFD09 /* Edit look */ = {
+			isa = PBXGroup;
+			children = (
+				04439459297B2D0F00FAFD09 /* ELViewController.swift */,
+			);
+			path = "Edit look";
+			sourceTree = "<group>";
+		};
+		04439461297B301100FAFD09 /* Preview */ = {
+			isa = PBXGroup;
+			children = (
+				04439462297B302B00FAFD09 /* ELPreviewViewController.swift */,
+			);
+			path = Preview;
+			sourceTree = "<group>";
+		};
+		04439464297B30EE00FAFD09 /* Add items */ = {
+			isa = PBXGroup;
+			children = (
+				04439465297B310000FAFD09 /* ELAddItemsViewController.swift */,
+			);
+			path = "Add items";
+			sourceTree = "<group>";
+		};
+		04439467297B31AB00FAFD09 /* Outwear */ = {
+			isa = PBXGroup;
+			children = (
+				04439468297B31C100FAFD09 /* ELOutwearViewController.swift */,
+			);
+			path = Outwear;
+			sourceTree = "<group>";
+		};
+		04980073297B357500069BEA /* Items Collection View */ = {
+			isa = PBXGroup;
+			children = (
+				04980074297B358600069BEA /* ItemsCollectionView.swift */,
+				04980076297B35BD00069BEA /* ItemsCollectionViewLayout.swift */,
+			);
+			path = "Items Collection View";
 			sourceTree = "<group>";
 		};
 		04C9C3A6296C7471005C7003 /* Add item */ = {
@@ -305,8 +369,6 @@
 			isa = PBXGroup;
 			children = (
 				04D480AD2974229C00A961EE /* COItemsViewController.swift */,
-				04D480AF2974231700A961EE /* COItemsCollectionView.swift */,
-				04439442297962E000FAFD09 /* Layout.swift */,
 			);
 			path = Look;
 			sourceTree = "<group>";
@@ -338,8 +400,10 @@
 		04E6B819296C539C00E50AA8 /* CheckRoom */ = {
 			isa = PBXGroup;
 			children = (
+				04980073297B357500069BEA /* Items Collection View */,
 				04E6B81A296C539C00E50AA8 /* AppDelegate.swift */,
 				04E6B81C296C539C00E50AA8 /* SceneDelegate.swift */,
+				04439458297B2CFD00FAFD09 /* Edit look */,
 				0443944429799CFC00FAFD09 /* My outfits */,
 				04D480A829741CBA00A961EE /* Create outfit */,
 				04C9C3D5296F0E45005C7003 /* Tomorrow outfit */,
@@ -367,6 +431,7 @@
 				0443944929799DDA00FAFD09 /* TOBuilder.swift */,
 				0443944B29799DEE00FAFD09 /* AIBuilder.swift */,
 				0443944D2979A74E00FAFD09 /* MOBuilder.swift */,
+				0443945B297B2D2000FAFD09 /* ELBuilder.swift */,
 			);
 			path = Builder;
 			sourceTree = "<group>";
@@ -379,6 +444,7 @@
 				04D480B5297447FE00A961EE /* COCoordinator.swift */,
 				04D480B3297447F200A961EE /* TOCoordinator.swift */,
 				0443944F2979A7D500FAFD09 /* MOCoordinator.swift */,
+				0443945D297B2D7500FAFD09 /* ELCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -466,15 +532,15 @@
 				04D480B6297447FE00A961EE /* COCoordinator.swift in Sources */,
 				04C9C3DE296F131D005C7003 /* TOPreviewViewController.swift in Sources */,
 				04C9C3D7296F0F68005C7003 /* TOSeasonsViewController.swift in Sources */,
-				04439443297962E000FAFD09 /* Layout.swift in Sources */,
+				04439466297B310000FAFD09 /* ELAddItemsViewController.swift in Sources */,
 				04D480B4297447F200A961EE /* TOCoordinator.swift in Sources */,
 				04C9C3E8296F30CD005C7003 /* TOLooksCollectionViewCell.swift in Sources */,
 				04D480AA29741CDF00A961EE /* COSeasonViewController.swift in Sources */,
 				0443944829799DBB00FAFD09 /* COBuilder.swift in Sources */,
 				04E6B831296C540800E50AA8 /* Coordinator.swift in Sources */,
-				04D480B02974231700A961EE /* COItemsCollectionView.swift in Sources */,
 				04E6B81F296C539C00E50AA8 /* MainViewController.swift in Sources */,
 				0443944E2979A74E00FAFD09 /* MOBuilder.swift in Sources */,
+				0443945C297B2D2000FAFD09 /* ELBuilder.swift in Sources */,
 				04C9C3C3296DEA7D005C7003 /* SuccessViewController.swift in Sources */,
 				04E6B81B296C539C00E50AA8 /* AppDelegate.swift in Sources */,
 				04C9C3AA296C7E0C005C7003 /* ViewController.swift in Sources */,
@@ -482,11 +548,15 @@
 				04C9C3B2296C849A005C7003 /* CategoryCollectionView.swift in Sources */,
 				04C9C3A5296C6C20005C7003 /* Icons.swift in Sources */,
 				044394502979A7D500FAFD09 /* MOCoordinator.swift in Sources */,
+				04980077297B35BD00069BEA /* ItemsCollectionViewLayout.swift in Sources */,
+				04439463297B302B00FAFD09 /* ELPreviewViewController.swift in Sources */,
+				04980075297B358600069BEA /* ItemsCollectionView.swift in Sources */,
 				04E6B81D296C539C00E50AA8 /* SceneDelegate.swift in Sources */,
 				04309C1429733BF700A439D4 /* TOLooksPreviewViewController.swift in Sources */,
 				04C9C3E4296F2FFC005C7003 /* Season.swift in Sources */,
 				04D480B9297449C200A961EE /* COPreviewViewController.swift in Sources */,
 				044394542979AED700FAFD09 /* MOLooksViewController.swift in Sources */,
+				0443945E297B2D7500FAFD09 /* ELCoordinator.swift in Sources */,
 				0443944629799D2600FAFD09 /* MOSeasonsViewController.swift in Sources */,
 				04C9C3A8296C7487005C7003 /* AIPreviewViewController.swift in Sources */,
 				04C9C3BD296DE91E005C7003 /* AIAccessoryViewController.swift in Sources */,
@@ -496,6 +566,8 @@
 				04D480AE2974229C00A961EE /* COItemsViewController.swift in Sources */,
 				04C9C3DA296F12C2005C7003 /* OopsViewController.swift in Sources */,
 				04C9C3C0296DE9EB005C7003 /* AISeasonViewController.swift in Sources */,
+				04439469297B31C100FAFD09 /* ELOutwearViewController.swift in Sources */,
+				0443945A297B2D0F00FAFD09 /* ELViewController.swift in Sources */,
 				04309C1629733C8200A439D4 /* TOLookImageModel.swift in Sources */,
 				04E6B836296C593600E50AA8 /* MainHeaderView.swift in Sources */,
 				044394572979B25400FAFD09 /* MOPreviewViewController.swift in Sources */,

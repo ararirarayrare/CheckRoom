@@ -1,15 +1,8 @@
-//
-//  COLookCollectionView.swift
-//  CheckRoom
-//
-//  Created by mac on 15.01.2023.
-//
-
 import UIKit
 
-class COItemsCollectionView: UICollectionView {
+class ItemsCollectionView: UICollectionView {
     
-    private(set) var selectedIndex: Int = 0
+   private(set) var selectedIndex: Int = 0
     
     var selectedItem: UIImage? {
         return items[selectedIndex]
@@ -20,7 +13,7 @@ class COItemsCollectionView: UICollectionView {
     init(items: [UIImage?], frame: CGRect) {
         self.items = items
         
-        let layout = CarouselFlowLayout()
+        let layout = ItemsCollectionViewLayout()
         layout.scrollDirection = .horizontal
         layout.itemSize = CGSize(width: frame.width * 0.5,
                                  height: frame.height)
@@ -41,13 +34,21 @@ class COItemsCollectionView: UICollectionView {
         register(cellClass, forCellWithReuseIdentifier: identifier)
     }
     
+    func scrollTo(item: Int) {
+        scrollToItem(
+            at: IndexPath(item: item, section: 0),
+            at: [.centeredVertically, .centeredHorizontally],
+            animated: true
+        )
+    }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
 }
 
-extension COItemsCollectionView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension ItemsCollectionView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return items.count
@@ -69,7 +70,7 @@ extension COItemsCollectionView: UICollectionViewDelegate, UICollectionViewDataS
     
     
 //    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-//    
+//
 //        return UIEdgeInsets(top: 0, left: bounds.width / 4, bottom: 0, right: 0)
 //    }
     
