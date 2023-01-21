@@ -128,6 +128,7 @@ class MOSeasonsViewController: ViewController {
         
         let newSeason = Season.allCases[collectionView.selectedItem]
         
+        coordinator.eventOccured(.saved)
     }
     
 }

@@ -56,6 +56,8 @@ class ELPreviewViewController: ViewController {
     init(coordinator: ELCoordinator, look: UIImage?) {
         self.coordinator = coordinator
         super.init(nibName: nil, bundle: nil)
+        
+        imageView.image = look
     }
     
     required init?(coder: NSCoder) {

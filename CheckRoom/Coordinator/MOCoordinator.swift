@@ -10,7 +10,7 @@ import UIKit
 class MOCoordinator: Coordinator {
     
     enum Event {
-        case preview(UIImage?), looks(Season), seasons(forEditedLook: UIImage? = nil)
+        case preview(UIImage?), looks(Season), seasons(forEditedLook: UIImage? = nil), saved
     }
     
     weak var parent: Coordinator?
@@ -44,11 +44,20 @@ class MOCoordinator: Coordinator {
             navigationController?.pushViewController(vc, animated: true)
         case .seasons(let look):
             let vc = builder.createSeasons(forEditedLook: look, coordinator: self)
-//            navigationController?.pushViewController(vc, animated: true)
+            navigationController?.pushViewController(vc, animated: true)
             
-            navigationController?.viewControllers.insert(vc, at: 1)
+//            navigationController?.viewControllers.insert(vc, at: 1)
+//
+//            navigationController?.popToViewController(vc, animated: true)
             
-            navigationController?.popToViewController(vc, animated: true)
+        case .saved:
+            let vc = builder.createSuccess(title: "Congratulations, the item was saved!",
+                                           coordinator: self)
+            
+            vc.modalTransitionStyle = .coverVertical
+            vc.modalPresentationStyle = .overFullScreen
+            
+            navigationController?.present(vc, animated: true)
         }
     }
     

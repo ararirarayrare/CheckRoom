@@ -68,6 +68,7 @@ class TOPreviewViewController: ViewController {
         title = "Preview"
         
         saveButton.addTarget(self, action: #selector(saveTapped), for: .touchUpInside)
+        editButton.addTarget(self, action: #selector(editTapped), for: .touchUpInside)
     }
     
     override func layout() {
@@ -78,25 +79,6 @@ class TOPreviewViewController: ViewController {
         view.addSubview(saveButton)
         
         NSLayoutConstraint.activate([
-//            imageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,
-//                                           constant: 40),
-//            imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor,
-//                                               constant: 20),
-//            imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor,
-//                                                constant: -20),
-//            imageView.heightAnchor.constraint(equalTo: imageView.widthAnchor,
-//                                              multiplier: 1.2),
-            
-            
-//            editButton.topAnchor.constraint(equalTo: imageView.bottomAnchor,
-//                                            constant: 32),
-//            editButton.widthAnchor.constraint(equalToConstant: 140),
-//            editButton.heightAnchor.constraint(equalToConstant: 56),
-//            editButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            
-            
-//            saveButton.topAnchor.constraint(equalTo: editButton.bottomAnchor,
-//                                            constant: 16),
             saveButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor,
                                                constant: -32),
             saveButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -120,6 +102,13 @@ class TOPreviewViewController: ViewController {
             imageView.bottomAnchor.constraint(equalTo: editButton.topAnchor,
                                               constant: -32)
         ])
+    }
+    
+    @objc
+    private func editTapped() {
+        let look = imageView.image
+        
+        (coordinator.parent as? MainCoordinator)?.eventOccured(.editLook(look))
     }
     
     @objc

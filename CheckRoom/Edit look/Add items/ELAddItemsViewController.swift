@@ -12,19 +12,12 @@ class ELAddItemsViewController: ViewController {
     private let collectionView: CategoryCollectionView = {
         let images = [
             UIImage(named: "outerwear-subcategory-top"),
-            UIImage(named: "undercoat-subcategory-top")
+            UIImage(named: "accesories-category")
         ]
-        
-        let activeImages = [
-            UIImage(named: "outerwear-subcategory-top-active"),
-            UIImage(named: "undercoat-subcategory-top-active")
-        ]
-        
+
         let collectionView = CategoryCollectionView(defaultImages: images)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         
-        collectionView.activeImages = activeImages
-
         return collectionView
     }()
     
@@ -70,7 +63,10 @@ extension ELAddItemsViewController: CategoryCollectionViewDelegateSelection {
         case 0:
             coordinator.eventOccured(.outwear(outwear))
         case 1:
+            ()
 //            coordinator.eventOccured(<#T##event: ELCoordinator.Event##ELCoordinator.Event#>)
+        default:
+            break
         }
         
     }

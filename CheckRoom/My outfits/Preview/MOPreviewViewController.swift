@@ -103,7 +103,9 @@ class MOPreviewViewController: ViewController {
     
     @objc
     private func editTapped() {
+        let look = imageView.image
         
+        (coordinator.parent as? MainCoordinator)?.eventOccured(.editLook(look))
     }
     
     @objc

@@ -66,6 +66,6 @@ class ELOutwearViewController: ViewController {
     
     @objc
     private func saveTapped() {
-//        coordinator.
+        coordinator.eventOccured(.saved)
     }
 }
