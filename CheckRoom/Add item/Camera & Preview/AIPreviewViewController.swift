@@ -49,21 +49,25 @@ class AIPreviewViewController: ViewController {
         
         navigationController?.navigationBar.prefersLargeTitles = true
         
-        if imageView.image == nil {
-            let imagePicker = UIImagePickerController()
-            imagePicker.modalPresentationStyle = .overFullScreen
-            imagePicker.allowsEditing = false
-            imagePicker.sourceType = .camera
-            imagePicker.delegate = self
-
-            present(imagePicker, animated: true)
-        }
+//        if imageView.image == nil {
+//            let imagePicker = UIImagePickerController()
+//            imagePicker.modalPresentationStyle = .overFullScreen
+//            imagePicker.allowsEditing = false
+//            imagePicker.sourceType = .camera
+//            imagePicker.delegate = self
+//
+//            present(imagePicker, animated: true)
+//        }
+        
+        imageView.image = UIPasteboard.general.image
+        
+    print("PASTED")
         
     }
     
     @objc
     private func editTapped() {
-        
+        UIApplication.shared.open(URL(string: "photos-redirect://")!)
     }
     
     @objc
@@ -84,6 +88,16 @@ class AIPreviewViewController: ViewController {
         navigationItem.rightBarButtonItem = editButton
         
         saveButton.addTarget(self, action: #selector(saveTapped), for: .touchUpInside)
+        
+        NotificationCenter.default.addObserver(forName: UIApplication.didBecomeActiveNotification,
+                                               object: nil,
+                                               queue: .main) { _ in
+            guard let image = UIPasteboard.general.image else {
+                return
+            }
+            
+            self.imageView.image = image
+        }
     }
     
     override func layout() {
@@ -110,19 +124,19 @@ class AIPreviewViewController: ViewController {
     
 }
 
-extension AIPreviewViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        picker.dismiss(animated: false)
-        navigationController?.popViewController(animated: true)
-    }
-    
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        
-        picker.dismiss(animated: true)
-        
-        if let image = info[.originalImage] as? UIImage {
-            imageView.image = image
-        }
-        
-    }
-}
+//extension AIPreviewViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+//    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+//        picker.dismiss(animated: false)
+//        navigationController?.popViewController(animated: true)
+//    }
+//
+//    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+//
+//        picker.dismiss(animated: true)
+//
+//        if let image = info[.originalImage] as? UIImage {
+//            imageView.image = image.removeBackground()
+//        }
+//
+//    }
+//}
