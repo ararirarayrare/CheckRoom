@@ -10,7 +10,11 @@ import UIKit
 class AICoordinator: Coordinator {
     
     enum Event {
-        case category, subcatecoryTop, accessory, season, saved
+        case category(image: UIImage?),
+             subcategoryTop(image: UIImage?),
+             accessory(image: UIImage?),
+             season(wear: Wear),
+             saved
     }
     
     weak var parent: Coordinator?
@@ -31,20 +35,20 @@ class AICoordinator: Coordinator {
     
     func eventOccured(_ event: Event) {
         switch event {
-        case .category:
-            let vc = builder.createCategory(coordinator: self)
+        case .category(let image):
+            let vc = builder.createCategory(coordinator: self, image: image)
             navigationController?.pushViewController(vc, animated: true)
             
-        case .subcatecoryTop:
-            let vc = builder.createSubcategory(coordinator: self)
+        case .subcategoryTop(let image):
+            let vc = builder.createSubcategory(coordinator: self, image: image)
             navigationController?.pushViewController(vc, animated: true)
             
-        case .accessory:
-            let vc = builder.createAccessory(coordinator: self)
+        case .accessory(let image):
+            let vc = builder.createAccessory(coordinator: self, image: image)
             navigationController?.pushViewController(vc, animated: true)
             
-        case .season:
-            let vc = builder.createSeason(coordinator: self)
+        case .season(let wear):
+            let vc = builder.createSeason(coordinator: self, wear: wear)
             navigationController?.pushViewController(vc, animated: true)
             
         case .saved:

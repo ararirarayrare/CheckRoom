@@ -14,23 +14,23 @@ class AIBuilder: Builder {
         return vc
     }
     
-    func createCategory(coordinator: AICoordinator) -> AICategoryViewController {
-        let vc = AICategoryViewController(coordinator: coordinator)
+    func createCategory(coordinator: AICoordinator, image: UIImage?) -> AICategoryViewController {
+        let vc = AICategoryViewController(coordinator: coordinator, image: image)
         return vc
     }
     
-    func createSubcategory(coordinator: AICoordinator) -> AISubcategoryViewController {
-        let vc = AISubcategoryViewController(coordinator: coordinator)
+    func createSubcategory(coordinator: AICoordinator, image: UIImage?) -> AISubcategoryViewController {
+        let vc = AISubcategoryViewController(coordinator: coordinator, image: image)
         return vc
     }
     
-    func createAccessory(coordinator: AICoordinator) -> AIAccessoryViewController {
-        let vc = AIAccessoryViewController(coordinator: coordinator)
+    func createAccessory(coordinator: AICoordinator, image: UIImage?) -> AIAccessoryViewController {
+        let vc = AIAccessoryViewController(coordinator: coordinator, image: image)
         return vc
     }
     
-    func createSeason(coordinator: AICoordinator) -> AISeasonViewController {
-        let vc = AISeasonViewController(coordinator: coordinator)
+    func createSeason(coordinator: AICoordinator, wear: Wear) -> AISeasonViewController {
+        let vc = AISeasonViewController(coordinator: coordinator, wear: wear)
         return vc
     }
 }

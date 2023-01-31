@@ -72,7 +72,8 @@ class AIPreviewViewController: ViewController {
     
     @objc
     private func saveTapped() {
-        coordinator.eventOccured(.category)
+        let look = imageView.image
+        coordinator.eventOccured(.category(image: look))
     }
     
     override func setup() {

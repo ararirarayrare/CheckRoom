@@ -61,8 +61,11 @@ class AICategoryViewController: ViewController {
     
     let coordinator: AICoordinator
     
-    init(coordinator: AICoordinator) {
+    private let image: UIImage?
+    
+    init(coordinator: AICoordinator, image: UIImage?) {
         self.coordinator = coordinator
+        self.image = image
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -72,12 +75,18 @@ class AICategoryViewController: ViewController {
 
     @objc
     private func saveTapped() {
-        if collectionView.selectedItem == 0 {
-            coordinator.eventOccured(.subcatecoryTop)
-        } else if collectionView.selectedItem == 3 {
-            coordinator.eventOccured(.accessory)
-        } else {
-            coordinator.eventOccured(.season)
+        
+        switch collectionView.selectedItem {
+        case 0:
+            coordinator.eventOccured(.subcategoryTop(image: self.image))
+        case 1:
+            let bottomWear = BottomWear(image: self.image)
+        case 2:
+            let shoes = Shoes(image: self.image)
+        case 3:
+            coordinator.eventOccured(.accessory(image: self.image))
+        default:
+            break
         }
     }
     

@@ -50,8 +50,11 @@ class AISeasonViewController: ViewController {
     
     let coordinator: AICoordinator
     
-    init(coordinator: AICoordinator) {
+    private var wear: Wear
+    
+    init(coordinator: AICoordinator, wear: Wear) {
         self.coordinator = coordinator
+        self.wear = wear
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -62,7 +65,28 @@ class AISeasonViewController: ViewController {
     
     @objc
     private func saveTapped() {
-        coordinator.eventOccured(.saved)
+        if let season = Season(rawValue: collectionView.selectedItem) {
+            
+            wear.season = season
+            
+            if let top = wear as? TopWear {
+                print(top.season, top.image, top.category)
+            }
+            
+            if let bottom = wear as? BottomWear {
+                print(bottom.image, bottom.season)
+            }
+            
+            if let shoes = wear as? Shoes {
+                print(shoes.image, shoes.season)
+            }
+            
+            if let accessory = wear as? Accessory  {
+                print(accessory.image, accessory.season, accessory.category)
+            }
+            
+            coordinator.eventOccured(.saved)
+        }
     }
     
     override func setup() {

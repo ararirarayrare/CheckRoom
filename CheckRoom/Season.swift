@@ -7,9 +7,12 @@
 
 import UIKit
 
-enum Season: CaseIterable {
+enum Season: Int, CaseIterable {
     
-    case summer, autumn, winter, spring
+    case summer = 0
+    case autumn = 1
+    case winter = 2
+    case spring = 3
     
     static var current: Self {
         let month = Calendar.current.dateComponents([.month], from: Date()).month ?? -1

@@ -10,6 +10,7 @@
 		04309BEA296F353400A439D4 /* TOLooksCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04309BE9296F353400A439D4 /* TOLooksCollectionView.swift */; };
 		04309C1429733BF700A439D4 /* TOLooksPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04309C1329733BF700A439D4 /* TOLooksPreviewViewController.swift */; };
 		04309C1629733C8200A439D4 /* TOLookImageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04309C1529733C8200A439D4 /* TOLookImageModel.swift */; };
+		043FDD432989849C000A4C2D /* Wear.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043FDD422989849C000A4C2D /* Wear.swift */; };
 		0443944629799D2600FAFD09 /* MOSeasonsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0443944529799D2600FAFD09 /* MOSeasonsViewController.swift */; };
 		0443944829799DBB00FAFD09 /* COBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0443944729799DBB00FAFD09 /* COBuilder.swift */; };
 		0443944A29799DDA00FAFD09 /* TOBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0443944929799DDA00FAFD09 /* TOBuilder.swift */; };
@@ -80,6 +81,7 @@
 		04309BE9296F353400A439D4 /* TOLooksCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TOLooksCollectionView.swift; sourceTree = "<group>"; };
 		04309C1329733BF700A439D4 /* TOLooksPreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TOLooksPreviewViewController.swift; sourceTree = "<group>"; };
 		04309C1529733C8200A439D4 /* TOLookImageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TOLookImageModel.swift; sourceTree = "<group>"; };
+		043FDD422989849C000A4C2D /* Wear.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wear.swift; sourceTree = "<group>"; };
 		0443944529799D2600FAFD09 /* MOSeasonsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MOSeasonsViewController.swift; sourceTree = "<group>"; };
 		0443944729799DBB00FAFD09 /* COBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = COBuilder.swift; sourceTree = "<group>"; };
 		0443944929799DDA00FAFD09 /* TOBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TOBuilder.swift; sourceTree = "<group>"; };
@@ -484,6 +486,7 @@
 				04C9C3A4296C6C20005C7003 /* Icons.swift */,
 				04C9C3E3296F2FFC005C7003 /* Season.swift */,
 				04C9C3A9296C7E0C005C7003 /* ViewController.swift */,
+				043FDD422989849C000A4C2D /* Wear.swift */,
 			);
 			path = CheckRoom;
 			sourceTree = "<group>";
@@ -648,6 +651,7 @@
 				04C9C3DA296F12C2005C7003 /* OopsViewController.swift in Sources */,
 				04C9C3C0296DE9EB005C7003 /* AISeasonViewController.swift in Sources */,
 				0498009D297DD38400069BEA /* DeepLabV3.mlmodel in Sources */,
+				043FDD432989849C000A4C2D /* Wear.swift in Sources */,
 				049800B5297DD74A00069BEA /* Predictions.swift in Sources */,
 				04439469297B31C100FAFD09 /* ELOutwearViewController.swift in Sources */,
 				0443945A297B2D0F00FAFD09 /* ELViewController.swift in Sources */,

@@ -56,9 +56,12 @@ class AISubcategoryViewController: ViewController {
     }()
     
     let coordinator: AICoordinator
+        
+    private let image: UIImage?
     
-    init(coordinator: AICoordinator) {
+    init(coordinator: AICoordinator, image: UIImage?) {
         self.coordinator = coordinator
+        self.image = image
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -68,7 +71,11 @@ class AISubcategoryViewController: ViewController {
 
     @objc
     private func saveTapped() {
-        coordinator.eventOccured(.season)
+        if let subcategory = TopWear.Category(rawValue: collectionView.selectedItem) {
+            let topWear = TopWear(image: self.image,
+                                  category: subcategory)
+            coordinator.eventOccured(.season(wear: topWear))
+        }
     }
     
     override func setup() {

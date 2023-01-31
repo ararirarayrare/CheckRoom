@@ -61,8 +61,11 @@ class AIAccessoryViewController: ViewController {
     
     let coordinator: AICoordinator
     
-    init(coordinator: AICoordinator) {
+    private let image: UIImage?
+    
+    init(coordinator: AICoordinator, image: UIImage?) {
         self.coordinator = coordinator
+        self.image = image
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -72,7 +75,11 @@ class AIAccessoryViewController: ViewController {
 
     @objc
     private func saveTapped() {
-        coordinator.eventOccured(.season)
+        if let accessoryType = Accessory.Category(rawValue: collectionView.selectedItem) {
+            let accessory = Accessory(image: self.image,
+                                      category: accessoryType)
+            coordinator.eventOccured(.season(wear: accessory))
+        }
     }
     
     override func setup() {
