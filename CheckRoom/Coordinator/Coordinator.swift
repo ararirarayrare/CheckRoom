@@ -100,7 +100,7 @@ class MainCoordinator: Coordinator {
                 let coordinator = MOCoordinator(builder: builder,
                                                 navigationController: navigationController)
                 coordinator.parent = self
-                coordinator.start()
+                coordinator.start(withSeason: .current)
                 
                 children?.append(coordinator)
             }

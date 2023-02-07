@@ -37,15 +37,15 @@ class MOSeasonsViewController: ViewController {
     
     let coordinator: MOCoordinator
     
-    private let editedLook: UIImage?
+    private let editedOutfit: Outfit?
     
-    private var isEditingLook: Bool {
-        return editedLook != nil
+    private var isEditingOutfit: Bool {
+        return editedOutfit != nil
     }
     
-    init(coordinator: MOCoordinator, editedLook look: UIImage? = nil) {
+    init(coordinator: MOCoordinator, editedOutfit outfit: Outfit? = nil) {
         self.coordinator = coordinator
-        self.editedLook = look
+        self.editedOutfit = outfit
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -65,7 +65,7 @@ class MOSeasonsViewController: ViewController {
         
         navigationController?.navigationBar.prefersLargeTitles = true
         
-        if isEditingLook {
+        if isEditingOutfit {
             collectionView.activeImages = Season.allCases.map { $0.imageActive }
             
             saveButton = UIButton()
@@ -96,7 +96,7 @@ class MOSeasonsViewController: ViewController {
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
         
-        if isEditingLook {
+        if isEditingOutfit {
             view.addSubview(shadowView)
             
             NSLayoutConstraint.activate([
@@ -122,7 +122,7 @@ class MOSeasonsViewController: ViewController {
     
     @objc
     private func saveTapped() {
-        guard isEditingLook else {
+        guard isEditingOutfit else {
             return
         }
         
@@ -136,11 +136,12 @@ class MOSeasonsViewController: ViewController {
 extension MOSeasonsViewController: CategoryCollectionViewDelegateSelection {
     func collectionView(_ collectionView: CategoryCollectionView, didSelectItemAt index: Int) {
         
-        guard !isEditingLook else {
+        guard !isEditingOutfit else {
             return
         }
         
         let season = Season.allCases[index]
         
+        coordinator.start(withSeason: season)
     }
 }

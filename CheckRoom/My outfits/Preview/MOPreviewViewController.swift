@@ -47,8 +47,11 @@ class MOPreviewViewController: ViewController {
     
     let coordinator: MOCoordinator
     
-    init(coordinator: MOCoordinator) {
+    let outfit: Outfit
+    
+    init(coordinator: MOCoordinator, outfit: Outfit) {
         self.coordinator = coordinator
+        self.outfit = outfit
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -103,14 +106,14 @@ class MOPreviewViewController: ViewController {
     
     @objc
     private func editTapped() {
-        let look = imageView.image
-        
+        // MARK: - TODO !!! 
+        let look = outfit.image
         (coordinator.parent as? MainCoordinator)?.eventOccured(.editLook(look))
     }
     
     @objc
     private func changeSeasonTapped() {
-        coordinator.eventOccured(.seasons(forEditedLook: imageView.image))
+        coordinator.eventOccured(.changeSeason(forOutfit: outfit))
     }
 }
 

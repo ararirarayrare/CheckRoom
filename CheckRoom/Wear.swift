@@ -121,3 +121,40 @@ class Accessory: Wear {
     }
     
 }
+
+
+class Outfit: Object {
+    
+    fileprivate(set) var image: UIImage? {
+        get {
+            return UIImage(data: imageData)
+        }
+        
+        set {
+            if let data = newValue?.jpegData(compressionQuality: 0.9) {
+                imageData = data
+            }
+        }
+    }
+    
+    @objc dynamic private var imageData: Data = Data()
+    
+    @objc dynamic private var seasonRawValue: String = ""
+    
+    var season: Season {
+        get {
+            return Season(rawValue: Int(seasonRawValue)! )!
+        }
+
+        set {
+            seasonRawValue = String(describing: newValue.rawValue)
+        }
+    }
+    
+    convenience init(image: UIImage?) {
+        self.init()
+        
+        self.image = image
+    }
+    
+}

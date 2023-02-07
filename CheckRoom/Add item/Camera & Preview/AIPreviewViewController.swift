@@ -45,24 +45,15 @@ class AIPreviewViewController: ViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-
         
         navigationController?.navigationBar.prefersLargeTitles = true
         
-//        if imageView.image == nil {
-//            let imagePicker = UIImagePickerController()
-//            imagePicker.modalPresentationStyle = .overFullScreen
-//            imagePicker.allowsEditing = false
-//            imagePicker.sourceType = .camera
-//            imagePicker.delegate = self
-//
-//            present(imagePicker, animated: true)
-//        }
-        
-        imageView.image = UIPasteboard.general.image
-        
-    print("PASTED")
-        
+        if let image = UIPasteboard.general.image {
+            imageView.image = image
+        } else {
+            UIApplication.shared.open(URL(string: "photos-redirect://")!)
+        }
+
     }
     
     @objc

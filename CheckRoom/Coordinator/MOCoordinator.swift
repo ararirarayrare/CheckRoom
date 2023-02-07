@@ -10,7 +10,11 @@ import UIKit
 class MOCoordinator: Coordinator {
     
     enum Event {
-        case preview(UIImage?), looks(Season), seasons(forEditedLook: UIImage? = nil), saved
+        case preview(Outfit),
+             looks(Season),
+             chooseSeason,
+             changeSeason(forOutfit: Outfit),
+             saved
     }
     
     weak var parent: Coordinator?
@@ -29,8 +33,10 @@ class MOCoordinator: Coordinator {
         self.window = navigationController?.view.window
     }
     
-    func start() {
-        let vc = builder.createLooks(forSeason: .current, coordinator: self)
+    func start() { }
+    
+    func start(withSeason season: Season) {
+        let vc = builder.createLooks(forSeason: season, coordinator: self)
         navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -39,11 +45,18 @@ class MOCoordinator: Coordinator {
         case .looks(let season):
             let vc = builder.createLooks(forSeason: season, coordinator: self)
             navigationController?.pushViewController(vc, animated: true)
-        case .preview(let look):
-            let vc = builder.createPreview(forLook: look, coordinator: self)
+            
+        case .preview(let outfit):
+            let vc = builder.createPreview(forOutfit: outfit, coordinator: self)
             navigationController?.pushViewController(vc, animated: true)
-        case .seasons(let look):
-            let vc = builder.createSeasons(forEditedLook: look, coordinator: self)
+            
+        case .chooseSeason:
+            let vc = builder.createSeasons(coordinator: self)
+            navigationController?.pushViewController(vc, animated: true)
+            
+        case .changeSeason(let outfit):
+            let vc = builder.createSeasons(editedOutfit: outfit,
+                                           coordinator: self)
             navigationController?.pushViewController(vc, animated: true)
             
 //            navigationController?.viewControllers.insert(vc, at: 1)

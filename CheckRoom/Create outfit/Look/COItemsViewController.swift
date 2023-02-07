@@ -60,16 +60,24 @@ class COItemsViewController: ViewController {
                           height: (view.bounds.height - 120)  * 0.25)
         )
         
+        let bottomItems = dataManager.getWear(type: BottomWear.self,
+                                              forSeason: self.season)
+            .compactMap { $0.image }
+        
         bottomCollectionView = ItemsCollectionView(
-            items: Array(repeating: UIImage(named: "bottom-item"), count: 4),
+            items: bottomItems,
             frame: CGRect(x: 0,
                           y: topCollectionView.frame.maxY + 4,
                           width: view.bounds.width,
                           height: (view.bounds.height - 120) * 0.4)
         )
         
+        let shoes = dataManager.getWear(type: Shoes.self,
+                                        forSeason: self.season)
+            .compactMap { $0.image }
+        
         shoesCollectionView = ItemsCollectionView(
-            items: Array(repeating: UIImage(named: "shoe-item"), count: 4),
+            items: shoes,
             frame: CGRect(x: 0,
                           y: bottomCollectionView.frame.maxY + 4,
                           width: view.bounds.width,
@@ -94,7 +102,7 @@ class COItemsViewController: ViewController {
     
     private func createCollectionView(withItems items: [UIImage?], frame: CGRect) -> ItemsCollectionView {
         let collectionView = ItemsCollectionView(items: items, frame: frame)
-//        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        //        collectionView.translatesAutoresizingMaskIntoConstraints = false
         
         return collectionView
     }

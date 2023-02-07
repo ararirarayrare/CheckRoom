@@ -81,8 +81,10 @@ class AICategoryViewController: ViewController {
             coordinator.eventOccured(.subcategoryTop(image: self.image))
         case 1:
             let bottomWear = BottomWear(image: self.image)
+            coordinator.eventOccured(.season(wear: bottomWear))
         case 2:
             let shoes = Shoes(image: self.image)
+            coordinator.eventOccured(.season(wear: shoes))
         case 3:
             coordinator.eventOccured(.accessory(image: self.image))
         default:

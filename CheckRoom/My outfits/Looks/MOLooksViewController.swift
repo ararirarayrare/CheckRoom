@@ -78,7 +78,7 @@ class MOLooksViewController: ViewController {
     
     @objc
     private func changeSeasonTapped() {
-        coordinator.eventOccured(.seasons())
+        coordinator.eventOccured(.chooseSeason)
     }
 
     
@@ -119,6 +119,9 @@ class MOLooksViewController: ViewController {
 
 extension MOLooksViewController: TOLooksCollectionViewDelegateSelection {
     func collectionView(_ collectionView: TOLooksCollectionView, didSelectImage image: UIImage?) {
-        coordinator.eventOccured(.preview(image))
+        // MARK: - TODO !!!
+        let outfit = Outfit(image: image)
+        outfit.season = season
+        coordinator.eventOccured(.preview(outfit))
     }
 }

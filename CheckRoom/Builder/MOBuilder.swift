@@ -14,16 +14,16 @@ class MOBuilder: Builder {
         return vc
     }
     
-    func createSeasons(forEditedLook look: UIImage? = nil,
+    func createSeasons(editedOutfit outfit: Outfit? = nil,
                        coordinator: MOCoordinator) -> MOSeasonsViewController {
         
-        let vc = MOSeasonsViewController(coordinator: coordinator, editedLook: look)
+        let vc = MOSeasonsViewController(coordinator: coordinator,
+                                         editedOutfit: outfit)
         return vc
     }
     
-    func createPreview(forLook image: UIImage?, coordinator: MOCoordinator) -> MOPreviewViewController {
-        let vc = MOPreviewViewController(coordinator: coordinator)
-        vc.imageView.image = image
+    func createPreview(forOutfit outfit: Outfit, coordinator: MOCoordinator) -> MOPreviewViewController {
+        let vc = MOPreviewViewController(coordinator: coordinator, outfit: outfit)
         return vc
     }
 }
