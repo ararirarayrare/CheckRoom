@@ -9,34 +9,15 @@ import UIKit
 
 class COItemsViewController: ViewController {
     
-    private lazy var topCollectionView = createCollectionView(
-        withItems: Array(repeating: UIImage(named: "top-item"), count: 4),
-        frame: CGRect(x: 0,
-                      y: 120,
-                      width: view.bounds.width,
-                      height: (view.bounds.height - 120)  * 0.25)
-    )
-    
-    private lazy var bottomCollectionView = createCollectionView(
-        withItems: Array(repeating: UIImage(named: "bottom-item"), count: 4),
-        frame: CGRect(x: 0,
-                      y: topCollectionView.frame.maxY + 4,
-                      width: view.bounds.width,
-                      height: (view.bounds.height - 120) * 0.4)
-    )
-    
-    private lazy var shoesCollectionView = createCollectionView(
-        withItems: Array(repeating: UIImage(named: "shoe-item"), count: 4),
-        frame: CGRect(x: 0,
-                      y: bottomCollectionView.frame.maxY + 4,
-                      width: view.bounds.width,
-                      height: (view.bounds.height - 120) * 0.15)
-    )
-    
+    private var topCollectionView: ItemsCollectionView!
+    private var bottomCollectionView: ItemsCollectionView!
+    private var shoesCollectionView: ItemsCollectionView!
     
     let coordinator: COCoordinator
     
     let season: Season
+    
+    private let dataManager = DataManager()
     
     init(season: Season, coordinator: COCoordinator) {
         self.season = season
@@ -65,6 +46,36 @@ class COItemsViewController: ViewController {
         )
         
         navigationItem.rightBarButtonItem = nextBarButton
+        
+        let topItems = dataManager.getWear(type: TopWear.self,
+                                           forSeason: self.season)
+            .filter { $0.category == .undercoat }
+            .compactMap { $0.image }
+        
+        topCollectionView = ItemsCollectionView(
+            items: topItems,
+            frame: CGRect(x: 0,
+                          y: 120,
+                          width: view.bounds.width,
+                          height: (view.bounds.height - 120)  * 0.25)
+        )
+        
+        bottomCollectionView = ItemsCollectionView(
+            items: Array(repeating: UIImage(named: "bottom-item"), count: 4),
+            frame: CGRect(x: 0,
+                          y: topCollectionView.frame.maxY + 4,
+                          width: view.bounds.width,
+                          height: (view.bounds.height - 120) * 0.4)
+        )
+        
+        shoesCollectionView = ItemsCollectionView(
+            items: Array(repeating: UIImage(named: "shoe-item"), count: 4),
+            frame: CGRect(x: 0,
+                          y: bottomCollectionView.frame.maxY + 4,
+                          width: view.bounds.width,
+                          height: (view.bounds.height - 120) * 0.15)
+        )
+        
     }
     
     override func layout() {

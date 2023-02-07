@@ -69,21 +69,23 @@ class AISeasonViewController: ViewController {
             
             wear.season = season
             
-            if let top = wear as? TopWear {
-                print(top.season, top.image, top.category)
-            }
+//            if let top = wear as? TopWear {
+//                print(top.season, top.image, top.category)
+//            }
+//
+//            if let bottom = wear as? BottomWear {
+//                print(bottom.image, bottom.season)
+//            }
+//
+//            if let shoes = wear as? Shoes {
+//                print(shoes.image, shoes.season)
+//            }
+//
+//            if let accessory = wear as? Accessory  {
+//                print(accessory.image, accessory.season, accessory.category)
+//            }
             
-            if let bottom = wear as? BottomWear {
-                print(bottom.image, bottom.season)
-            }
-            
-            if let shoes = wear as? Shoes {
-                print(shoes.image, shoes.season)
-            }
-            
-            if let accessory = wear as? Accessory  {
-                print(accessory.image, accessory.season, accessory.category)
-            }
+            DataManager().save(wear: wear)
             
             coordinator.eventOccured(.saved)
         }

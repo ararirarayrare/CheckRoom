@@ -6,64 +6,93 @@
 //
 
 import UIKit
+import RealmSwift
 
-protocol Wear {
-    var image: UIImage? { get }
-    var season: Season! { get set }
+extension Season: PersistableEnum {}
+
+class Wear: Object {
+    
+    fileprivate(set) var image: UIImage? {
+        get {
+            return UIImage(data: imageData)
+        }
+        
+        set {
+            if let data = newValue?.jpegData(compressionQuality: 0.9) {
+                imageData = data
+            }
+        }
+    }
+    
+    @objc dynamic private var imageData: Data = Data()
+    
+    @objc dynamic private var seasonRawValue: String = ""
+    
+    var season: Season {
+        get {
+            return Season(rawValue: Int(seasonRawValue)! )!
+        }
+
+        set {
+            seasonRawValue = String(describing: newValue.rawValue)
+        }
+    }
+
 }
 
 class TopWear: Wear {
-    
-    var image: UIImage?
-    
-    var season: Season!
     
     enum Category: Int {
         case outwear = 0
         case undercoat = 1
     }
     
-    let category: Category
+    @objc dynamic private var categoryRawValue: String = ""
     
-    init(image: UIImage?, category: Category) {
+    private(set) var category: Category {
+        get {
+            return Category(rawValue: Int(categoryRawValue)! )!
+        }
+        
+        set {
+            categoryRawValue = String(describing: newValue.rawValue)
+        }
+    }
+    
+    
+    convenience init(image: UIImage?, category: Category) {
+        self.init()
+        
         self.category = category
         self.image = image
+
 //        self.season = season
     }
 }
 
 
 class BottomWear: Wear {
-    
-    var image: UIImage?
-    
-    var season: Season!
-    
-    init(image: UIImage?) {
+
+    convenience init(image: UIImage?) {
+        self.init()
+        
         self.image = image
-//        self.season = season
     }
     
 }
 
 class Shoes: Wear {
-    var image: UIImage?
-    
-    var season: Season!
-    
-    init(image: UIImage?) {
+ 
+    convenience init(image: UIImage?) {
+        self.init()
+        
         self.image = image
-//        self.season = season
     }
     
 }
 
 class Accessory: Wear {
-    
-    var image: UIImage?
-    
-    var season: Season!
-    
+
     enum Category: Int {
         case hat = 0
         case jewelery = 1
@@ -71,9 +100,21 @@ class Accessory: Wear {
         case glasses = 3
     }
     
-    let category: Category
+    @objc dynamic private var categoryRawValue: String = ""
     
-    init(image: UIImage?, category: Category) {
+    private(set) var category: Category {
+        get {
+            return Category(rawValue: Int(categoryRawValue)!)!
+        }
+        
+        set {
+            categoryRawValue = String(describing: newValue.rawValue)
+        }
+    }
+    
+    convenience init(image: UIImage?, category: Category) {
+        self.init()
+        
         self.category = category
         self.image = image
 //        self.season = season

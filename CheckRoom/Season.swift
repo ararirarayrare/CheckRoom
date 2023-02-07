@@ -8,7 +8,7 @@
 import UIKit
 
 enum Season: Int, CaseIterable {
-    
+
     case summer = 0
     case autumn = 1
     case winter = 2
