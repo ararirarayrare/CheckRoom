@@ -28,7 +28,26 @@ class DataManager {
         var array = [T]()
         objects?.filter { $0.season == season }
             .forEach { array.append($0) }
-
+        
+        return array
+    }
+    
+    func save(outfit: Outfit) {
+        try! realm.write {
+            self.realm?.add(outfit)
+        }
+    }
+    
+    func getOutfits(forSeason season: Season) -> [Outfit] {
+        realm?.beginWrite()
+        let objects = realm?.objects(Outfit.self)
+        try! realm?.commitWrite()
+        
+        var array = Array<Outfit>()
+        
+        objects?.filter { $0.season == season }
+            .forEach { array.append($0) }
+        
         return array
     }
 }

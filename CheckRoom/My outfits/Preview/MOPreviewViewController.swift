@@ -9,19 +9,21 @@ import UIKit
 
 class MOPreviewViewController: ViewController {
     
-    let imageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        
-        imageView.layer.cornerRadius = 20
-        
-        imageView.layer.shadowColor = UIColor.black.cgColor
-        imageView.layer.shadowRadius = 20
-        imageView.layer.shadowOpacity = 0.2
-        imageView.layer.shadowOffset.height = 2
-        
-        return imageView
-    }()
+//    let imageView: UIImageView = {
+//        let imageView = UIImageView()
+//        imageView.translatesAutoresizingMaskIntoConstraints = false
+//
+//        imageView.layer.cornerRadius = 20
+//
+//        imageView.layer.shadowColor = UIColor.black.cgColor
+//        imageView.layer.shadowRadius = 20
+//        imageView.layer.shadowOpacity = 0.2
+//        imageView.layer.shadowOffset.height = 2
+//
+//        return imageView
+//    }()
+    
+    private let outfitView: OutfitView
     
     private let editButton: UIButton = {
         let button = UIButton()
@@ -52,6 +54,7 @@ class MOPreviewViewController: ViewController {
     init(coordinator: MOCoordinator, outfit: Outfit) {
         self.coordinator = coordinator
         self.outfit = outfit
+        self.outfitView = outfit.createPreview()
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -64,6 +67,13 @@ class MOPreviewViewController: ViewController {
         
         title = "Preview"
         
+        outfitView.layer.cornerRadius = 20
+        
+        outfitView.layer.shadowColor = UIColor.black.cgColor
+        outfitView.layer.shadowRadius = 20
+        outfitView.layer.shadowOpacity = 0.2
+        outfitView.layer.shadowOffset.height = 2
+        
         changeSeasonButton.addTarget(self, action: #selector(changeSeasonTapped), for: .touchUpInside)
         editButton.addTarget(self, action: #selector(editTapped), for: .touchUpInside)
     }
@@ -71,7 +81,9 @@ class MOPreviewViewController: ViewController {
     override func layout() {
         super.layout()
         
-        view.addSubview(imageView)
+        outfitView.translatesAutoresizingMaskIntoConstraints = false
+        
+        view.addSubview(outfitView)
         view.addSubview(editButton)
         view.addSubview(changeSeasonButton)
         
@@ -86,20 +98,19 @@ class MOPreviewViewController: ViewController {
             
             
             editButton.bottomAnchor.constraint(equalTo: changeSeasonButton.topAnchor,
-                                               constant: -16),
+                                               constant: -20),
             editButton.widthAnchor.constraint(equalToConstant: 140),
             editButton.heightAnchor.constraint(equalToConstant: 56),
             editButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
             
-            
-            imageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,
+            outfitView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,
                                            constant: 40),
-            imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor,
+            outfitView.leadingAnchor.constraint(equalTo: view.leadingAnchor,
                                                constant: 20),
-            imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor,
+            outfitView.trailingAnchor.constraint(equalTo: view.trailingAnchor,
                                                 constant: -20),
-            imageView.bottomAnchor.constraint(equalTo: editButton.topAnchor,
+            outfitView.bottomAnchor.constraint(equalTo: editButton.topAnchor,
                                               constant: -32)
         ])
     }

@@ -18,7 +18,7 @@ class Wear: Object {
         }
         
         set {
-            if let data = newValue?.jpegData(compressionQuality: 0.9) {
+            if let data = newValue?.pngData() {
                 imageData = data
             }
         }

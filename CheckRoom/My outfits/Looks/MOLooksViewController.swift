@@ -9,13 +9,7 @@ import UIKit
 
 class MOLooksViewController: ViewController {
     
-    private let collectionView: TOLooksCollectionView = {
-        let looks = Array<UIImage?>(repeating: UIImage(named: "look-example"), count: 8)
-        let collectionView = TOLooksCollectionView(looks: looks)
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        
-        return collectionView
-    }()
+    private var collectionView: TOLooksCollectionView!
     
     let coordinator: MOCoordinator
     
@@ -41,10 +35,14 @@ class MOLooksViewController: ViewController {
             
         let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(longPressed(_:)))
         longPressGesture.minimumPressDuration = 0.2
+        
+        let outfits = DataManager.shared.getOutfits(forSeason: self.season)
+        collectionView = TOLooksCollectionView(outfits: outfits)
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
                 
         collectionView.addGestureRecognizer(longPressGesture)
-        
         collectionView.selectionDelegate = self
+        
         
         
         let anotherSeasonBarButton = UIBarButtonItem(title: "Another season",
@@ -94,23 +92,38 @@ class MOLooksViewController: ViewController {
         if let indexPath = collectionView.indexPathForItem(at: point),
            let cell = (collectionView.cellForItem(at: indexPath) as? TOLooksCollectionViewCell) {
             
-            let imageView = cell.imageView
-                        
+//            let imageView = cell.imageView
+            let outfitView = cell.outfit.createPreview()
+            outfitView.layer.cornerRadius = cell.outfitView.layer.cornerRadius
+            
             let point = collectionView.convert(cell.frame.origin, to: view)
             
-            let imageModel = TOLookImageModel(image: imageView.image,
-                                              cornerRadius: 20,
-                                              size: imageView.frame.size,
-                                              origin: CGPoint(x: point.x + 16, y: point.y + 16))
+            let originalOrigin = CGPoint(x: point.x + 16, y: point.y + 16)
             
-            let previewViewController = TOLooksPreviewViewController(imageModel: imageModel) {
-                cell.containerView.isHidden = false
+            //            let imageModel = TOLookImageModel(image: imageView.image,
+            //                                              cornerRadius: 20,
+            //                                              size: imageView.frame.size,
+            //                                              origin: CGPoint(x: point.x + 16, y: point.y + 16))
+            
+            let previewViewController = TOLooksPreviewViewController(
+                outfitView: outfitView,
+                originalRect: CGRect(origin: originalOrigin, size: cell.outfitView.frame.size)
+            ) {
+                cell.outfitView.isHidden = false
+                UIView.animate(withDuration: 0.1) {
+                    cell.outfitView.layer.shadowOpacity = 0.2
+                }
             }
             
             present(previewViewController, animated: false)
             
-            cell.containerView.isHidden = true
-
+//            cell.outfitView.isHidden = true
+            UIView.animate(withDuration: 0.1) {
+                cell.outfitView.layer.shadowOpacity = 0
+            } completion: { _ in
+                cell.outfitView.isHidden = true
+                previewViewController.animatePresenting()
+            }
         }
         
     }
@@ -118,11 +131,7 @@ class MOLooksViewController: ViewController {
 }
 
 extension MOLooksViewController: TOLooksCollectionViewDelegateSelection {
-    func collectionView(_ collectionView: TOLooksCollectionView, didSelectImage image: UIImage?) {
-        // MARK: - TODO !!!
-//        let outfit = Outfit(image: image)
-//        outfit.season = season
-        let outfit = Outfit(season: self.season)
+    func collectionView(_ collectionView: TOLooksCollectionView, didSelectOutfit outfit: Outfit) {
         coordinator.eventOccured(.preview(outfit))
     }
 }

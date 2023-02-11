@@ -10,11 +10,14 @@ import UIKit
 class TOLooksViewController: ViewController {
     
     private let collectionView: TOLooksCollectionView = {
-        let looks = Array<UIImage?>(repeating: UIImage(named: "look-example"), count: 8)
-        let collectionView = TOLooksCollectionView(looks: looks)
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
+//        let looks = Array<UIImage?>(repeating: UIImage(named: "look-example"), count: 8)
+//        let collectionView = TOLooksCollectionView(looks: looks)
+//        collectionView.translatesAutoresizingMaskIntoConstraints = false
+//
         
-        return collectionView
+//        return collectionView
+        
+        return TOLooksCollectionView(outfits: [])
     }()
     
     let coordinator: TOCoordinator
@@ -71,22 +74,22 @@ class TOLooksViewController: ViewController {
         if let indexPath = collectionView.indexPathForItem(at: point),
            let cell = (collectionView.cellForItem(at: indexPath) as? TOLooksCollectionViewCell) {
             
-            let imageView = cell.imageView
-                        
-            let point = collectionView.convert(cell.frame.origin, to: view)
-            
-            let imageModel = TOLookImageModel(image: imageView.image,
-                                              cornerRadius: 20,
-                                              size: imageView.frame.size,
-                                              origin: CGPoint(x: point.x + 16, y: point.y + 16))
-            
-            let previewViewController = TOLooksPreviewViewController(imageModel: imageModel) {
-                cell.containerView.isHidden = false
-            }
-            
-            present(previewViewController, animated: false)
-            
-            cell.containerView.isHidden = true
+//            let imageView = cell.imageView
+//                        
+//            let point = collectionView.convert(cell.frame.origin, to: view)
+//            
+//            let imageModel = TOLookImageModel(image: imageView.image,
+//                                              cornerRadius: 20,
+//                                              size: imageView.frame.size,
+//                                              origin: CGPoint(x: point.x + 16, y: point.y + 16))
+//            
+//            let previewViewController = TOLooksPreviewViewController(imageModel: imageModel) {
+//                cell.containerView.isHidden = false
+//            }
+//            
+//            present(previewViewController, animated: false)
+//            
+//            cell.containerView.isHidden = true
 
         }
         
@@ -95,7 +98,7 @@ class TOLooksViewController: ViewController {
 }
 
 extension TOLooksViewController: TOLooksCollectionViewDelegateSelection {
-    func collectionView(_ collectionView: TOLooksCollectionView, didSelectImage image: UIImage?) {
-        coordinator.eventOccured(.preview(image))
+    func collectionView(_ collectionView: TOLooksCollectionView, didSelectOutfit outfit: Outfit) {
+        // MARK: - TODO !!!
     }
 }

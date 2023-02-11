@@ -23,7 +23,7 @@ class COPreviewViewController: ViewController {
 //        return imageView
 //    }()
     
-    let outfitView = COPeviewView()
+    private let outfitView: OutfitView
     
     private let addItemsButton: UIButton = {
         let button = UIButton()
@@ -60,6 +60,7 @@ class COPreviewViewController: ViewController {
     init(coordinator: COCoordinator, outfit: Outfit) {
         self.coordinator = coordinator
         self.outfit = outfit
+        self.outfitView = outfit.createPreview()
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -73,6 +74,14 @@ class COPreviewViewController: ViewController {
         title = "Preview"
         
         saveButton.addTarget(self, action: #selector(saveTapped), for: .touchUpInside)
+        
+        
+        outfitView.layer.cornerRadius = 20
+        
+        outfitView.layer.shadowColor = UIColor.black.cgColor
+        outfitView.layer.shadowRadius = 20
+        outfitView.layer.shadowOpacity = 0.2
+        outfitView.layer.shadowOffset.height = 2
         
         outfitView.topImageView.image = outfit.topWearImage
         outfitView.bottomImageView.image = outfit.bottomWearImage
@@ -116,6 +125,8 @@ class COPreviewViewController: ViewController {
     
     @objc
     private func saveTapped() {
+        DataManager.shared.save(outfit: outfit)
+        
         coordinator.eventOccured(.saved)
     }
 

@@ -93,8 +93,8 @@ class MainCoordinator: Coordinator {
             }
             
         case .myOutfits:
-            if let coordinator = children?.first(where: { ($0 as? MOCoordinator) != nil }) {
-                coordinator.start()
+            if let coordinator = children?.first(where: { ($0 as? MOCoordinator) != nil }) as? MOCoordinator {
+                coordinator.start(withSeason: .current)
             } else {
                 let builder = builder.createMOBuilder()
                 let coordinator = MOCoordinator(builder: builder,

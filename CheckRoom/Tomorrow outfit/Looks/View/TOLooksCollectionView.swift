@@ -8,17 +8,17 @@
 import UIKit
 
 protocol TOLooksCollectionViewDelegateSelection: AnyObject {
-    func collectionView(_ collectionView: TOLooksCollectionView, didSelectImage image: UIImage?)
+    func collectionView(_ collectionView: TOLooksCollectionView, didSelectOutfit outfit: Outfit)
 }
 
 class TOLooksCollectionView: UICollectionView {
     
     weak var selectionDelegate: TOLooksCollectionViewDelegateSelection?
     
-    let looks: [UIImage?]
+    let outfits: [Outfit]
     
-    init(looks: [UIImage?]) {
-        self.looks = looks
+    init(outfits: [Outfit]) {
+        self.outfits = outfits
         
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 0
@@ -38,17 +38,7 @@ class TOLooksCollectionView: UICollectionView {
         
         register(cellClass, forCellWithReuseIdentifier: identifier)
     }
-    
-    @objc
-    private func cellTapped(_ sender: UITapGestureRecognizer) {
-        
-        guard let image = (sender.view as? UIImageView)?.image else {
-            return
-        }
-        
-        selectionDelegate?.collectionView(self, didSelectImage: image)
-    }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -58,7 +48,7 @@ class TOLooksCollectionView: UICollectionView {
 extension TOLooksCollectionView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return looks.count
+        return outfits.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -69,11 +59,15 @@ extension TOLooksCollectionView: UICollectionViewDelegate, UICollectionViewDataS
             return TOLooksCollectionViewCell()
         }
         
-        cell.imageView.image = looks[indexPath.item]
-        cell.imageView.isUserInteractionEnabled = true
+//        cell.imageView.image = looks[indexPath.item]
+//        cell.imageView.isUserInteractionEnabled = true
         
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(cellTapped(_:)))
-        cell.imageView.addGestureRecognizer(tapGesture)
+        cell.outfit = outfits[indexPath.item]
+        
+//        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(cellTapped(_:)))
+//        cell.isUserInteractionEnabled = true
+//
+//        cell.outfitView.addGestureRecognizer(tapGesture)
         
         return cell
     }
@@ -88,5 +82,14 @@ extension TOLooksCollectionView: UICollectionViewDelegate, UICollectionViewDataS
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         
         return UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8)
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let cell = cellForItem(at: indexPath) as? TOLooksCollectionViewCell {
+            
+            selectionDelegate?.collectionView(self, didSelectOutfit: cell.outfit)
+            
+        }
     }
 }

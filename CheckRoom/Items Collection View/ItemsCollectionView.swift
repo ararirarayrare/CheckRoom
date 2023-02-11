@@ -34,14 +34,6 @@ class ItemsCollectionView: UICollectionView {
         register(cellClass, forCellWithReuseIdentifier: identifier)
     }
     
-    func scrollTo(item: Int) {
-        scrollToItem(
-            at: IndexPath(item: item, section: 0),
-            at: [.centeredVertically, .centeredHorizontally],
-            animated: true
-        )
-    }
-    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -68,7 +60,14 @@ extension ItemsCollectionView: UICollectionViewDelegate, UICollectionViewDataSou
         return cell
     }
     
-    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        if let cell = visibleCells.first(where: { $0.alpha > 0.99 }),
+           let index = indexPath(for: cell)?.item {
+            
+            selectedIndex = index
+        }
+    }
+
 //    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
 //
 //        return UIEdgeInsets(top: 0, left: bounds.width / 4, bottom: 0, right: 0)

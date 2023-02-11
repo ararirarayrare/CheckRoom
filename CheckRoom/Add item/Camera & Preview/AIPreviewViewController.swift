@@ -89,6 +89,7 @@ class AIPreviewViewController: ViewController {
             }
             
             self.imageView.image = image
+            
         }
     }
     
