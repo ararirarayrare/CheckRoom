@@ -9,19 +9,21 @@ import UIKit
 
 class COPreviewViewController: ViewController {
     
-    let imageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        
-        imageView.layer.cornerRadius = 20
-        
-        imageView.layer.shadowColor = UIColor.black.cgColor
-        imageView.layer.shadowRadius = 20
-        imageView.layer.shadowOpacity = 0.2
-        imageView.layer.shadowOffset.height = 2
-        
-        return imageView
-    }()
+//    let imageView: UIImageView = {
+//        let imageView = UIImageView()
+//        imageView.translatesAutoresizingMaskIntoConstraints = false
+//
+//        imageView.layer.cornerRadius = 20
+//
+//        imageView.layer.shadowColor = UIColor.black.cgColor
+//        imageView.layer.shadowRadius = 20
+//        imageView.layer.shadowOpacity = 0.2
+//        imageView.layer.shadowOffset.height = 2
+//
+//        return imageView
+//    }()
+    
+    let outfitView = COPeviewView()
     
     private let addItemsButton: UIButton = {
         let button = UIButton()
@@ -53,8 +55,11 @@ class COPreviewViewController: ViewController {
     
     let coordinator: COCoordinator
     
-    init(coordinator: COCoordinator) {
+    let outfit: Outfit
+    
+    init(coordinator: COCoordinator, outfit: Outfit) {
         self.coordinator = coordinator
+        self.outfit = outfit
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -68,12 +73,18 @@ class COPreviewViewController: ViewController {
         title = "Preview"
         
         saveButton.addTarget(self, action: #selector(saveTapped), for: .touchUpInside)
+        
+        outfitView.topImageView.image = outfit.topWearImage
+        outfitView.bottomImageView.image = outfit.bottomWearImage
+        outfitView.shoesImageView.image = outfit.shoesImage
     }
     
     override func layout() {
         super.layout()
         
-        view.addSubview(imageView)
+        outfitView.translatesAutoresizingMaskIntoConstraints = false
+        
+        view.addSubview(outfitView)
         view.addSubview(addItemsButton)
         view.addSubview(saveButton)
         
@@ -92,13 +103,13 @@ class COPreviewViewController: ViewController {
             addItemsButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
             
-            imageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,
+            outfitView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,
                                            constant: 40),
-            imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor,
+            outfitView.leadingAnchor.constraint(equalTo: view.leadingAnchor,
                                                constant: 20),
-            imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor,
+            outfitView.trailingAnchor.constraint(equalTo: view.trailingAnchor,
                                                 constant: -20),
-            imageView.bottomAnchor.constraint(equalTo: addItemsButton.topAnchor,
+            outfitView.bottomAnchor.constraint(equalTo: addItemsButton.topAnchor,
                                               constant: -32)
         ])
     }

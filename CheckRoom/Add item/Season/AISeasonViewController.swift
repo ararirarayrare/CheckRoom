@@ -85,7 +85,7 @@ class AISeasonViewController: ViewController {
 //                print(accessory.image, accessory.season, accessory.category)
 //            }
             
-            DataManager().save(wear: wear)
+            DataManager.shared.save(wear: wear)
             
             coordinator.eventOccured(.saved)
         }

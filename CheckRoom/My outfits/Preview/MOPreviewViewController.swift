@@ -107,8 +107,8 @@ class MOPreviewViewController: ViewController {
     @objc
     private func editTapped() {
         // MARK: - TODO !!! 
-        let look = outfit.image
-        (coordinator.parent as? MainCoordinator)?.eventOccured(.editLook(look))
+//        let look = outfit.image
+//        (coordinator.parent as? MainCoordinator)?.eventOccured(.editLook(look))
     }
     
     @objc

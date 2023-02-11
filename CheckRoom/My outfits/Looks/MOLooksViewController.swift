@@ -120,8 +120,9 @@ class MOLooksViewController: ViewController {
 extension MOLooksViewController: TOLooksCollectionViewDelegateSelection {
     func collectionView(_ collectionView: TOLooksCollectionView, didSelectImage image: UIImage?) {
         // MARK: - TODO !!!
-        let outfit = Outfit(image: image)
-        outfit.season = season
+//        let outfit = Outfit(image: image)
+//        outfit.season = season
+        let outfit = Outfit(season: self.season)
         coordinator.eventOccured(.preview(outfit))
     }
 }

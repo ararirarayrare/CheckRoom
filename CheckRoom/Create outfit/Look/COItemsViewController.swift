@@ -17,7 +17,7 @@ class COItemsViewController: ViewController {
     
     let season: Season
     
-    private let dataManager = DataManager()
+    private let dataManager = DataManager.shared
     
     init(season: Season, coordinator: COCoordinator) {
         self.season = season
@@ -96,8 +96,11 @@ class COItemsViewController: ViewController {
     
     @objc
     private func nextTapped() {
-        let look = UIImage(named: "look-example")
-        coordinator.eventOccured(.preview(look))
+        let outfit = Outfit(season: season)
+        outfit.topWearImage = topCollectionView.selectedItem
+        outfit.bottomWearImage = bottomCollectionView.selectedItem
+        outfit.shoesImage = shoesCollectionView.selectedItem
+        coordinator.eventOccured(.preview(outfit))
     }
     
     private func createCollectionView(withItems items: [UIImage?], frame: CGRect) -> ItemsCollectionView {

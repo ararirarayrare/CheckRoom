@@ -10,12 +10,14 @@ import RealmSwift
 
 class DataManager {
     
-    private let realm: Realm? = try? Realm()
+    static let shared = DataManager()
+    
+    private let realm: Realm! = try! Realm()
     
     func save(wear: Wear) {
-        realm?.beginWrite()
-        realm?.add(wear)
-        try? realm?.commitWrite()
+        try! realm.write {
+            self.realm?.add(wear)
+        }
     }
     
     func getWear<T: Wear>(type: T.Type, forSeason season: Season) -> [T] {

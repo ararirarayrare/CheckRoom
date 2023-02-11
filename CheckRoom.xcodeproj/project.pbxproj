@@ -25,6 +25,8 @@
 		04439463297B302B00FAFD09 /* ELPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04439462297B302B00FAFD09 /* ELPreviewViewController.swift */; };
 		04439466297B310000FAFD09 /* ELAddItemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04439465297B310000FAFD09 /* ELAddItemsViewController.swift */; };
 		04439469297B31C100FAFD09 /* ELOutwearViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04439468297B31C100FAFD09 /* ELOutwearViewController.swift */; };
+		0455BDE52993C80200FBBD40 /* Outfit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0455BDE42993C80200FBBD40 /* Outfit.swift */; };
+		0455BDE72993CC7A00FBBD40 /* COPeviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0455BDE62993CC7A00FBBD40 /* COPeviewView.swift */; };
 		04980075297B358600069BEA /* ItemsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04980074297B358600069BEA /* ItemsCollectionView.swift */; };
 		04980077297B35BD00069BEA /* ItemsCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04980076297B35BD00069BEA /* ItemsCollectionViewLayout.swift */; };
 		0498009D297DD38400069BEA /* DeepLabV3.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 0498009C297DD38300069BEA /* DeepLabV3.mlmodel */; };
@@ -98,6 +100,8 @@
 		04439462297B302B00FAFD09 /* ELPreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ELPreviewViewController.swift; sourceTree = "<group>"; };
 		04439465297B310000FAFD09 /* ELAddItemsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ELAddItemsViewController.swift; sourceTree = "<group>"; };
 		04439468297B31C100FAFD09 /* ELOutwearViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ELOutwearViewController.swift; sourceTree = "<group>"; };
+		0455BDE42993C80200FBBD40 /* Outfit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Outfit.swift; sourceTree = "<group>"; };
+		0455BDE62993CC7A00FBBD40 /* COPeviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = COPeviewView.swift; sourceTree = "<group>"; };
 		04980074297B358600069BEA /* ItemsCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsCollectionView.swift; sourceTree = "<group>"; };
 		04980076297B35BD00069BEA /* ItemsCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsCollectionViewLayout.swift; sourceTree = "<group>"; };
 		0498009C297DD38300069BEA /* DeepLabV3.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = DeepLabV3.mlmodel; sourceTree = "<group>"; };
@@ -448,6 +452,7 @@
 			isa = PBXGroup;
 			children = (
 				04D480B8297449C200A961EE /* COPreviewViewController.swift */,
+				0455BDE62993CC7A00FBBD40 /* COPeviewView.swift */,
 			);
 			path = Preview;
 			sourceTree = "<group>";
@@ -505,6 +510,7 @@
 				04C9C3E3296F2FFC005C7003 /* Season.swift */,
 				04C9C3A9296C7E0C005C7003 /* ViewController.swift */,
 				043FDD422989849C000A4C2D /* Wear.swift */,
+				0455BDE42993C80200FBBD40 /* Outfit.swift */,
 			);
 			path = CheckRoom;
 			sourceTree = "<group>";
@@ -549,7 +555,6 @@
 				0CDA6F6138B1636F0E07EC9C /* Pods-CheckRoom.debug.xcconfig */,
 				28113621E48CA69EFE59D32C /* Pods-CheckRoom.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -705,10 +710,12 @@
 				04C9C3B2296C849A005C7003 /* CategoryCollectionView.swift in Sources */,
 				04C9C3A5296C6C20005C7003 /* Icons.swift in Sources */,
 				044394502979A7D500FAFD09 /* MOCoordinator.swift in Sources */,
+				0455BDE52993C80200FBBD40 /* Outfit.swift in Sources */,
 				04980077297B35BD00069BEA /* ItemsCollectionViewLayout.swift in Sources */,
 				049800BE297DD74A00069BEA /* NonMaxSuppression.swift in Sources */,
 				04439463297B302B00FAFD09 /* ELPreviewViewController.swift in Sources */,
 				049800B4297DD74A00069BEA /* UIImage+CVPixelBuffer.swift in Sources */,
+				0455BDE72993CC7A00FBBD40 /* COPeviewView.swift in Sources */,
 				04980075297B358600069BEA /* ItemsCollectionView.swift in Sources */,
 				04E6B81D296C539C00E50AA8 /* SceneDelegate.swift in Sources */,
 				049800BC297DD74A00069BEA /* CVPixelBuffer+Create.swift in Sources */,

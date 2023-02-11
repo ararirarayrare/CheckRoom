@@ -5,7 +5,7 @@ class ItemsCollectionView: UICollectionView {
    private(set) var selectedIndex: Int = 0
     
     var selectedItem: UIImage? {
-        return items[selectedIndex]
+        return items.isEmpty ? nil : items[selectedIndex]
     }
     
     let items: [UIImage?]

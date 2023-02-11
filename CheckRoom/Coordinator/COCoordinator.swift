@@ -10,7 +10,7 @@ import UIKit
 class COCoordinator: Coordinator {
     
     enum Event {
-        case items(Season), preview(UIImage?), saved
+        case items(Season), preview(Outfit), saved
     }
     
     weak var parent: Coordinator?
@@ -40,8 +40,8 @@ class COCoordinator: Coordinator {
             let vc = builder.createItems(forSeason: season, coordinator: self)
             navigationController?.pushViewController(vc, animated: true)
             
-        case .preview(let look):
-            let vc = builder.createPreview(forLook: look, coordinator: self)
+        case .preview(let outfit):
+            let vc = builder.createPreview(outfit: outfit, coordinator: self)
             navigationController?.pushViewController(vc, animated: true)
             
         case .saved:

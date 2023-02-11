@@ -15,13 +15,15 @@ class COBuilder: Builder {
     }
     
     func createItems(forSeason season: Season, coordinator: COCoordinator) -> COItemsViewController {
-        let vc = COItemsViewController(season: season, coordinator: coordinator)
+        let vc = COItemsViewController(season: season,
+                                       coordinator: coordinator)
         return vc
     }
     
-    func createPreview(forLook image: UIImage?, coordinator: COCoordinator) -> COPreviewViewController {
-        let vc = COPreviewViewController(coordinator: coordinator)
-        vc.imageView.image = image
+    func createPreview(outfit: Outfit, coordinator: COCoordinator) -> COPreviewViewController {
+        let vc = COPreviewViewController(coordinator: coordinator,
+                                         outfit: outfit)
+        
         return vc
     }
 }
