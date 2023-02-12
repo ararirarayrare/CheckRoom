@@ -12,15 +12,20 @@ extension Season: PersistableEnum {}
 
 class Wear: Object {
     
+    fileprivate var lock = pthread_rwlock_t()
+    private var lockAttributes = pthread_rwlockattr_t()
+    
     fileprivate(set) var image: UIImage? {
         get {
             return UIImage(data: imageData)
         }
         
         set {
+            pthread_rwlock_wrlock(&lock)
             if let data = newValue?.pngData() {
                 imageData = data
             }
+            pthread_rwlock_unlock(&lock)
         }
     }
     
@@ -34,8 +39,14 @@ class Wear: Object {
         }
 
         set {
+            pthread_rwlock_wrlock(&lock)
             seasonRawValue = String(describing: newValue.rawValue)
+            pthread_rwlock_unlock(&lock)
         }
+    }
+    
+    fileprivate func setup() {
+        pthread_rwlock_init(&lock, &lockAttributes)
     }
 
 }
@@ -55,7 +66,9 @@ class TopWear: Wear {
         }
         
         set {
+            pthread_rwlock_wrlock(&lock)
             categoryRawValue = String(describing: newValue.rawValue)
+            pthread_rwlock_unlock(&lock)
         }
     }
     
@@ -108,7 +121,9 @@ class Accessory: Wear {
         }
         
         set {
+            pthread_rwlock_wrlock(&lock)
             categoryRawValue = String(describing: newValue.rawValue)
+            pthread_rwlock_unlock(&lock)
         }
     }
     

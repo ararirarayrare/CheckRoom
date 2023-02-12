@@ -36,8 +36,11 @@ class ELViewController: ViewController {
         
     let coordinator: ELCoordinator
     
-    init(coordinator: ELCoordinator, look: UIImage?) {
+    let outfit: Outfit
+    
+    init(coordinator: ELCoordinator, outfit: Outfit) {
         self.coordinator = coordinator
+        self.outfit = outfit
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -73,9 +76,11 @@ class ELViewController: ViewController {
     
     @objc
     private func nextTapped() {
-        let look = UIImage(named: "look-example")
+//        let look = UIImage(named: "look-example")
+//
+//        coordinator.eventOccured(.preview(look))
         
-        coordinator.eventOccured(.preview(look))
+        // MARK: - TODO !!!
     }
     
     private func createCollectionView(withItems items: [UIImage?], frame: CGRect) -> ItemsCollectionView {

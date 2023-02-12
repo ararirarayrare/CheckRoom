@@ -59,10 +59,6 @@ class MOCoordinator: Coordinator {
                                            coordinator: self)
             navigationController?.pushViewController(vc, animated: true)
             
-//            navigationController?.viewControllers.insert(vc, at: 1)
-//
-//            navigationController?.popToViewController(vc, animated: true)
-            
         case .saved:
             let vc = builder.createSuccess(title: "Congratulations, the item was saved!",
                                            coordinator: self)

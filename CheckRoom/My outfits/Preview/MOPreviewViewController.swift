@@ -23,8 +23,6 @@ class MOPreviewViewController: ViewController {
 //        return imageView
 //    }()
     
-    private let outfitView: OutfitView
-    
     private let editButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -47,9 +45,11 @@ class MOPreviewViewController: ViewController {
         return button
     }()
     
-    let coordinator: MOCoordinator
+    private let outfitView: OutfitView
     
     let outfit: Outfit
+    
+    let coordinator: MOCoordinator
     
     init(coordinator: MOCoordinator, outfit: Outfit) {
         self.coordinator = coordinator
@@ -90,7 +90,7 @@ class MOPreviewViewController: ViewController {
         NSLayoutConstraint.activate([
             changeSeasonButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor,
                                                        constant: -32),
-            changeSeasonButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            changeSeasonButton.heightAnchor.constraint(equalToConstant: 56),
             changeSeasonButton.leadingAnchor.constraint(equalTo: view.leadingAnchor,
                                                         constant: 32),
             changeSeasonButton.trailingAnchor.constraint(equalTo: view.trailingAnchor,
@@ -98,12 +98,12 @@ class MOPreviewViewController: ViewController {
             
             
             editButton.bottomAnchor.constraint(equalTo: changeSeasonButton.topAnchor,
-                                               constant: -20),
+                                               constant: -12),
             editButton.widthAnchor.constraint(equalToConstant: 140),
             editButton.heightAnchor.constraint(equalToConstant: 56),
             editButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            
-            
+
+
             outfitView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,
                                            constant: 40),
             outfitView.leadingAnchor.constraint(equalTo: view.leadingAnchor,

@@ -10,6 +10,9 @@ import RealmSwift
 
 class Outfit: Object {
     
+    private var lock = pthread_rwlock_t()
+    private var lockAttributes = pthread_rwlockattr_t()
+    
     @objc dynamic private var topWearImageData: Data = Data()
     @objc dynamic private var bottomWearImageData: Data = Data()
     @objc dynamic private var shoesImageData: Data = Data()
@@ -21,7 +24,9 @@ class Outfit: Object {
         }
         
         set {
+            pthread_rwlock_wrlock(&lock)
             if let data = newValue?.pngData() { topWearImageData = data }
+            pthread_rwlock_unlock(&lock)
         }
     }
     
@@ -31,7 +36,9 @@ class Outfit: Object {
         }
         
         set {
+            pthread_rwlock_wrlock(&lock)
             if let data = newValue?.pngData() { bottomWearImageData = data }
+            pthread_rwlock_unlock(&lock)
         }
     }
     
@@ -41,7 +48,9 @@ class Outfit: Object {
         }
         
         set {
+            pthread_rwlock_wrlock(&lock)
             if let data = newValue?.pngData() { shoesImageData = data }
+            pthread_rwlock_unlock(&lock)
         }
     }
     
@@ -51,7 +60,9 @@ class Outfit: Object {
         }
         
         set {
+            pthread_rwlock_wrlock(&lock)
             if let data = newValue?.pngData() { accessoryImageData = data }
+            pthread_rwlock_unlock(&lock)
         }
     }
     
@@ -64,7 +75,9 @@ class Outfit: Object {
         }
 
         set {
+            pthread_rwlock_wrlock(&lock)
             seasonRawValue = String(describing: newValue.rawValue)
+            pthread_rwlock_unlock(&lock)
         }
     }
     
@@ -72,6 +85,8 @@ class Outfit: Object {
         self.init()
         
         self.season = season
+        
+        pthread_rwlock_init(&lock, &lockAttributes)
     }
     
     func createPreview() -> OutfitView {

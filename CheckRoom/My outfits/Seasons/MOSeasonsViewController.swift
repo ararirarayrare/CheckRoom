@@ -65,8 +65,9 @@ class MOSeasonsViewController: ViewController {
         
         navigationController?.navigationBar.prefersLargeTitles = true
         
-        if isEditingOutfit {
+        if let outfit = editedOutfit, isEditingOutfit {
             collectionView.activeImages = Season.allCases.map { $0.imageActive }
+            collectionView.selectedItem = outfit.season.rawValue
             
             saveButton = UIButton()
             saveButton?.translatesAutoresizingMaskIntoConstraints = false
@@ -122,11 +123,13 @@ class MOSeasonsViewController: ViewController {
     
     @objc
     private func saveTapped() {
-        guard isEditingOutfit else {
+        guard let outfit = editedOutfit, isEditingOutfit else {
             return
         }
         
         let newSeason = Season.allCases[collectionView.selectedItem]
+        
+        DataManager.shared.updateOutfit { outfit.season = newSeason }
         
         coordinator.eventOccured(.saved)
     }

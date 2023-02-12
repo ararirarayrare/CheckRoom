@@ -50,4 +50,26 @@ class DataManager {
         
         return array
     }
+    
+    func updateOutfit(_ updateHandler: () -> Void) {
+        
+        try! realm.write({ updateHandler() })
+        
+        
+//        let outfits = realm.objects(Outfit.self)
+        
+//        if let neededOutfit = outfits.first(where: {
+//            $0.topWearImage == outfit.topWearImage &&
+//            $0.bottomWearImage == outfit.bottomWearImage &&
+//            $0.shoesImage == outfit.shoesImage
+//        }) {
+//
+//            realm.delete(neededOutfit)
+//            realm.add(outfit)
+//
+//            try! realm.commitWrite()
+//        }
+        
+        
+    }
 }

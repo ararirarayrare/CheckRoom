@@ -23,7 +23,7 @@ class CategoryCollectionView: UICollectionView {
         }
     }
     
-    private(set) var selectedItem: Int = 0
+    var selectedItem: Int = 0
     
     init(defaultImages: [UIImage?]) {
         self.defaultImages = defaultImages

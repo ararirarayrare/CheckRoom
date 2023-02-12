@@ -10,7 +10,7 @@ import UIKit
 class ELBuilder: Builder {
     
     func createEdit(look: UIImage?, coordinator: ELCoordinator) -> ELViewController {
-        let vc = ELViewController(coordinator: coordinator, look: look)
+        let vc = ELViewController(coordinator: coordinator, outfit: look)
         return vc
     }
     
