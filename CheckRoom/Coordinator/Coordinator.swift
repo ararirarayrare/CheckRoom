@@ -33,7 +33,7 @@ class MainCoordinator: Coordinator {
     enum Event {
         case addItem, createOutfit, tomorrowOutfit, myOutfits
         
-        case editLook(UIImage?)
+        case editOutfit(Outfit)
     }
     
     private let builder: MainBuilder
@@ -106,16 +106,16 @@ class MainCoordinator: Coordinator {
             }
             
             
-        case .editLook(let look):
+        case .editOutfit(let outfit):
             if let coordinator = children?.first(where: { ($0 as? ELCoordinator) != nil }) as? ELCoordinator {
-                coordinator.start(withLook: look)
+                coordinator.start(withOutfit: outfit)
             } else {
                 let builder = builder.createELBuilder()
                 let coordinator = ELCoordinator(builder: builder,
                                                 navigationController: navigationController)
                 coordinator.parent = self
-                coordinator.start(withLook: look)
-                
+                coordinator.start(withOutfit: outfit)
+
                 children?.append(coordinator)
             }
         }

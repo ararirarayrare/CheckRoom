@@ -120,6 +120,8 @@ class MOPreviewViewController: ViewController {
         // MARK: - TODO !!! 
 //        let look = outfit.image
 //        (coordinator.parent as? MainCoordinator)?.eventOccured(.editLook(look))
+        
+        (coordinator.parent as? MainCoordinator)?.eventOccured(.editOutfit(outfit))
     }
     
     @objc

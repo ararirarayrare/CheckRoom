@@ -106,9 +106,11 @@ class TOPreviewViewController: ViewController {
     
     @objc
     private func editTapped() {
-        let look = imageView.image
+//        let look = imageView.image
+//
+//        (coordinator.parent as? MainCoordinator)?.eventOccured(.editLook(look))
         
-        (coordinator.parent as? MainCoordinator)?.eventOccured(.editLook(look))
+        // MARK: - TODO !!!
     }
     
     @objc

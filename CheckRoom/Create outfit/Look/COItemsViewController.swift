@@ -50,7 +50,6 @@ class COItemsViewController: ViewController {
         let topItems = dataManager.getWear(type: TopWear.self,
                                            forSeason: self.season)
             .filter { $0.category == .undercoat }
-            .compactMap { $0.image }
         
         topCollectionView = ItemsCollectionView(
             items: topItems,
@@ -62,7 +61,6 @@ class COItemsViewController: ViewController {
         
         let bottomItems = dataManager.getWear(type: BottomWear.self,
                                               forSeason: self.season)
-            .compactMap { $0.image }
         
         bottomCollectionView = ItemsCollectionView(
             items: bottomItems,
@@ -74,7 +72,6 @@ class COItemsViewController: ViewController {
         
         let shoes = dataManager.getWear(type: Shoes.self,
                                         forSeason: self.season)
-            .compactMap { $0.image }
         
         shoesCollectionView = ItemsCollectionView(
             items: shoes,
@@ -97,17 +94,16 @@ class COItemsViewController: ViewController {
     @objc
     private func nextTapped() {
         let outfit = Outfit(season: season)
-        outfit.topWearImage = topCollectionView.selectedItem
-        outfit.bottomWearImage = bottomCollectionView.selectedItem
-        outfit.shoesImage = shoesCollectionView.selectedItem
+//        outfit.topWearImage = topCollectionView.selectedItem
+//        outfit.bottomWearImage = bottomCollectionView.selectedItem
+//        outfit.shoesImage = shoesCollectionView.selectedItem
+        
+        outfit.topWear = topCollectionView.selectedItem as? TopWear
+        outfit.bottomWear = bottomCollectionView.selectedItem as? BottomWear
+        outfit.shoes = shoesCollectionView.selectedItem as? Shoes
+        
         coordinator.eventOccured(.preview(outfit))
     }
-    
-    private func createCollectionView(withItems items: [UIImage?], frame: CGRect) -> ItemsCollectionView {
-        let collectionView = ItemsCollectionView(items: items, frame: frame)
-        //        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        
-        return collectionView
-    }
+
     
 }

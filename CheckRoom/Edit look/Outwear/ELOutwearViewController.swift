@@ -10,8 +10,7 @@ import UIKit
 class ELOutwearViewController: ViewController {
     
     private lazy var collectionView = ItemsCollectionView(
-        items: Array(repeating: UIImage(named: "outwear-item"),
-                     count: 4),
+        items: [],
         frame: CGRect(x: 0,
                       y: 140,
                       width: view.bounds.width,
@@ -34,8 +33,11 @@ class ELOutwearViewController: ViewController {
     
     let coordinator: ELCoordinator
     
-    init(coordinator: ELCoordinator, look: UIImage?) {
+    let outfit: Outfit
+    
+    init(coordinator: ELCoordinator, outfit: Outfit) {
         self.coordinator = coordinator
+        self.outfit = outfit
         super.init(nibName: nil, bundle: nil)
     }
     

@@ -129,7 +129,9 @@ class MOSeasonsViewController: ViewController {
         
         let newSeason = Season.allCases[collectionView.selectedItem]
         
-        DataManager.shared.updateOutfit { outfit.season = newSeason }
+        DataManager.shared.updateOutfit {
+            outfit.season = newSeason
+        }
         
         coordinator.eventOccured(.saved)
     }

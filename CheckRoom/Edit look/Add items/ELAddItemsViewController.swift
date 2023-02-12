@@ -23,8 +23,11 @@ class ELAddItemsViewController: ViewController {
     
     let coordinator: ELCoordinator
     
-    init(coordinator: ELCoordinator, look: UIImage?) {
+    let outfit: Outfit
+    
+    init(coordinator: ELCoordinator, outfit: Outfit) {
         self.coordinator = coordinator
+        self.outfit = outfit
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -61,7 +64,8 @@ extension ELAddItemsViewController: CategoryCollectionViewDelegateSelection {
         
         switch index {
         case 0:
-            coordinator.eventOccured(.outwear(outwear))
+//            coordinator.eventOccured(.outwear(outwear))
+            ()
         case 1:
             ()
 //            coordinator.eventOccured(<#T##event: ELCoordinator.Event##ELCoordinator.Event#>)

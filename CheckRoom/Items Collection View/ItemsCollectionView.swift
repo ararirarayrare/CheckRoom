@@ -4,13 +4,13 @@ class ItemsCollectionView: UICollectionView {
     
    private(set) var selectedIndex: Int = 0
     
-    var selectedItem: UIImage? {
+    var selectedItem: Wear! {
         return items.isEmpty ? nil : items[selectedIndex]
     }
     
-    let items: [UIImage?]
+    let items: [Wear]
     
-    init(items: [UIImage?], frame: CGRect) {
+    init(items: [Wear], frame: CGRect) {
         self.items = items
         
         let layout = ItemsCollectionViewLayout()
@@ -34,6 +34,13 @@ class ItemsCollectionView: UICollectionView {
         register(cellClass, forCellWithReuseIdentifier: identifier)
     }
     
+    func scrollTo(index: Int) {
+        self.scrollToItem(at: IndexPath(item: index, section: 0),
+                          at: [.centeredVertically, .centeredHorizontally],
+                          animated: true)
+        self.selectedIndex = index
+    }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -54,7 +61,7 @@ extension ItemsCollectionView: UICollectionViewDelegate, UICollectionViewDataSou
             return COItemsCollectionViewCell()
         }
         
-        cell.imageView.image = items[indexPath.item]
+        cell.imageView.image = items[indexPath.item].image
         
         
         return cell

@@ -83,9 +83,13 @@ class COPreviewViewController: ViewController {
         outfitView.layer.shadowOpacity = 0.2
         outfitView.layer.shadowOffset.height = 2
         
-        outfitView.topImageView.image = outfit.topWearImage
-        outfitView.bottomImageView.image = outfit.bottomWearImage
-        outfitView.shoesImageView.image = outfit.shoesImage
+//        outfitView.topImageView.image = outfit.topWearImage
+//        outfitView.bottomImageView.image = outfit.bottomWearImage
+//        outfitView.shoesImageView.image = outfit.shoesImage
+        
+        outfitView.topImageView.image = outfit.topWear.image
+        outfitView.bottomImageView.image = outfit.bottomWear.image
+        outfitView.shoesImageView.image = outfit.shoes.image
     }
     
     override func layout() {

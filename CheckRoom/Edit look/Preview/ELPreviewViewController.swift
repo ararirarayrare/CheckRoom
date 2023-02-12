@@ -9,19 +9,19 @@ import UIKit
 
 class ELPreviewViewController: ViewController {
     
-    let imageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        
-        imageView.layer.cornerRadius = 20
-        
-        imageView.layer.shadowColor = UIColor.black.cgColor
-        imageView.layer.shadowRadius = 20
-        imageView.layer.shadowOpacity = 0.2
-        imageView.layer.shadowOffset.height = 2
-        
-        return imageView
-    }()
+//    let imageView: UIImageView = {
+//        let imageView = UIImageView()
+//        imageView.translatesAutoresizingMaskIntoConstraints = false
+//
+//        imageView.layer.cornerRadius = 20
+//
+//        imageView.layer.shadowColor = UIColor.black.cgColor
+//        imageView.layer.shadowRadius = 20
+//        imageView.layer.shadowOpacity = 0.2
+//        imageView.layer.shadowOffset.height = 2
+//
+//        return imageView
+//    }()
     
     private let addItemsButton: UIButton = {
         let button = UIButton()
@@ -53,11 +53,16 @@ class ELPreviewViewController: ViewController {
     
     let coordinator: ELCoordinator
     
-    init(coordinator: ELCoordinator, look: UIImage?) {
+    let outfit: Outfit
+    
+    private let outfitView: OutfitView
+    
+    init(coordinator: ELCoordinator, outfit: Outfit) {
         self.coordinator = coordinator
+        self.outfit = outfit
+        self.outfitView = outfit.createPreview()
         super.init(nibName: nil, bundle: nil)
         
-        imageView.image = look
     }
     
     required init?(coder: NSCoder) {
@@ -69,6 +74,13 @@ class ELPreviewViewController: ViewController {
         
         title = "Preview"
         
+        outfitView.layer.cornerRadius = 20
+        
+        outfitView.layer.shadowColor = UIColor.black.cgColor
+        outfitView.layer.shadowRadius = 20
+        outfitView.layer.shadowOpacity = 0.2
+        outfitView.layer.shadowOffset.height = 2
+        
         addItemsButton.addTarget(self, action: #selector(addItemsTapped), for: .touchUpInside)
         saveButton.addTarget(self, action: #selector(saveTapped), for: .touchUpInside)
     }
@@ -76,7 +88,10 @@ class ELPreviewViewController: ViewController {
     override func layout() {
         super.layout()
         
-        view.addSubview(imageView)
+        outfitView.translatesAutoresizingMaskIntoConstraints = false
+        
+//        view.addSubview(imageView)
+        view.addSubview(outfitView)
         view.addSubview(addItemsButton)
         view.addSubview(saveButton)
         
@@ -95,22 +110,33 @@ class ELPreviewViewController: ViewController {
             addItemsButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
             
-            imageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,
+            outfitView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,
                                            constant: 40),
-            imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor,
+            outfitView.leadingAnchor.constraint(equalTo: view.leadingAnchor,
                                                constant: 20),
-            imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor,
+            outfitView.trailingAnchor.constraint(equalTo: view.trailingAnchor,
                                                 constant: -20),
-            imageView.bottomAnchor.constraint(equalTo: addItemsButton.topAnchor,
+            outfitView.bottomAnchor.constraint(equalTo: addItemsButton.topAnchor,
                                               constant: -32)
+            
+//            imageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,
+//                                           constant: 40),
+//            imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor,
+//                                               constant: 20),
+//            imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor,
+//                                                constant: -20),
+//            imageView.bottomAnchor.constraint(equalTo: addItemsButton.topAnchor,
+//                                              constant: -32)
         ])
     }
     
     @objc
     private func addItemsTapped() {
-        let look = UIImage(named: "look-example")
+//        let look = UIImage(named: "look-example")
+//
+//        coordinator.eventOccured(.addItems(look))
         
-        coordinator.eventOccured(.addItems(look))
+        // MARK: - TODO !!!
     }
     
     @objc

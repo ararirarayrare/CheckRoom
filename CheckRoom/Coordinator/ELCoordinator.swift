@@ -10,7 +10,7 @@ import UIKit
 class ELCoordinator: Coordinator {
     
     enum Event {
-        case preview(UIImage?), addItems(UIImage?), outwear(UIImage?), saved
+        case preview(Outfit), addItems(Outfit), outwear(Outfit), saved
     }
     
     var parent: Coordinator?
@@ -33,23 +33,23 @@ class ELCoordinator: Coordinator {
         fatalError("Method is not implemented! Use start(withLook:)")
     }
     
-    func start(withLook look: UIImage?) {
-        let vc = builder.createEdit(look: look, coordinator: self)
+    func start(withOutfit outfit: Outfit) {
+        let vc = builder.createEdit(outfit: outfit, coordinator: self)
         navigationController?.pushViewController(vc, animated: true)
     }
     
     func eventOccured(_ event: Event) {
         switch event {
-        case .preview(let look):
-            let vc = builder.createPreview(look: look, coordinator: self)
+        case .preview(let outfit):
+            let vc = builder.createPreview(outfit: outfit, coordinator: self)
             navigationController?.pushViewController(vc, animated: true)
             
-        case .addItems(let look):
-            let vc = builder.createAddItems(look: look, coordinator: self)
+        case .addItems(let outfit):
+            let vc = builder.createAddItems(outfit: outfit, coordinator: self)
             navigationController?.pushViewController(vc, animated: true)
             
-        case .outwear(let look):
-            let vc = builder.createOutwear(look: look, coordinator: self)
+        case .outwear(let outfit):
+            let vc = builder.createOutwear(outfit: outfit, coordinator: self)
             navigationController?.pushViewController(vc, animated: true)
             
         case .saved:

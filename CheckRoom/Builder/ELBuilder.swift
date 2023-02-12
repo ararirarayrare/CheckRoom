@@ -9,23 +9,23 @@ import UIKit
 
 class ELBuilder: Builder {
     
-    func createEdit(look: UIImage?, coordinator: ELCoordinator) -> ELViewController {
-        let vc = ELViewController(coordinator: coordinator, outfit: look)
+    func createEdit(outfit: Outfit, coordinator: ELCoordinator) -> ELViewController {
+        let vc = ELViewController(coordinator: coordinator, outfit: outfit)
         return vc
     }
     
-    func createPreview(look: UIImage?, coordinator: ELCoordinator) -> ELPreviewViewController {
-        let vc = ELPreviewViewController(coordinator: coordinator, look: look)
+    func createPreview(outfit: Outfit, coordinator: ELCoordinator) -> ELPreviewViewController {
+        let vc = ELPreviewViewController(coordinator: coordinator, outfit: outfit)
         return vc
     }
     
-    func createAddItems(look: UIImage?, coordinator: ELCoordinator) -> ELAddItemsViewController {
-        let vc = ELAddItemsViewController(coordinator: coordinator, look: look)
+    func createAddItems(outfit: Outfit, coordinator: ELCoordinator) -> ELAddItemsViewController {
+        let vc = ELAddItemsViewController(coordinator: coordinator, outfit: outfit)
         return vc
     }
     
-    func createOutwear(look: UIImage?, coordinator: ELCoordinator) -> ELOutwearViewController {
-        let vc = ELOutwearViewController(coordinator: coordinator, look: look)
+    func createOutwear(outfit: Outfit, coordinator: ELCoordinator) -> ELOutwearViewController {
+        let vc = ELOutwearViewController(coordinator: coordinator, outfit: outfit)
         return vc
     }
 }

@@ -18,41 +18,45 @@ class Outfit: Object {
     @objc dynamic private var shoesImageData: Data = Data()
     @objc dynamic private var accessoryImageData: Data = Data()
     
-    var topWearImage: UIImage? {
-        get {
-            return UIImage(data: topWearImageData)
-        }
-        
-        set {
-            pthread_rwlock_wrlock(&lock)
-            if let data = newValue?.pngData() { topWearImageData = data }
-            pthread_rwlock_unlock(&lock)
-        }
-    }
+    @objc dynamic var topWear: TopWear!
+    @objc dynamic var bottomWear: BottomWear!
+    @objc dynamic var shoes: Shoes!
     
-    var bottomWearImage: UIImage? {
-        get {
-            return UIImage(data: bottomWearImageData)
-        }
-        
-        set {
-            pthread_rwlock_wrlock(&lock)
-            if let data = newValue?.pngData() { bottomWearImageData = data }
-            pthread_rwlock_unlock(&lock)
-        }
-    }
+//    var topWearImage: UIImage? {
+//        get {
+//            return UIImage(data: topWearImageData)
+//        }
+//
+//        set {
+//            pthread_rwlock_wrlock(&lock)
+//            if let data = newValue?.pngData() { topWearImageData = data }
+//            pthread_rwlock_unlock(&lock)
+//        }
+//    }
+//
+//    var bottomWearImage: UIImage? {
+//        get {
+//            return UIImage(data: bottomWearImageData)
+//        }
+//
+//        set {
+//            pthread_rwlock_wrlock(&lock)
+//            if let data = newValue?.pngData() { bottomWearImageData = data }
+//            pthread_rwlock_unlock(&lock)
+//        }
+//    }
     
-    var shoesImage: UIImage? {
-        get {
-            return UIImage(data: shoesImageData)
-        }
-        
-        set {
-            pthread_rwlock_wrlock(&lock)
-            if let data = newValue?.pngData() { shoesImageData = data }
-            pthread_rwlock_unlock(&lock)
-        }
-    }
+//    var shoesImage: UIImage? {
+//        get {
+//            return UIImage(data: shoesImageData)
+//        }
+//
+//        set {
+//            pthread_rwlock_wrlock(&lock)
+//            if let data = newValue?.pngData() { shoesImageData = data }
+//            pthread_rwlock_unlock(&lock)
+//        }
+//    }
     
     var accessoryImage: UIImage? {
         get {
@@ -77,6 +81,11 @@ class Outfit: Object {
         set {
             pthread_rwlock_wrlock(&lock)
             seasonRawValue = String(describing: newValue.rawValue)
+            
+            topWear?.season = newValue
+            bottomWear?.season = newValue
+            shoes?.season = newValue
+            
             pthread_rwlock_unlock(&lock)
         }
     }
@@ -91,9 +100,14 @@ class Outfit: Object {
     
     func createPreview() -> OutfitView {
         let view = OutfitView()
-        view.topImageView.image = topWearImage
-        view.bottomImageView.image = bottomWearImage
-        view.shoesImageView.image = shoesImage
+        
+//        view.topImageView.image = topWearImage
+//        view.bottomImageView.image = bottomWearImage
+//        view.shoesImageView.image = shoesImage
+        
+        view.topImageView.image = topWear.image
+        view.bottomImageView.image = bottomWear.image
+        view.shoesImageView.image = shoes.image
         
         return view
     }
