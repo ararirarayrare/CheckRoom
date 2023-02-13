@@ -74,7 +74,7 @@ class COPreviewViewController: ViewController {
         title = "Preview"
         
         saveButton.addTarget(self, action: #selector(saveTapped), for: .touchUpInside)
-        
+        addItemsButton.addTarget(self, action: #selector(addItemTapped), for: .touchUpInside)
         
         outfitView.layer.cornerRadius = 20
         
@@ -87,9 +87,10 @@ class COPreviewViewController: ViewController {
 //        outfitView.bottomImageView.image = outfit.bottomWearImage
 //        outfitView.shoesImageView.image = outfit.shoesImage
         
-        outfitView.topImageView.image = outfit.topWear.image
-        outfitView.bottomImageView.image = outfit.bottomWear.image
-        outfitView.shoesImageView.image = outfit.shoes.image
+//        outfitView.topImageView.image = outfit.topWear.image
+//        outfitView.bottomImageView.image = outfit.bottomWear.image
+//        outfitView.shoesImageView.image = outfit.shoes.image
+        
     }
     
     override func layout() {
@@ -134,5 +135,9 @@ class COPreviewViewController: ViewController {
         coordinator.eventOccured(.saved)
     }
 
+    @objc
+    private func addItemTapped() {
+        (coordinator.parent as? MainCoordinator)?.eventOccured(.addItemsTo(outfit))
+    }
     
 }

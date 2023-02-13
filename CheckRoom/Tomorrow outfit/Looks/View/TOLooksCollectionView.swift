@@ -86,10 +86,6 @@ extension TOLooksCollectionView: UICollectionViewDelegate, UICollectionViewDataS
     
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if let cell = cellForItem(at: indexPath) as? TOLooksCollectionViewCell {
-            
-            selectionDelegate?.collectionView(self, didSelectOutfit: cell.outfit)
-            
-        }
+        selectionDelegate?.collectionView(self, didSelectOutfit: outfits[indexPath.item])
     }
 }

@@ -12,64 +12,12 @@ class Outfit: Object {
     
     private var lock = pthread_rwlock_t()
     private var lockAttributes = pthread_rwlockattr_t()
-    
-    @objc dynamic private var topWearImageData: Data = Data()
-    @objc dynamic private var bottomWearImageData: Data = Data()
-    @objc dynamic private var shoesImageData: Data = Data()
-    @objc dynamic private var accessoryImageData: Data = Data()
-    
+
     @objc dynamic var topWear: TopWear!
     @objc dynamic var bottomWear: BottomWear!
     @objc dynamic var shoes: Shoes!
-    
-//    var topWearImage: UIImage? {
-//        get {
-//            return UIImage(data: topWearImageData)
-//        }
-//
-//        set {
-//            pthread_rwlock_wrlock(&lock)
-//            if let data = newValue?.pngData() { topWearImageData = data }
-//            pthread_rwlock_unlock(&lock)
-//        }
-//    }
-//
-//    var bottomWearImage: UIImage? {
-//        get {
-//            return UIImage(data: bottomWearImageData)
-//        }
-//
-//        set {
-//            pthread_rwlock_wrlock(&lock)
-//            if let data = newValue?.pngData() { bottomWearImageData = data }
-//            pthread_rwlock_unlock(&lock)
-//        }
-//    }
-    
-//    var shoesImage: UIImage? {
-//        get {
-//            return UIImage(data: shoesImageData)
-//        }
-//
-//        set {
-//            pthread_rwlock_wrlock(&lock)
-//            if let data = newValue?.pngData() { shoesImageData = data }
-//            pthread_rwlock_unlock(&lock)
-//        }
-//    }
-    
-    var accessoryImage: UIImage? {
-        get {
-            return UIImage(data: accessoryImageData)
-        }
-        
-        set {
-            pthread_rwlock_wrlock(&lock)
-            if let data = newValue?.pngData() { accessoryImageData = data }
-            pthread_rwlock_unlock(&lock)
-        }
-    }
-    
+    @objc dynamic var hat: Accessory?
+    @objc dynamic var outwear: TopWear?
     
     @objc dynamic private var seasonRawValue: String = ""
     
@@ -100,14 +48,11 @@ class Outfit: Object {
     
     func createPreview() -> OutfitView {
         let view = OutfitView()
-        
-//        view.topImageView.image = topWearImage
-//        view.bottomImageView.image = bottomWearImage
-//        view.shoesImageView.image = shoesImage
-        
+
         view.topImageView.image = topWear.image
         view.bottomImageView.image = bottomWear.image
         view.shoesImageView.image = shoes.image
+        view.accessoryImageView.image = hat?.image
         
         return view
     }
@@ -118,6 +63,8 @@ class OutfitView: UIView {
     let topImageView = UIImageView()
     let bottomImageView = UIImageView()
     let shoesImageView = UIImageView()
+    
+    let accessoryImageView = UIImageView()
     
     init() {
         super.init(frame: .zero)
@@ -136,24 +83,23 @@ class OutfitView: UIView {
         topImageView.contentMode = .scaleAspectFit
         bottomImageView.contentMode = .scaleAspectFit
         shoesImageView.contentMode = .scaleAspectFit
-        
-        shoesImageView.backgroundColor = .clear
+        accessoryImageView.contentMode = .scaleAspectFit
     }
     
     private func layout() {
         topImageView.translatesAutoresizingMaskIntoConstraints = false
         bottomImageView.translatesAutoresizingMaskIntoConstraints = false
         shoesImageView.translatesAutoresizingMaskIntoConstraints = false
+        accessoryImageView.translatesAutoresizingMaskIntoConstraints = false
         
         addSubview(topImageView)
         addSubview(bottomImageView)
         addSubview(shoesImageView)
+        addSubview(accessoryImageView)
         
         NSLayoutConstraint.activate([
             topImageView.topAnchor.constraint(equalTo: topAnchor,
                                               constant: 8),
-//            topImageView.bottomAnchor.constraint(equalTo: centerYAnchor,
-//                                                 constant: -12),
             topImageView.heightAnchor.constraint(equalTo: heightAnchor,
                                                  multiplier: 0.35),
             topImageView.widthAnchor.constraint(equalTo: topImageView.heightAnchor),
@@ -174,7 +120,16 @@ class OutfitView: UIView {
                                                    constant: -24),
             shoesImageView.widthAnchor.constraint(equalTo: widthAnchor,
                                                   multiplier: 0.3),
-            shoesImageView.heightAnchor.constraint(equalTo: shoesImageView.widthAnchor)
+            shoesImageView.heightAnchor.constraint(equalTo: shoesImageView.widthAnchor),
+            
+            
+            accessoryImageView.trailingAnchor.constraint(equalTo: trailingAnchor,
+                                                     constant: -24),
+            accessoryImageView.bottomAnchor.constraint(equalTo: shoesImageView.topAnchor,
+                                                   constant: -24),
+            accessoryImageView.widthAnchor.constraint(equalTo: widthAnchor,
+                                                  multiplier: 0.3),
+            accessoryImageView.heightAnchor.constraint(equalTo: accessoryImageView.widthAnchor),
         ])
     }
     

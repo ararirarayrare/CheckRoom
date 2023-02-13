@@ -35,6 +35,7 @@ class ELViewController: ViewController {
         
         let topItems = DataManager.shared.getWear(type: TopWear.self,
                                                   forSeason: outfit.season)
+            .filter { $0.category == .undercoat }
         
         topCollectionView = createCollectionView(
             withItems: topItems,

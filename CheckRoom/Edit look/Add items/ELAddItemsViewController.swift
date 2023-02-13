@@ -60,15 +60,11 @@ class ELAddItemsViewController: ViewController {
 extension ELAddItemsViewController: CategoryCollectionViewDelegateSelection {
     func collectionView(_ collectionView: CategoryCollectionView, didSelectItemAt index: Int) {
         
-        let outwear = UIImage(named: "outwear-item")
-        
         switch index {
         case 0:
-//            coordinator.eventOccured(.outwear(outwear))
-            ()
+            coordinator.eventOccured(.outwear(outfit))
         case 1:
-            ()
-//            coordinator.eventOccured(<#T##event: ELCoordinator.Event##ELCoordinator.Event#>)
+            coordinator.eventOccured(.accessoryCategories(outfit))
         default:
             break
         }

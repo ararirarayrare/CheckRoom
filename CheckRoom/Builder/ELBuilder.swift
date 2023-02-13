@@ -28,4 +28,19 @@ class ELBuilder: Builder {
         let vc = ELOutwearViewController(coordinator: coordinator, outfit: outfit)
         return vc
     }
+    
+    func createAccessoryCategories(outfit: Outfit,
+                                   coordinator: ELCoordinator) -> ELAccessoryCategoriesViewController {
+        let vc = ELAccessoryCategoriesViewController(coordinator: coordinator, outfit: outfit)
+        return vc
+    }
+    
+    func createAccessory(category: Accessory.Category,
+                         outfit: Outfit,
+                         coordinator: ELCoordinator) -> ELAccessoryViewController {
+        let vc = ELAccessoryViewController(coordinator: coordinator,
+                                           outfit: outfit,
+                                           accessoryCategory: category)
+        return vc
+    }
 }

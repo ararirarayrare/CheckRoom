@@ -27,6 +27,10 @@
 		04439469297B31C100FAFD09 /* ELOutwearViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04439468297B31C100FAFD09 /* ELOutwearViewController.swift */; };
 		0455BDE52993C80200FBBD40 /* Outfit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0455BDE42993C80200FBBD40 /* Outfit.swift */; };
 		0455BDF92999117F00FBBD40 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0455BDF82999117F00FBBD40 /* Extensions.swift */; };
+		0455BE01299A831000FBBD40 /* ELAccessoryCategoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0455BE00299A830F00FBBD40 /* ELAccessoryCategoriesViewController.swift */; };
+		0455BE04299A862700FBBD40 /* ELAccessoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0455BE03299A862700FBBD40 /* ELAccessoryViewController.swift */; };
+		0455BE06299A871200FBBD40 /* AccessoryCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0455BE05299A871200FBBD40 /* AccessoryCollectionView.swift */; };
+		0455BE08299A8AEF00FBBD40 /* AccessoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0455BE07299A8AEF00FBBD40 /* AccessoryCollectionViewCell.swift */; };
 		04980075297B358600069BEA /* ItemsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04980074297B358600069BEA /* ItemsCollectionView.swift */; };
 		04980077297B35BD00069BEA /* ItemsCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04980076297B35BD00069BEA /* ItemsCollectionViewLayout.swift */; };
 		0498009D297DD38400069BEA /* DeepLabV3.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 0498009C297DD38300069BEA /* DeepLabV3.mlmodel */; };
@@ -102,6 +106,10 @@
 		04439468297B31C100FAFD09 /* ELOutwearViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ELOutwearViewController.swift; sourceTree = "<group>"; };
 		0455BDE42993C80200FBBD40 /* Outfit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Outfit.swift; sourceTree = "<group>"; };
 		0455BDF82999117F00FBBD40 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		0455BE00299A830F00FBBD40 /* ELAccessoryCategoriesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ELAccessoryCategoriesViewController.swift; sourceTree = "<group>"; };
+		0455BE03299A862700FBBD40 /* ELAccessoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ELAccessoryViewController.swift; sourceTree = "<group>"; };
+		0455BE05299A871200FBBD40 /* AccessoryCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessoryCollectionView.swift; sourceTree = "<group>"; };
+		0455BE07299A8AEF00FBBD40 /* AccessoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		04980074297B358600069BEA /* ItemsCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsCollectionView.swift; sourceTree = "<group>"; };
 		04980076297B35BD00069BEA /* ItemsCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsCollectionViewLayout.swift; sourceTree = "<group>"; };
 		0498009C297DD38300069BEA /* DeepLabV3.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = DeepLabV3.mlmodel; sourceTree = "<group>"; };
@@ -257,6 +265,8 @@
 				04439461297B301100FAFD09 /* Preview */,
 				04439464297B30EE00FAFD09 /* Add items */,
 				04439467297B31AB00FAFD09 /* Outwear */,
+				0455BDFD299A82D600FBBD40 /* Accessory Categories */,
+				0455BE02299A860500FBBD40 /* Accessory */,
 			);
 			path = "Edit look";
 			sourceTree = "<group>";
@@ -291,6 +301,24 @@
 				04439468297B31C100FAFD09 /* ELOutwearViewController.swift */,
 			);
 			path = Outwear;
+			sourceTree = "<group>";
+		};
+		0455BDFD299A82D600FBBD40 /* Accessory Categories */ = {
+			isa = PBXGroup;
+			children = (
+				0455BE00299A830F00FBBD40 /* ELAccessoryCategoriesViewController.swift */,
+			);
+			path = "Accessory Categories";
+			sourceTree = "<group>";
+		};
+		0455BE02299A860500FBBD40 /* Accessory */ = {
+			isa = PBXGroup;
+			children = (
+				0455BE03299A862700FBBD40 /* ELAccessoryViewController.swift */,
+				0455BE05299A871200FBBD40 /* AccessoryCollectionView.swift */,
+				0455BE07299A8AEF00FBBD40 /* AccessoryCollectionViewCell.swift */,
+			);
+			path = Accessory;
 			sourceTree = "<group>";
 		};
 		04980073297B357500069BEA /* Items Collection View */ = {
@@ -702,6 +730,7 @@
 				049800C0297DD74A00069BEA /* MLMultiArray+Image.swift in Sources */,
 				0443944E2979A74E00FAFD09 /* MOBuilder.swift in Sources */,
 				049800BF297DD74A00069BEA /* CGImage+RawBytes.swift in Sources */,
+				0455BE04299A862700FBBD40 /* ELAccessoryViewController.swift in Sources */,
 				0443945C297B2D2000FAFD09 /* ELBuilder.swift in Sources */,
 				04C9C3C3296DEA7D005C7003 /* SuccessViewController.swift in Sources */,
 				04E6B81B296C539C00E50AA8 /* AppDelegate.swift in Sources */,
@@ -734,10 +763,13 @@
 				0443944A29799DDA00FAFD09 /* TOBuilder.swift in Sources */,
 				0443944C29799DEE00FAFD09 /* AIBuilder.swift in Sources */,
 				04DD59B529917EA3000D6CC4 /* DataManager.swift in Sources */,
+				0455BE01299A831000FBBD40 /* ELAccessoryCategoriesViewController.swift in Sources */,
 				04C9C3DC296F12F1005C7003 /* TOLooksViewController.swift in Sources */,
 				04D480AE2974229C00A961EE /* COItemsViewController.swift in Sources */,
 				04C9C3DA296F12C2005C7003 /* OopsViewController.swift in Sources */,
+				0455BE06299A871200FBBD40 /* AccessoryCollectionView.swift in Sources */,
 				04C9C3C0296DE9EB005C7003 /* AISeasonViewController.swift in Sources */,
+				0455BE08299A8AEF00FBBD40 /* AccessoryCollectionViewCell.swift in Sources */,
 				0498009D297DD38400069BEA /* DeepLabV3.mlmodel in Sources */,
 				043FDD432989849C000A4C2D /* Wear.swift in Sources */,
 				049800B5297DD74A00069BEA /* Predictions.swift in Sources */,

@@ -14,6 +14,15 @@ class DataManager {
     
     private let realm: Realm! = try! Realm()
     
+    func contains(_ object: Object) -> Bool {
+        realm.beginWrite()
+        defer {
+            try! realm.commitWrite()
+        }
+        
+        return realm.objects(type(of: object)).contains(where: { $0 == object })
+    }
+    
     func save(wear: Wear) {
         try! realm.write {
             self.realm?.add(wear)

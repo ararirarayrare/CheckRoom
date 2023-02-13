@@ -109,7 +109,7 @@ class Accessory: Wear {
     enum Category: Int {
         case hat = 0
         case jewelery = 1
-        case scrave = 2
+        case scraves = 2
         case glasses = 3
     }
     

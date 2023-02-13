@@ -38,7 +38,6 @@ class MOLooksViewController: ViewController {
         
         let outfits = DataManager.shared.getOutfits(forSeason: self.season)
         collectionView = TOLooksCollectionView(outfits: outfits)
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
                 
         collectionView.addGestureRecognizer(longPressGesture)
         collectionView.selectionDelegate = self
@@ -63,6 +62,8 @@ class MOLooksViewController: ViewController {
     
     override func layout() {
         super.layout()
+        
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
         
         view.addSubview(collectionView)
         

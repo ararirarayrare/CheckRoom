@@ -10,7 +10,12 @@ import UIKit
 class ELCoordinator: Coordinator {
     
     enum Event {
-        case preview(Outfit), addItems(Outfit), outwear(Outfit), saved
+        case preview(Outfit),
+             addItems(Outfit),
+             outwear(Outfit),
+             accessoryCategories(Outfit),
+             accessory(category: Accessory.Category, outfit: Outfit),
+             saved
     }
     
     var parent: Coordinator?
@@ -50,6 +55,16 @@ class ELCoordinator: Coordinator {
             
         case .outwear(let outfit):
             let vc = builder.createOutwear(outfit: outfit, coordinator: self)
+            navigationController?.pushViewController(vc, animated: true)
+            
+        case .accessoryCategories(let outfit):
+            let vc = builder.createAccessoryCategories(outfit: outfit, coordinator: self)
+            navigationController?.pushViewController(vc, animated: true)
+            
+        case .accessory(category: let category, outfit: let outfit):
+            let vc = builder.createAccessory(category: category,
+                                             outfit: outfit,
+                                             coordinator: self)
             navigationController?.pushViewController(vc, animated: true)
             
         case .saved:

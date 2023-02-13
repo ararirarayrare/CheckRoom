@@ -34,6 +34,7 @@ class MainCoordinator: Coordinator {
         case addItem, createOutfit, tomorrowOutfit, myOutfits
         
         case editOutfit(Outfit)
+        case addItemsTo(Outfit)
     }
     
     private let builder: MainBuilder
@@ -115,6 +116,20 @@ class MainCoordinator: Coordinator {
                                                 navigationController: navigationController)
                 coordinator.parent = self
                 coordinator.start(withOutfit: outfit)
+
+                children?.append(coordinator)
+            }
+            
+        case .addItemsTo(let outfit):
+            if let coordinator = children?.first(where: { ($0 as? ELCoordinator) != nil }) as? ELCoordinator {
+                coordinator.eventOccured(.addItems(outfit))
+            } else {
+                let builder = builder.createELBuilder()
+                let coordinator = ELCoordinator(builder: builder,
+                                                navigationController: navigationController)
+                coordinator.parent = self
+//                coordinator.start(withOutfit: outfit)
+                coordinator.eventOccured(.addItems(outfit))
 
                 children?.append(coordinator)
             }

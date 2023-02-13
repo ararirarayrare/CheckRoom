@@ -9,20 +9,6 @@ import UIKit
 
 class ELPreviewViewController: ViewController {
     
-//    let imageView: UIImageView = {
-//        let imageView = UIImageView()
-//        imageView.translatesAutoresizingMaskIntoConstraints = false
-//
-//        imageView.layer.cornerRadius = 20
-//
-//        imageView.layer.shadowColor = UIColor.black.cgColor
-//        imageView.layer.shadowRadius = 20
-//        imageView.layer.shadowOpacity = 0.2
-//        imageView.layer.shadowOffset.height = 2
-//
-//        return imageView
-//    }()
-    
     private let addItemsButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -90,7 +76,6 @@ class ELPreviewViewController: ViewController {
         
         outfitView.translatesAutoresizingMaskIntoConstraints = false
         
-//        view.addSubview(imageView)
         view.addSubview(outfitView)
         view.addSubview(addItemsButton)
         view.addSubview(saveButton)
@@ -118,30 +103,16 @@ class ELPreviewViewController: ViewController {
                                                 constant: -20),
             outfitView.bottomAnchor.constraint(equalTo: addItemsButton.topAnchor,
                                               constant: -32)
-            
-//            imageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,
-//                                           constant: 40),
-//            imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor,
-//                                               constant: 20),
-//            imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor,
-//                                                constant: -20),
-//            imageView.bottomAnchor.constraint(equalTo: addItemsButton.topAnchor,
-//                                              constant: -32)
         ])
     }
     
     @objc
     private func addItemsTapped() {
-//        let look = UIImage(named: "look-example")
-//
-//        coordinator.eventOccured(.addItems(look))
-        
-        // MARK: - TODO !!!
+        coordinator.eventOccured(.addItems(outfit))
     }
     
     @objc
     private func saveTapped() {
-//        let look = UIImage(named: "look-example")
         
         coordinator.eventOccured(.saved)
     }

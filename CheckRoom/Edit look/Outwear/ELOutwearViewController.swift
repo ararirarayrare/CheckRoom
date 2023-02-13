@@ -9,13 +9,7 @@ import UIKit
 
 class ELOutwearViewController: ViewController {
     
-    private lazy var collectionView = ItemsCollectionView(
-        items: [],
-        frame: CGRect(x: 0,
-                      y: 140,
-                      width: view.bounds.width,
-                      height: view.bounds.width * 1.25)
-    )
+    private var collectionView: ItemsCollectionView!
     
     private let saveButton: UIButton = {
         let button = UIButton()
@@ -48,6 +42,19 @@ class ELOutwearViewController: ViewController {
     override func setup() {
         super.setup()
         
+        
+        let outwearItems = DataManager.shared.getWear(type: TopWear.self,
+                                                      forSeason: outfit.season)
+            .filter { $0.category == .outwear }
+        
+        collectionView = ItemsCollectionView(
+            items: outwearItems,
+            frame: CGRect(x: 0,
+                          y: 140,
+                          width: view.bounds.width,
+                          height: view.bounds.width * 1.25)
+        )
+        
         saveButton.addTarget(self, action: #selector(saveTapped), for: .touchUpInside)
     }
     
@@ -68,6 +75,11 @@ class ELOutwearViewController: ViewController {
     
     @objc
     private func saveTapped() {
+        
+        DataManager.shared.updateOutfit {
+            self.outfit.outwear = self.collectionView.selectedItem as? TopWear
+        }
+        
         coordinator.eventOccured(.saved)
     }
 }
