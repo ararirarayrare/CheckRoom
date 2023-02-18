@@ -9,20 +9,6 @@ import UIKit
 
 class MOPreviewViewController: ViewController {
     
-//    let imageView: UIImageView = {
-//        let imageView = UIImageView()
-//        imageView.translatesAutoresizingMaskIntoConstraints = false
-//
-//        imageView.layer.cornerRadius = 20
-//
-//        imageView.layer.shadowColor = UIColor.black.cgColor
-//        imageView.layer.shadowRadius = 20
-//        imageView.layer.shadowOpacity = 0.2
-//        imageView.layer.shadowOffset.height = 2
-//
-//        return imageView
-//    }()
-    
     private let editButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -117,10 +103,6 @@ class MOPreviewViewController: ViewController {
     
     @objc
     private func editTapped() {
-        // MARK: - TODO !!! 
-//        let look = outfit.image
-//        (coordinator.parent as? MainCoordinator)?.eventOccured(.editLook(look))
-        
         (coordinator.parent as? MainCoordinator)?.eventOccured(.editOutfit(outfit))
     }
     

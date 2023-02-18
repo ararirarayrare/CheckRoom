@@ -47,7 +47,7 @@ class ELOutwearViewController: ViewController {
                                                       forSeason: outfit.season)
             .filter { $0.category == .outwear }
         
-        guard !outwearItems.isEmpty else {
+        guard !outwearItems.isEmpty  else {
             setupOops()
             return
         }

@@ -9,20 +9,6 @@ import UIKit
 
 class TOPreviewViewController: ViewController {
     
-    let imageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        
-        imageView.layer.cornerRadius = 20
-        
-        imageView.layer.shadowColor = UIColor.black.cgColor
-        imageView.layer.shadowRadius = 20
-        imageView.layer.shadowOpacity = 0.2
-        imageView.layer.shadowOffset.height = 2
-        
-        return imageView
-    }()
-    
     private let editButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -51,10 +37,16 @@ class TOPreviewViewController: ViewController {
         return button
     }()
     
+    private let outfitView: OutfitView
+    
     let coordinator: TOCoordinator
     
-    init(coordinator: TOCoordinator) {
+    let outfit: Outfit
+    
+    init(coordinator: TOCoordinator, outfit: Outfit) {
         self.coordinator = coordinator
+        self.outfit = outfit
+        self.outfitView = outfit.createPreview()
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -67,6 +59,13 @@ class TOPreviewViewController: ViewController {
         
         title = "Preview"
         
+        outfitView.layer.cornerRadius = 20
+        
+        outfitView.layer.shadowColor = UIColor.black.cgColor
+        outfitView.layer.shadowRadius = 20
+        outfitView.layer.shadowOpacity = 0.2
+        outfitView.layer.shadowOffset.height = 2
+        
         saveButton.addTarget(self, action: #selector(saveTapped), for: .touchUpInside)
         editButton.addTarget(self, action: #selector(editTapped), for: .touchUpInside)
     }
@@ -74,7 +73,9 @@ class TOPreviewViewController: ViewController {
     override func layout() {
         super.layout()
         
-        view.addSubview(imageView)
+        outfitView.translatesAutoresizingMaskIntoConstraints = false
+        
+        view.addSubview(outfitView)
         view.addSubview(editButton)
         view.addSubview(saveButton)
         
@@ -93,28 +94,25 @@ class TOPreviewViewController: ViewController {
             editButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
             
-            imageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,
+            outfitView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,
                                            constant: 40),
-            imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor,
+            outfitView.leadingAnchor.constraint(equalTo: view.leadingAnchor,
                                                constant: 20),
-            imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor,
+            outfitView.trailingAnchor.constraint(equalTo: view.trailingAnchor,
                                                 constant: -20),
-            imageView.bottomAnchor.constraint(equalTo: editButton.topAnchor,
+            outfitView.bottomAnchor.constraint(equalTo: editButton.topAnchor,
                                               constant: -32)
         ])
     }
     
     @objc
     private func editTapped() {
-//        let look = imageView.image
-//
-//        (coordinator.parent as? MainCoordinator)?.eventOccured(.editLook(look))
-        
-        // MARK: - TODO !!!
+        (coordinator.parent as? MainCoordinator)?.eventOccured(.editOutfit(outfit))
     }
     
     @objc
     private func saveTapped() {
+        //MARK: - TODO !!! what after????
         coordinator.eventOccured(.saved)
     }
 }

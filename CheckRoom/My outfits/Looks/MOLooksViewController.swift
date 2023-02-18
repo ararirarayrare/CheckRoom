@@ -105,19 +105,13 @@ class MOLooksViewController: ViewController {
         if let indexPath = collectionView.indexPathForItem(at: point),
            let cell = (collectionView.cellForItem(at: indexPath) as? TOLooksCollectionViewCell) {
             
-//            let imageView = cell.imageView
             let outfitView = cell.outfit.createPreview()
             outfitView.layer.cornerRadius = cell.outfitView.layer.cornerRadius
             
             let point = collectionView.convert(cell.frame.origin, to: view)
             
             let originalOrigin = CGPoint(x: point.x + 16, y: point.y + 16)
-            
-            //            let imageModel = TOLookImageModel(image: imageView.image,
-            //                                              cornerRadius: 20,
-            //                                              size: imageView.frame.size,
-            //                                              origin: CGPoint(x: point.x + 16, y: point.y + 16))
-            
+
             let previewViewController = TOLooksPreviewViewController(
                 outfitView: outfitView,
                 originalRect: CGRect(origin: originalOrigin, size: cell.outfitView.frame.size)
@@ -130,7 +124,6 @@ class MOLooksViewController: ViewController {
             
             present(previewViewController, animated: false)
             
-//            cell.outfitView.isHidden = true
             UIView.animate(withDuration: 0.1) {
                 cell.outfitView.layer.shadowOpacity = 0
             } completion: { _ in

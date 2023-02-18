@@ -19,9 +19,8 @@ class TOBuilder: Builder {
         return vc
     }
     
-    func createPreview(forLook image: UIImage?, coordinator: TOCoordinator) -> TOPreviewViewController {
-        let vc = TOPreviewViewController(coordinator: coordinator)
-        vc.imageView.image = image
+    func createPreview(forOutfit outfit: Outfit, coordinator: TOCoordinator) -> TOPreviewViewController {
+        let vc = TOPreviewViewController(coordinator: coordinator, outfit: outfit)
         return vc
     }
     
