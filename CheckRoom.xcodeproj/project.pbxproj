@@ -31,6 +31,7 @@
 		0455BE04299A862700FBBD40 /* ELAccessoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0455BE03299A862700FBBD40 /* ELAccessoryViewController.swift */; };
 		0455BE06299A871200FBBD40 /* AccessoryCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0455BE05299A871200FBBD40 /* AccessoryCollectionView.swift */; };
 		0455BE08299A8AEF00FBBD40 /* AccessoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0455BE07299A8AEF00FBBD40 /* AccessoryCollectionViewCell.swift */; };
+		0455BE2029A11BFA00FBBD40 /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0455BE1F29A11BFA00FBBD40 /* Poppins-Regular.ttf */; };
 		04980075297B358600069BEA /* ItemsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04980074297B358600069BEA /* ItemsCollectionView.swift */; };
 		04980077297B35BD00069BEA /* ItemsCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04980076297B35BD00069BEA /* ItemsCollectionViewLayout.swift */; };
 		0498009D297DD38400069BEA /* DeepLabV3.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 0498009C297DD38300069BEA /* DeepLabV3.mlmodel */; };
@@ -110,6 +111,7 @@
 		0455BE03299A862700FBBD40 /* ELAccessoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ELAccessoryViewController.swift; sourceTree = "<group>"; };
 		0455BE05299A871200FBBD40 /* AccessoryCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessoryCollectionView.swift; sourceTree = "<group>"; };
 		0455BE07299A8AEF00FBBD40 /* AccessoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessoryCollectionViewCell.swift; sourceTree = "<group>"; };
+		0455BE1F29A11BFA00FBBD40 /* Poppins-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Regular.ttf"; sourceTree = "<group>"; };
 		04980074297B358600069BEA /* ItemsCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsCollectionView.swift; sourceTree = "<group>"; };
 		04980076297B35BD00069BEA /* ItemsCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsCollectionViewLayout.swift; sourceTree = "<group>"; };
 		0498009C297DD38300069BEA /* DeepLabV3.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = DeepLabV3.mlmodel; sourceTree = "<group>"; };
@@ -321,6 +323,22 @@
 			path = Accessory;
 			sourceTree = "<group>";
 		};
+		0455BE1D29A11BC700FBBD40 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				0455BE1E29A11BDF00FBBD40 /* Fonts */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		0455BE1E29A11BDF00FBBD40 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				0455BE1F29A11BFA00FBBD40 /* Poppins-Regular.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		04980073297B357500069BEA /* Items Collection View */ = {
 			isa = PBXGroup;
 			children = (
@@ -358,7 +376,7 @@
 			isa = PBXGroup;
 			children = (
 				04C9C3B1296C849A005C7003 /* CategoryCollectionView.swift */,
-				04C9C3AB296C83DB005C7003 /* Camera & Preview */,
+				04C9C3AB296C83DB005C7003 /* Preview */,
 				04C9C3AC296C83E2005C7003 /* Category */,
 				04C9C3AD296C8420005C7003 /* Subcategory */,
 				04C9C3DF296F1394005C7003 /* Accessory */,
@@ -367,12 +385,12 @@
 			path = "Add item";
 			sourceTree = "<group>";
 		};
-		04C9C3AB296C83DB005C7003 /* Camera & Preview */ = {
+		04C9C3AB296C83DB005C7003 /* Preview */ = {
 			isa = PBXGroup;
 			children = (
 				04C9C3A7296C7487005C7003 /* AIPreviewViewController.swift */,
 			);
-			path = "Camera & Preview";
+			path = Preview;
 			sourceTree = "<group>";
 		};
 		04C9C3AC296C83E2005C7003 /* Category */ = {
@@ -533,6 +551,7 @@
 				0498009E297DD3B600069BEA /* UIImage magic.swift */,
 				049800A0297DD74A00069BEA /* CoreMLHelpers */,
 				0498009C297DD38300069BEA /* DeepLabV3.mlmodel */,
+				0455BE1D29A11BC700FBBD40 /* Resources */,
 				04C9C3A4296C6C20005C7003 /* Icons.swift */,
 				04C9C3E3296F2FFC005C7003 /* Season.swift */,
 				04C9C3A9296C7E0C005C7003 /* ViewController.swift */,
@@ -654,6 +673,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0455BE2029A11BFA00FBBD40 /* Poppins-Regular.ttf in Resources */,
 				04E6B827296C539F00E50AA8 /* LaunchScreen.storyboard in Resources */,
 				04E6B824296C539F00E50AA8 /* Assets.xcassets in Resources */,
 			);

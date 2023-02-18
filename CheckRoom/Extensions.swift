@@ -7,25 +7,10 @@
 
 import UIKit
 
-//extension Array {
-//    func firstIndex(where predicate: (Element) -> Bool) -> Int? {
-//        guard !self.isEmpty else {
-//            return nil
-//        }
-//        
-//        var index = 0
-//        
-//        forEach { item in
-//            print(predicate(item))
-//            if predicate(item) {
-//                return
-//                
-//            } else {
-//                index += 1
-//
-//            }
-//        }
-//        
-//        return index
-//    }
-//}
+extension UIFont {
+    
+    static func poppinsFont(ofSize size: CGFloat) -> UIFont? {
+        return UIFont(name: "Poppins-Regular", size: size)
+    }
+    
+}

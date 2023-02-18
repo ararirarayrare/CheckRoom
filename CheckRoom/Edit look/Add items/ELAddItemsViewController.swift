@@ -37,7 +37,7 @@ class ELAddItemsViewController: ViewController {
 
     override func setup() {
         super.setup()
-        title = "Add to subcategory"
+        title = "Choose subcategory"
         
         collectionView.selectionDelegate = self
     }
