@@ -41,6 +41,8 @@ class NavigationController: UINavigationController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationBar.prefersLargeTitles = true
+        
         let appearance = UINavigationBarAppearance()
         appearance.configureWithTransparentBackground()
         

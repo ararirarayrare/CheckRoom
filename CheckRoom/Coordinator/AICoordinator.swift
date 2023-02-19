@@ -65,7 +65,7 @@ class AICoordinator: Coordinator {
     
     func start() {
         let vc = builder.createPreview(coordinator: self)
-        navigationController?.pushViewController(vc, animated: false)
+        navigationController?.pushViewController(vc, animated: true)
     }
     
 }

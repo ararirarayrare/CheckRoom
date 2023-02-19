@@ -32,6 +32,9 @@ class AIPreviewViewController: ViewController {
         return button
     }()
     
+    private var openGalleryButton: UIButton?
+    private var openGalleryLabel: UILabel?
+    
     let coordinator: AICoordinator
     
     init(coordinator: AICoordinator) {
@@ -42,17 +45,23 @@ class AIPreviewViewController: ViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationController?.navigationBar.prefersLargeTitles = true
+    }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        navigationController?.navigationBar.prefersLargeTitles = true
+//        navrigationController?.navigationBar.prefersLargeTitles = true
         
-        if let image = UIPasteboard.general.image {
-            imageView.image = image
-        } else {
-            UIApplication.shared.open(URL(string: "photos-redirect://")!)
-        }
+//        if let image = UIPasteboard.general.image {
+//            imageView.image = image
+//        } else {
+//            UIApplication.shared.open(URL(string: "photos-redirect://")!)
+//        }
 
     }
     
@@ -72,13 +81,6 @@ class AIPreviewViewController: ViewController {
         
         title = "Preview"
         
-        let editButton = UIBarButtonItem(image: Icons.editPicture,
-                                         style: .plain,
-                                         target: self,
-                                         action: #selector(editTapped))
-        editButton.tintColor = UIColor(red: 133/255, green: 133/255, blue: 133/255, alpha: 1.0)
-        navigationItem.rightBarButtonItem = editButton
-        
         saveButton.addTarget(self, action: #selector(saveTapped), for: .touchUpInside)
         
         NotificationCenter.default.addObserver(forName: UIApplication.didBecomeActiveNotification,
@@ -90,6 +92,35 @@ class AIPreviewViewController: ViewController {
             
             self.imageView.image = image
             
+            self.openGalleryLabel?.removeFromSuperview()
+            self.openGalleryButton?.removeFromSuperview()
+            
+            self.openGalleryLabel = nil
+            self.openGalleryButton = nil
+            
+            self.imageView.isHidden = false
+            self.saveButton.isHidden = false
+            
+            let editButton = UIBarButtonItem(image: Icons.editPicture,
+                                             style: .plain,
+                                             target: self,
+                                             action: #selector(self.editTapped))
+            editButton.tintColor = UIColor(red: 133/255, green: 133/255, blue: 133/255, alpha: 1.0)
+            self.navigationItem.rightBarButtonItem = editButton
+        }
+        
+        if let image = UIPasteboard.general.image {
+            self.imageView.image = image
+            
+            let editButton = UIBarButtonItem(image: Icons.editPicture,
+                                             style: .plain,
+                                             target: self,
+                                             action: #selector(editTapped))
+            editButton.tintColor = UIColor(red: 133/255, green: 133/255, blue: 133/255, alpha: 1.0)
+            navigationItem.rightBarButtonItem = editButton
+            
+        } else {
+            setupOops()
         }
     }
     
@@ -112,6 +143,61 @@ class AIPreviewViewController: ViewController {
                                            constant: 20),
             imageView.bottomAnchor.constraint(equalTo: saveButton.topAnchor,
                                               constant: -48)
+        ])
+    }
+    
+    @objc
+    private func openGalleryTapped() {
+        UIApplication.shared.open(URL(string: "photos-redirect://")!)
+    }
+
+    private func setupOops() {
+        let label = UILabel()
+        label.font = .poppinsFont(ofSize: 16)
+        label.textAlignment = .center
+        label.textColor = UIColor(red: 114/255, green: 114/255, blue: 114/255, alpha: 1.0)
+        label.numberOfLines = 0
+        
+        label.text = "Open your phone gallery and copy an item with a long image clip."
+        
+        
+        let openGalleryButton = UIButton(type: .system)
+        openGalleryButton.translatesAutoresizingMaskIntoConstraints = false
+        openGalleryButton.backgroundColor = .black
+        openGalleryButton.titleLabel?.font = .boldSystemFont(ofSize: 22)
+        openGalleryButton.setTitleColor(.white, for: .normal)
+        openGalleryButton.setTitle("Open Gallery", for: .normal)
+        openGalleryButton.layer.cornerRadius = 28
+        openGalleryButton.addTarget(self, action: #selector(openGalleryTapped), for: .touchUpInside)
+        
+        
+        self.openGalleryLabel = label
+        self.openGalleryButton = openGalleryButton
+        
+        self.imageView.isHidden = true
+        self.saveButton.isHidden = true
+        self.navigationItem.rightBarButtonItem = nil
+        
+        label.translatesAutoresizingMaskIntoConstraints = false
+        openGalleryButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        view.addSubview(label)
+        view.addSubview(openGalleryButton)
+        
+        NSLayoutConstraint.activate([
+            label.leadingAnchor.constraint(equalTo: view.leadingAnchor,
+                                           constant: 48),
+            label.trailingAnchor.constraint(equalTo: view.trailingAnchor,
+                                            constant: -48),
+            label.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,
+                                       constant: 40),
+            
+            
+            openGalleryButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor,
+                                               constant: -32),
+            openGalleryButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            openGalleryButton.widthAnchor.constraint(equalToConstant: 180),
+            openGalleryButton.heightAnchor.constraint(equalToConstant: 56)
         ])
     }
     

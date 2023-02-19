@@ -35,12 +35,7 @@ class MainViewController: ViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        navigationController?.navigationBar.prefersLargeTitles = false
-    }
+
 
     override func setup() {
         super.setup()
@@ -54,8 +49,8 @@ class MainViewController: ViewController {
         view.addSubview(headerView)
         
         NSLayoutConstraint.activate([
-            logoImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,
-                                               constant: 0),
+            logoImageView.topAnchor.constraint(equalTo: view.topAnchor,
+                                               constant: 56),
             logoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             logoImageView.widthAnchor.constraint(equalToConstant: 80),
             logoImageView.heightAnchor.constraint(equalTo: logoImageView.widthAnchor,

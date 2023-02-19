@@ -81,14 +81,14 @@ class MainCoordinator: Coordinator {
             }
             
         case .tomorrowOutfit:
-            if let coordinator = children?.first(where: { ($0 as? TOCoordinator) != nil }) {
-                coordinator.start()
+            if let coordinator = children?.first(where: { ($0 as? TOCoordinator) != nil }) as? TOCoordinator {
+                coordinator.start(withSeason: .current)
             } else {
                 let builder = builder.createTOBuilder()
                 let coordinator = TOCoordinator(builder: builder,
                                                 navigationController: navigationController)
                 coordinator.parent = self
-                coordinator.start()
+                coordinator.start(withSeason: .current)
                 
                 children?.append(coordinator)
             }

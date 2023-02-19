@@ -10,7 +10,7 @@ import UIKit
 class TOCoordinator: Coordinator {
     
     enum Event {
-        case looks(Season), preview(Outfit), saved
+        case looks(Season), preview(Outfit), saved, chooseSeason
     }
     
     weak var parent: Coordinator?
@@ -31,6 +31,10 @@ class TOCoordinator: Coordinator {
     
     func eventOccured(_ event: Event) {
         switch event {
+        case .chooseSeason:
+            let vc = builder.createSeasons(coordinator: self)
+            navigationController?.pushViewController(vc, animated: true)
+            
         case .looks(let season):
             let vc = builder.createLooks(forSeason: season, coordinator: self)
             navigationController?.pushViewController(vc, animated: true)
@@ -50,10 +54,17 @@ class TOCoordinator: Coordinator {
         }
     }
     
-    func start() {
-        let vc = builder.createSeasons(coordinator: self)
+    func start() { }
+    
+    func start(withSeason season: Season) {
+        let vc = builder.createLooks(forSeason: season, coordinator: self)
         navigationController?.pushViewController(vc, animated: true)
     }
+    
+//    func start() {
+//        let vc = builder.createSeasons(coordinator: self)
+//        navigationController?.pushViewController(vc, animated: true)
+//    }
     
     
 }

@@ -417,14 +417,14 @@
 			path = Success;
 			sourceTree = "<group>";
 		};
-		04C9C3D5296F0E45005C7003 /* Tomorrow outfit */ = {
+		04C9C3D5296F0E45005C7003 /* Tomorrow Outfit */ = {
 			isa = PBXGroup;
 			children = (
 				04C9C3E1296F2FB6005C7003 /* Seasons */,
 				04C9C3E2296F2FBC005C7003 /* Looks */,
 				04309C1A29734F1F00A439D4 /* Preview */,
 			);
-			path = "Tomorrow outfit";
+			path = "Tomorrow Outfit";
 			sourceTree = "<group>";
 		};
 		04C9C3D8296F12B2005C7003 /* Oops */ = {
@@ -537,7 +537,7 @@
 				04439458297B2CFD00FAFD09 /* Edit look */,
 				0443944429799CFC00FAFD09 /* My outfits */,
 				04D480A829741CBA00A961EE /* Create outfit */,
-				04C9C3D5296F0E45005C7003 /* Tomorrow outfit */,
+				04C9C3D5296F0E45005C7003 /* Tomorrow Outfit */,
 				04C9C3A6296C7471005C7003 /* Add item */,
 				04E6B834296C550F00E50AA8 /* Main */,
 				04C9C3C1296DEA6B005C7003 /* Success */,

@@ -31,6 +31,21 @@ class TOLooksViewController: ViewController {
         
         title = season.title + " season"
         
+        let anotherSeasonBarButton = UIBarButtonItem(title: "Another season",
+                                                     style: .plain,
+                                                     target: self,
+                                                     action: #selector(changeSeasonTapped))
+        
+        anotherSeasonBarButton.setTitleTextAttributes(
+            [
+                .font : UIFont.boldSystemFont(ofSize: 16),
+                .foregroundColor : UIColor.black
+            ],
+            for: .normal
+        )
+        
+        navigationItem.rightBarButtonItem = anotherSeasonBarButton
+        
         let outfits = DataManager.shared.getOutfits(forSeason: self.season)
         
         guard !outfits.isEmpty else {
@@ -65,7 +80,11 @@ class TOLooksViewController: ViewController {
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
-
+    
+    @objc
+    private func changeSeasonTapped() {
+        coordinator.eventOccured(.chooseSeason)
+    }
     
     @objc
     private func longPressed(_ recognizer: UILongPressGestureRecognizer) {
