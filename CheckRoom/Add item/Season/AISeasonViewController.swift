@@ -17,6 +17,8 @@ class AISeasonViewController: ViewController {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         
         collectionView.activeImages = activeImages
+        
+        collectionView.multipleSelection = true
 
         return collectionView
     }()
@@ -65,21 +67,75 @@ class AISeasonViewController: ViewController {
     
     @objc
     private func saveTapped() {
-        if let season = Season(rawValue: collectionView.selectedItem) {
+        //MARK: - REDO!!!
+        
+        let group = DispatchGroup()
+        
+        collectionView.selectedItems.forEach { itemIndex in
             
-            wear.season = season
+            if let season = Season(rawValue: itemIndex) {
+                group.enter()
+                
+                if let newWear = (wear as? TopWear)?.getCopy() {
+                    newWear.season = season
+                    DataManager.shared.save(wear: newWear)
+                }
+                
+                if let newWear = (wear as? BottomWear)?.getCopy() {
+                    newWear.season = season
+                    DataManager.shared.save(wear: newWear)
+                }
+                
+                if let newWear = (wear as? Shoes)?.getCopy() {
+                    newWear.season = season
+                    DataManager.shared.save(wear: newWear)
+                }
+                
+                if let newWear = (wear as? Accessory)?.getCopy() {
+                    newWear.season = season
+                    DataManager.shared.save(wear: newWear)
+                }
+                
+//                let newWear = wear.getCopy()
+//                newWear.season = season
+//                DataManager.shared.save(wear: newWear)
+//
+//                print(DataManager.shared.getWear(type: Shoes.self, forSeason: season).count)
+                
+                group.leave()
+            }
             
-            DataManager.shared.save(wear: wear)
-            
-            coordinator.eventOccured(.saved)
         }
+        
+        group.notify(queue: .main) {
+            self.coordinator.eventOccured(.saved)
+        }
+        
+//        if let season = Season(rawValue: collectionView.selectedItems.first!) {
+//
+//            wear.season = season
+//
+//            DataManager.shared.save(wear: wear)
+//
+//            coordinator.eventOccured(.saved)
+//        }
     }
     
     override func setup() {
         super.setup()
+        
         title = "Choose a season"
         
         saveButton.addTarget(self, action: #selector(saveTapped), for: .touchUpInside)
+        
+        collectionView.$selectedItems
+            .receive(on: RunLoop.main)
+            .compactMap({ $0.isEmpty })
+            .sink { isEmpty in
+                self.saveButton.alpha = isEmpty ? 0.35 : 1.0
+                self.saveButton.isUserInteractionEnabled = !isEmpty
+            }
+            .store(in: &cancellables)
     }
     
     override func layout() {

@@ -75,7 +75,8 @@ class AIAccessoryViewController: ViewController {
 
     @objc
     private func saveTapped() {
-        if let accessoryType = Accessory.Category(rawValue: collectionView.selectedItem) {
+        //MARK: - REDO!!!
+        if let accessoryType = Accessory.Category(rawValue: collectionView.selectedItems.first!) {
             let accessory = Accessory(image: self.image,
                                       category: accessoryType)
             coordinator.eventOccured(.season(wear: accessory))

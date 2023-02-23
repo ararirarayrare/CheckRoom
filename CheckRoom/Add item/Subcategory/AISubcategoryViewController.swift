@@ -71,7 +71,8 @@ class AISubcategoryViewController: ViewController {
 
     @objc
     private func saveTapped() {
-        if let subcategory = TopWear.Category(rawValue: collectionView.selectedItem) {
+        //MARK: - REDO!!!
+        if let subcategory = TopWear.Category(rawValue: collectionView.selectedItems.first!) {
             let topWear = TopWear(image: self.image,
                                   category: subcategory)
             coordinator.eventOccured(.season(wear: topWear))

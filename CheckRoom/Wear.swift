@@ -11,7 +11,7 @@ import RealmSwift
 extension Season: PersistableEnum {}
 
 class Wear: Object {
-    
+        
     fileprivate var lock = pthread_rwlock_t()
     private var lockAttributes = pthread_rwlockattr_t()
     
@@ -33,9 +33,12 @@ class Wear: Object {
     
     @objc dynamic private var seasonRawValue: String = ""
     
-    var season: Season {
+    var season: Season! {
         get {
-            return Season(rawValue: Int(seasonRawValue)! )!
+            guard let rawValue = Int(seasonRawValue), let season = Season(rawValue: rawValue) else {
+                return nil
+            }
+            return season
         }
 
         set {
@@ -48,10 +51,15 @@ class Wear: Object {
     fileprivate func setup() {
         pthread_rwlock_init(&lock, &lockAttributes)
     }
-
 }
 
 class TopWear: Wear {
+    
+    func getCopy() -> TopWear {
+        let copy = TopWear(image: self.image, category: self.category)
+        if let season = self.season { copy.season = season }
+        return copy
+    }
     
     enum Category: Int {
         case outwear = 0
@@ -91,7 +99,12 @@ class BottomWear: Wear {
         
         self.image = image
     }
-    
+
+    func getCopy() -> BottomWear {
+        let copy = BottomWear(image: self.image)
+        if let season = self.season { copy.season = season }
+        return copy
+    }
 }
 
 class Shoes: Wear {
@@ -102,9 +115,21 @@ class Shoes: Wear {
         self.image = image
     }
     
+    func getCopy() -> Shoes {
+        let copy = Shoes(image: self.image)
+        if let season = self.season { copy.season = season }
+        return copy
+    }
 }
 
 class Accessory: Wear {
+    
+    func getCopy() -> Accessory {
+        let copy = Accessory(image: self.image, category: self.category)
+        if let season = self.season { copy.season = season }
+        return copy
+    }
+    
 
     enum Category: Int {
         case hat = 0

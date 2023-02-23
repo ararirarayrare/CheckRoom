@@ -6,8 +6,11 @@
 //
 
 import UIKit
+import Combine
 
 class ViewController: UIViewController {
+    
+    var cancellables = Set<AnyCancellable>()
     
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return .portrait

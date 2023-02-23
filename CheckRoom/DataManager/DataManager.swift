@@ -36,6 +36,7 @@ class DataManager {
         
         var array = [T]()
         objects?.filter { $0.season == season }
+//            .compactMap { $0 as? T }
             .forEach { array.append($0) }
         
         return array

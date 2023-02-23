@@ -75,8 +75,8 @@ class AICategoryViewController: ViewController {
 
     @objc
     private func saveTapped() {
-        
-        switch collectionView.selectedItem {
+        //MARK: - REDO!!!
+        switch collectionView.selectedItems.first! {
         case 0:
             coordinator.eventOccured(.subcategoryTop(image: self.image))
         case 1:

@@ -67,7 +67,8 @@ class MOSeasonsViewController: ViewController {
         
         if let outfit = editedOutfit, isEditingOutfit {
             collectionView.activeImages = Season.allCases.map { $0.imageActive }
-            collectionView.selectedItem = outfit.season.rawValue
+            //MARK: - REDO!!!
+            collectionView.selectedItems = [outfit.season.rawValue]
             
             saveButton = UIButton()
             saveButton?.translatesAutoresizingMaskIntoConstraints = false
@@ -126,8 +127,8 @@ class MOSeasonsViewController: ViewController {
         guard let outfit = editedOutfit, isEditingOutfit else {
             return
         }
-        
-        let newSeason = Season.allCases[collectionView.selectedItem]
+        //MARK: - REDO!!!
+        let newSeason = Season.allCases[collectionView.selectedItems.first!]
         
         DataManager.shared.updateOutfit {
             outfit.season = newSeason

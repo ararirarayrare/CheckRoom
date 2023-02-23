@@ -42,6 +42,8 @@ class COItemsViewController: ViewController {
         let shoes = dataManager.getWear(type: Shoes.self,
                                         forSeason: self.season)
         
+        Season.allCases.forEach({ print(dataManager.getWear(type: Shoes.self, forSeason: $0).count) })
+        
         guard !topItems.isEmpty && !bottomItems.isEmpty && !shoes.isEmpty else {
             setupOops()
             return

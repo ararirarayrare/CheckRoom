@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 protocol CategoryCollectionViewDelegateSelection: AnyObject {
     func collectionView(_ collectionView: CategoryCollectionView, didSelectItemAt index: Int)
@@ -23,7 +24,11 @@ class CategoryCollectionView: UICollectionView {
         }
     }
     
-    var selectedItem: Int = 0
+    @Published
+    var selectedItems: Set<Int> = [0]
+    
+    
+    var multipleSelection: Bool = false
     
     init(defaultImages: [UIImage?]) {
         self.defaultImages = defaultImages
@@ -69,7 +74,7 @@ extension CategoryCollectionView: UICollectionViewDelegate, UICollectionViewData
             return CategoryCollectionViewCell()
         }
         
-        let isSelected = (indexPath.item == selectedItem)
+        let isSelected = selectedItems.contains(indexPath.item)
         let activeImage = activeImages[indexPath.item]
         let defaultImage = defaultImages[indexPath.item]
         
@@ -79,13 +84,28 @@ extension CategoryCollectionView: UICollectionViewDelegate, UICollectionViewData
         cell.button.setImage(activeImage, for: .highlighted)
         
         cell.actionHandler = { [weak self] in
-            self?.selectedItem = indexPath.item
+            guard let self = self else {
+                return
+            }
             
-            if let self = self, let selectionDelegate = self.selectionDelegate {
+            if self.multipleSelection {
+                
+                if isSelected {
+                    self.selectedItems.remove(indexPath.item)
+                } else {
+                    self.selectedItems.insert(indexPath.item)
+                }
+
+            } else {
+                self.selectedItems = [indexPath.item]
+            }
+            
+            if let selectionDelegate = self.selectionDelegate {
                 selectionDelegate.collectionView(self, didSelectItemAt: indexPath.item)
             } else {
-                self?.reloadData()
+                self.reloadData()
             }
+            
         }
         
         return cell

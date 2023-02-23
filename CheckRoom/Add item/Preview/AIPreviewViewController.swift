@@ -51,19 +51,6 @@ class AIPreviewViewController: ViewController {
         
         navigationController?.navigationBar.prefersLargeTitles = true
     }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-//        navrigationController?.navigationBar.prefersLargeTitles = true
-        
-//        if let image = UIPasteboard.general.image {
-//            imageView.image = image
-//        } else {
-//            UIApplication.shared.open(URL(string: "photos-redirect://")!)
-//        }
-
-    }
     
     @objc
     private func editTapped() {
@@ -77,7 +64,9 @@ class AIPreviewViewController: ViewController {
     }
     
     override func setup() {
-        super.setup()
+        super.setup() 
+        
+        UIPasteboard.general.image = nil
         
         title = "Preview"
         
@@ -109,23 +98,24 @@ class AIPreviewViewController: ViewController {
             self.navigationItem.rightBarButtonItem = editButton
         }
         
-        if let image = UIPasteboard.general.image {
-            self.imageView.image = image
-            
-            let editButton = UIBarButtonItem(image: Icons.editPicture,
-                                             style: .plain,
-                                             target: self,
-                                             action: #selector(editTapped))
-            editButton.tintColor = UIColor(red: 133/255, green: 133/255, blue: 133/255, alpha: 1.0)
-            navigationItem.rightBarButtonItem = editButton
-            
-        } else {
+//        if let image = UIPasteboard.general.image {
+//            self.imageView.image = image
+//
+//            let editButton = UIBarButtonItem(image: Icons.editPicture,
+//                                             style: .plain,
+//                                             target: self,
+//                                             action: #selector(editTapped))
+//            editButton.tintColor = UIColor(red: 133/255, green: 133/255, blue: 133/255, alpha: 1.0)
+//            navigationItem.rightBarButtonItem = editButton
+//
+//        } else {
             setupOops()
-        }
+//        }
     }
     
     override func layout() {
         super.layout()
+        
         view.addSubview(saveButton)
         view.addSubview(imageView)
         
@@ -159,7 +149,6 @@ class AIPreviewViewController: ViewController {
         label.numberOfLines = 0
         
         label.text = "Open your phone gallery and copy an item with a long image clip."
-        
         
         let openGalleryButton = UIButton(type: .system)
         openGalleryButton.translatesAutoresizingMaskIntoConstraints = false

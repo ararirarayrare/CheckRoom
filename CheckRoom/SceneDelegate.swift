@@ -23,6 +23,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let coordinator = MainCoordinator(builder: builder,
                                           window: window)
         coordinator.start()
+        
     }
 }
 
