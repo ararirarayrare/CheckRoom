@@ -14,13 +14,17 @@ class ItemsCollectionView: UICollectionView {
         self.items = items
         
         let layout = ItemsCollectionViewLayout()
-        layout.scrollDirection = .horizontal
-        layout.itemSize = CGSize(width: frame.width * 0.5,
+        layout.scrollDirection = .horizontal        
+        layout.itemSize = CGSize(width: frame.width * 0.75,
                                  height: frame.height)
+        
+        layout.spacing = 0
         
         super.init(frame: frame, collectionViewLayout: layout)
                 
         contentInset = .zero
+        
+        clipsToBounds = false
 
         showsVerticalScrollIndicator = false
         showsHorizontalScrollIndicator = false
@@ -93,12 +97,17 @@ class COItemsCollectionViewCell: UICollectionViewCell {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFit
+        imageView.clipsToBounds = false
         
         return imageView
     }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
+        clipsToBounds = false
+        
+        backgroundColor = .blue.withAlphaComponent(0.5)
 
         layout()
     }

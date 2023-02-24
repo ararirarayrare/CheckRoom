@@ -44,6 +44,7 @@ class CategoryCollectionView: UICollectionView {
         backgroundColor = .clear
         
         contentInset.bottom = 160
+        contentInset.top = 24
         
         delegate = self
         dataSource = self

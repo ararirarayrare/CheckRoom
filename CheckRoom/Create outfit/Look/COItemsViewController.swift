@@ -28,6 +28,11 @@ class COItemsViewController: ViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        
+    }
     
     override func setup() {
         super.setup()
@@ -63,33 +68,42 @@ class COItemsViewController: ViewController {
         
         navigationItem.rightBarButtonItem = nextBarButton
         
+        let possibleHeight = view.bounds.height - 186
+
         let topCollectionView = ItemsCollectionView(
             items: topItems,
             frame: CGRect(x: 0,
-                          y: 120,
+                          y: 146,
                           width: view.bounds.width,
-                          height: (view.bounds.height - 120)  * 0.25)
+                          height: possibleHeight * 0.36)
+//                          height: (view.bounds.height - 120)  * 0.25)
         )
         
         let bottomCollectionView = ItemsCollectionView(
             items: bottomItems,
             frame: CGRect(x: 0,
-                          y: topCollectionView.frame.maxY + 4,
+                          y: topCollectionView.frame.maxY,
                           width: view.bounds.width,
-                          height: (view.bounds.height - 120) * 0.4)
+                          height: possibleHeight * 0.47)
+//                          height: (view.bounds.height - 120) * 0.4)
         )
         
         let shoesCollectionView = ItemsCollectionView(
             items: shoes,
             frame: CGRect(x: 0,
-                          y: bottomCollectionView.frame.maxY + 4,
+                          y: bottomCollectionView.frame.maxY,
                           width: view.bounds.width,
-                          height: (view.bounds.height - 120) * 0.15)
+                          height: possibleHeight * 0.17)
+//                          height: (view.bounds.height - 120) * 0.15)
         )
         
         self.topCollectionView = topCollectionView
         self.bottomCollectionView = bottomCollectionView
         self.shoesCollectionView = shoesCollectionView
+        
+        topCollectionView.backgroundColor = .red.withAlphaComponent(0.5)
+        bottomCollectionView.backgroundColor = .green.withAlphaComponent(0.5)
+        shoesCollectionView.backgroundColor = .darkGray.withAlphaComponent(0.5)
     }
     
     override func layout() {
@@ -99,9 +113,20 @@ class COItemsViewController: ViewController {
            let bottomCollectionView = bottomCollectionView,
            let shoesCollectionView = shoesCollectionView {
             
+            
+            
+            topCollectionView.translatesAutoresizingMaskIntoConstraints = false
+            
             view.addSubview(topCollectionView)
             view.addSubview(bottomCollectionView)
             view.addSubview(shoesCollectionView)
+            
+            NSLayoutConstraint.activate([
+                topCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+                topCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+                topCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+                topCollectionView.heightAnchor.constraint(equalToConstant: topCollectionView.frame.height)
+            ])
         }
     }
     

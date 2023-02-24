@@ -44,12 +44,6 @@ class COSeasonsViewController: ViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        navigationController?.navigationBar.prefersLargeTitles = true
-    }
-    
     override func setup() {
         super.setup()
         title = "Choose a season"
@@ -57,6 +51,7 @@ class COSeasonsViewController: ViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
                 
         collectionView.selectionDelegate = self
+    
     }
     
     override func layout() {
