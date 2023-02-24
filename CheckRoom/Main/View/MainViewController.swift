@@ -39,6 +39,9 @@ class MainViewController: ViewController {
 
     override func setup() {
         super.setup()
+        
+        navigationItem.largeTitleDisplayMode = .never
+        
         headerView.coordinator = self.coordinator
     }
     
@@ -49,8 +52,8 @@ class MainViewController: ViewController {
         view.addSubview(headerView)
         
         NSLayoutConstraint.activate([
-            logoImageView.topAnchor.constraint(equalTo: view.topAnchor,
-                                               constant: 56),
+            logoImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,
+                                               constant: 24),
             logoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             logoImageView.widthAnchor.constraint(equalToConstant: 80),
             logoImageView.heightAnchor.constraint(equalTo: logoImageView.widthAnchor,

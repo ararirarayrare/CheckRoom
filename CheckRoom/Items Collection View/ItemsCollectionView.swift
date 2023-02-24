@@ -8,19 +8,47 @@ class ItemsCollectionView: UICollectionView {
         return items.isEmpty ? nil : items[selectedIndex]
     }
     
+    enum ItemsAligment {
+        case top, bottom
+    }
+    
+    var itemsAligment: ItemsAligment = .top
+    
+    var itemSize: CGSize {
+        get {
+            return (collectionViewLayout as? ItemsCollectionViewLayout)?.itemSize ?? .zero
+        }
+        
+        set {
+            (collectionViewLayout as? ItemsCollectionViewLayout)?.itemSize = newValue
+        }
+    }
+    
+    var spacing: CGFloat {
+        get {
+            return (collectionViewLayout as? ItemsCollectionViewLayout)?.spacing ?? 0
+        }
+        
+        set {
+            (collectionViewLayout as? ItemsCollectionViewLayout)?.spacing = newValue
+        }
+    }
+    
+    var possibleHeightDelta: CGFloat = 16.0
+    
     let items: [Wear]
     
-    init(items: [Wear], frame: CGRect) {
+    init(items: [Wear]) {
         self.items = items
         
         let layout = ItemsCollectionViewLayout()
-        layout.scrollDirection = .horizontal        
-        layout.itemSize = CGSize(width: frame.width * 0.75,
-                                 height: frame.height)
+        layout.scrollDirection = .horizontal
+//        layout.itemSize = CGSize(width: frame.width * 0.75,
+//                                 height: frame.height)
         
         layout.spacing = 0
         
-        super.init(frame: frame, collectionViewLayout: layout)
+        super.init(frame: .zero, collectionViewLayout: layout)
                 
         contentInset = .zero
         
@@ -32,11 +60,41 @@ class ItemsCollectionView: UICollectionView {
         delegate = self
         dataSource = self
         
+        backgroundColor = .clear
+        
         let cellClass = COItemsCollectionViewCell.self
         let identifier = String(describing: cellClass)
         
         register(cellClass, forCellWithReuseIdentifier: identifier)
     }
+    
+//    init(items: [Wear], frame: CGRect) {
+//        self.items = items
+//
+//        let layout = ItemsCollectionViewLayout()
+//        layout.scrollDirection = .horizontal
+//        layout.itemSize = CGSize(width: frame.width * 0.75,
+//                                 height: frame.height)
+//
+//        layout.spacing = 0
+//
+//        super.init(frame: frame, collectionViewLayout: layout)
+//
+//        contentInset = .zero
+//
+//        clipsToBounds = false
+//
+//        showsVerticalScrollIndicator = false
+//        showsHorizontalScrollIndicator = false
+//
+//        delegate = self
+//        dataSource = self
+//
+//        let cellClass = COItemsCollectionViewCell.self
+//        let identifier = String(describing: cellClass)
+//
+//        register(cellClass, forCellWithReuseIdentifier: identifier)
+//    }
     
     func scrollTo(index: Int) {
         self.scrollToItem(at: IndexPath(item: index, section: 0),
@@ -66,7 +124,7 @@ extension ItemsCollectionView: UICollectionViewDelegate, UICollectionViewDataSou
         }
         
         cell.imageView.image = items[indexPath.item].image
-        
+        cell.itemsAligment = self.itemsAligment
         
         return cell
     }
@@ -93,21 +151,26 @@ extension ItemsCollectionView: UICollectionViewDelegate, UICollectionViewDataSou
 
 class COItemsCollectionViewCell: UICollectionViewCell {
     
-    let imageView: UIImageView = {
+    fileprivate let imageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.contentMode = .scaleAspectFit
+//        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.contentMode = .scaleToFill
+        
         imageView.clipsToBounds = false
         
         return imageView
     }()
+    
+    fileprivate var itemsAligment: ItemsCollectionView.ItemsAligment = .top
+    fileprivate var possibleHeightDelta: CGFloat = 20.0
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
         clipsToBounds = false
         
-        backgroundColor = .blue.withAlphaComponent(0.5)
+//        contentView.backgroundColor = .yellow.withAlphaComponent(0.5)
+//        imageView.backgroundColor = .blue.withAlphaComponent(0.5)
 
         layout()
     }
@@ -116,15 +179,63 @@ class COItemsCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+//        guard true == false else {
+//            imageView.frame = contentView.bounds
+//            return
+//        }
+        
+        guard let imageSize = imageView.image?.size, contentView.bounds != .zero else {
+            return
+        }
+        
+        let bounds = contentView.bounds
+        
+        // width / height
+        let aspectRatio = imageSize.width / imageSize.height
+    
+        let newWidth = bounds.width
+        
+        let newHeight = newWidth / aspectRatio
+                
+        if (newHeight - bounds.height) > possibleHeightDelta {
+            
+            let newHeight = bounds.height + possibleHeightDelta
+            let newWidth = newHeight * aspectRatio
+            
+            let newSize = CGSize(width: newWidth, height: newHeight)
+//            let newImage = imageView.image?.resize(to: newSize, with: .accelerate)
+            
+//            imageView.image = newImage
+            imageView.frame.size = newSize
+            
+            imageView.center = contentView.center
+            imageView.frame.origin.y = -(possibleHeightDelta / 2)
+            
+        } else {
+            
+            let newSize = CGSize(width: newWidth, height: newHeight)
+//            let newImage = imageView.image?.resize(to: newSize, with: .accelerate)
+//
+//            imageView.image = newImage
+            imageView.frame.size = newSize
+            
+            imageView.center.x = contentView.center.x
+            
+            switch itemsAligment {
+            case .top:
+                imageView.frame.origin.y = 0
+            case .bottom:
+                imageView.frame.origin.y = (bounds.height - newSize.height)
+            }
+        }
+    
+    }
+    
     private func layout() {
         addSubview(imageView)
-        
-        NSLayoutConstraint.activate([
-            imageView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            imageView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            imageView.topAnchor.constraint(equalTo: topAnchor),
-            imageView.bottomAnchor.constraint(equalTo: bottomAnchor)
-        ])
     }
     
 }

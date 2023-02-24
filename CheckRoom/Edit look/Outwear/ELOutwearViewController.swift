@@ -53,11 +53,11 @@ class ELOutwearViewController: ViewController {
         }
         
         collectionView = ItemsCollectionView(
-            items: outwearItems,
-            frame: CGRect(x: 0,
-                          y: 140,
-                          width: view.bounds.width,
-                          height: view.bounds.width * 1.25)
+            items: outwearItems
+//            frame: CGRect(x: 0,
+//                          y: 140,
+//                          width: view.bounds.width,
+//                          height: view.bounds.width * 1.25)
         )
         
         saveButton.addTarget(self, action: #selector(saveTapped), for: .touchUpInside)

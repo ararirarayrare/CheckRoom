@@ -48,7 +48,7 @@ class COSeasonsViewController: ViewController {
         super.setup()
         title = "Choose a season"
         
-        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.largeTitleDisplayMode = .always
                 
         collectionView.selectionDelegate = self
     

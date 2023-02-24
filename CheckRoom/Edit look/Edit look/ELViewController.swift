@@ -122,7 +122,7 @@ class ELViewController: ViewController {
     }
     
     private func createCollectionView(withItems items: [Wear], frame: CGRect) -> ItemsCollectionView {
-        let collectionView = ItemsCollectionView(items: items, frame: frame)
+        let collectionView = ItemsCollectionView(items: items)
         //        collectionView.translatesAutoresizingMaskIntoConstraints = false
         
         return collectionView

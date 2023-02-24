@@ -53,17 +53,11 @@ class MOSeasonsViewController: ViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        navigationController?.navigationBar.prefersLargeTitles = true
-    }
-    
     override func setup() {
         super.setup()
         title = "Choose a season"
         
-        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.largeTitleDisplayMode = .always
         
         if let outfit = editedOutfit, isEditingOutfit {
             collectionView.activeImages = Season.allCases.map { $0.imageActive }

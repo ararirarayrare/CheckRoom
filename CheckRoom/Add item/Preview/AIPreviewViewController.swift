@@ -46,12 +46,6 @@ class AIPreviewViewController: ViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        navigationController?.navigationBar.prefersLargeTitles = true
-    }
-    
     @objc
     private func editTapped() {
         UIApplication.shared.open(URL(string: "photos-redirect://")!)
@@ -64,7 +58,9 @@ class AIPreviewViewController: ViewController {
     }
     
     override func setup() {
-        super.setup() 
+        super.setup()
+        
+        navigationItem.largeTitleDisplayMode = .always
         
         UIPasteboard.general.image = nil
         

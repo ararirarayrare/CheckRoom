@@ -34,7 +34,7 @@ class MOLooksViewController: ViewController {
     override func setup() {
         super.setup()
         
-        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.largeTitleDisplayMode = .always
         title = season.title + " season"
 
         let anotherSeasonBarButton = UIBarButtonItem(title: "Another season",
