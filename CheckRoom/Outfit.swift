@@ -80,10 +80,10 @@ class OutfitView: UIView {
     private func setup() {
         backgroundColor = .white
     
-        topImageView.contentMode = .scaleAspectFit
-        bottomImageView.contentMode = .scaleAspectFit
-        shoesImageView.contentMode = .scaleAspectFit
-        accessoryImageView.contentMode = .scaleAspectFit
+        topImageView.contentMode = .scaleToFill
+        bottomImageView.contentMode = .scaleToFill
+        shoesImageView.contentMode = .scaleToFill
+        accessoryImageView.contentMode = .scaleToFill
     }
     
     private func layout() {
@@ -97,39 +97,41 @@ class OutfitView: UIView {
         addSubview(shoesImageView)
         addSubview(accessoryImageView)
         
+        fatalError("REDO LAYOUT !!!! LIKE IN ITEMS COLLECTION VIEW!!! ACCOORDING TO IMAGE ASPECT RATIO")
+        //MARK: - TODO !!!
         NSLayoutConstraint.activate([
-            topImageView.topAnchor.constraint(equalTo: topAnchor,
-                                              constant: 8),
-            topImageView.heightAnchor.constraint(equalTo: heightAnchor,
-                                                 multiplier: 0.35),
-            topImageView.widthAnchor.constraint(equalTo: topImageView.heightAnchor),
-            topImageView.centerXAnchor.constraint(equalTo: centerXAnchor),
+//            topImageView.topAnchor.constraint(equalTo: topAnchor,
+//                                              constant: 8),
+//            topImageView.heightAnchor.constraint(equalTo: heightAnchor,
+//                                                 multiplier: 0.35),
+//            topImageView.widthAnchor.constraint(equalTo: topImageView.heightAnchor),
+//            topImageView.centerXAnchor.constraint(equalTo: centerXAnchor),
+//
+//
+//            bottomImageView.topAnchor.constraint(equalTo: topImageView.bottomAnchor,
+//                                                 constant: 4),
+//            bottomImageView.bottomAnchor.constraint(equalTo: bottomAnchor,
+//                                                    constant: -8),
+//            bottomImageView.widthAnchor.constraint(equalTo: bottomImageView.heightAnchor),
+//            bottomImageView.centerXAnchor.constraint(equalTo: centerXAnchor),
             
             
-            bottomImageView.topAnchor.constraint(equalTo: topImageView.bottomAnchor,
-                                                 constant: 4),
-            bottomImageView.bottomAnchor.constraint(equalTo: bottomAnchor,
-                                                    constant: -8),
-            bottomImageView.widthAnchor.constraint(equalTo: bottomImageView.heightAnchor),
-            bottomImageView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            
-            
-            shoesImageView.trailingAnchor.constraint(equalTo: trailingAnchor,
-                                                     constant: -24),
-            shoesImageView.bottomAnchor.constraint(equalTo: bottomAnchor,
-                                                   constant: -24),
-            shoesImageView.widthAnchor.constraint(equalTo: widthAnchor,
-                                                  multiplier: 0.3),
-            shoesImageView.heightAnchor.constraint(equalTo: shoesImageView.widthAnchor),
-            
-            
-            accessoryImageView.trailingAnchor.constraint(equalTo: trailingAnchor,
-                                                     constant: -24),
-            accessoryImageView.bottomAnchor.constraint(equalTo: shoesImageView.topAnchor,
-                                                   constant: -24),
-            accessoryImageView.widthAnchor.constraint(equalTo: widthAnchor,
-                                                  multiplier: 0.3),
-            accessoryImageView.heightAnchor.constraint(equalTo: accessoryImageView.widthAnchor),
+//            shoesImageView.trailingAnchor.constraint(equalTo: trailingAnchor,
+//                                                     constant: -24),
+//            shoesImageView.bottomAnchor.constraint(equalTo: bottomAnchor,
+//                                                   constant: -24),
+//            shoesImageView.widthAnchor.constraint(equalTo: widthAnchor,
+//                                                  multiplier: 0.3),
+//            shoesImageView.heightAnchor.constraint(equalTo: shoesImageView.widthAnchor),
+//
+//
+//            accessoryImageView.trailingAnchor.constraint(equalTo: trailingAnchor,
+//                                                     constant: -24),
+//            accessoryImageView.bottomAnchor.constraint(equalTo: shoesImageView.topAnchor,
+//                                                   constant: -24),
+//            accessoryImageView.widthAnchor.constraint(equalTo: widthAnchor,
+//                                                  multiplier: 0.3),
+//            accessoryImageView.heightAnchor.constraint(equalTo: accessoryImageView.widthAnchor),
         ])
     }
     

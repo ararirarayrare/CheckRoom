@@ -28,6 +28,16 @@ class COItemsViewController: ViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
@@ -52,13 +62,15 @@ class COItemsViewController: ViewController {
         bottomCollectionView.itemsAligment = .top
         shoesCollectionView.itemsAligment = .top
         
-        topCollectionView.possibleHeightDelta = 8.0
-        bottomCollectionView.possibleHeightDelta = 20.0
+        topCollectionView.possibleHeightDelta = 0
+        bottomCollectionView.possibleHeightDelta = 16.0
         shoesCollectionView.possibleHeightDelta = 0.0
     }
     
     override func setup() {
         super.setup()
+        
+        view.clipsToBounds = true
                 
         navigationItem.largeTitleDisplayMode = .never
         
@@ -92,45 +104,16 @@ class COItemsViewController: ViewController {
         )
         
         navigationItem.rightBarButtonItem = nextBarButton
-        
-//        let possibleHeight = view.bounds.height - 186
+    
 
-        let topCollectionView = ItemsCollectionView(
-            items: topItems
-//            frame: CGRect(x: 0,
-//                          y: 146,
-//                          width: view.bounds.width,
-//                          height: possibleHeight * 0.36)
-////                          height: (view.bounds.height - 120)  * 0.25)
-        )
+        let topCollectionView = ItemsCollectionView(items: topItems)
+        let bottomCollectionView = ItemsCollectionView(items: bottomItems)
+        let shoesCollectionView = ItemsCollectionView(items: shoes)
         
-        let bottomCollectionView = ItemsCollectionView(
-            items: bottomItems
-//            frame: CGRect(x: 0,
-//                          y: topCollectionView.frame.maxY,
-//                          width: view.bounds.width,
-//                          height: possibleHeight * 0.47)
-////                          height: (view.bounds.height - 120) * 0.4)
-        )
-        
-        let shoesCollectionView = ItemsCollectionView(
-            items: shoes
-//            frame: CGRect(x: 0,
-//                          y: bottomCollectionView.frame.maxY,
-//                          width: view.bounds.width,
-//                          height: possibleHeight * 0.17)
-////                          height: (view.bounds.height - 120) * 0.15)
-        )
         
         self.topCollectionView = topCollectionView
         self.bottomCollectionView = bottomCollectionView
         self.shoesCollectionView = shoesCollectionView
-        
-        
-//        topCollectionView.itemContentMode = .scaleAspectFi
-//        topCollectionView.backgroundColor = .red.withAlphaComponent(0.5)
-//        bottomCollectionView.backgroundColor = .green.withAlphaComponent(0.5)
-//        shoesCollectionView.backgroundColor = .darkGray.withAlphaComponent(0.5)
     }
     
     override func layout() {
@@ -172,14 +155,12 @@ class COItemsViewController: ViewController {
             ])
         }
     }
+
     
     @objc
     private func nextTapped() {
         let outfit = Outfit(season: season)
-//        outfit.topWearImage = topCollectionView.selectedItem
-//        outfit.bottomWearImage = bottomCollectionView.selectedItem
-//        outfit.shoesImage = shoesCollectionView.selectedItem
-        
+
         outfit.topWear = topCollectionView?.selectedItem as? TopWear
         outfit.bottomWear = bottomCollectionView?.selectedItem as? BottomWear
         outfit.shoes = shoesCollectionView?.selectedItem as? Shoes

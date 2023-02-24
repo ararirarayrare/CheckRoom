@@ -37,45 +37,24 @@ class ELViewController: ViewController {
                                                   forSeason: outfit.season)
             .filter { $0.category == .undercoat }
         
-        topCollectionView = createCollectionView(
-            withItems: topItems,
-            frame: CGRect(x: 0,
-                          y: 120,
-                          width: view.bounds.width,
-                          height: (view.bounds.height - 120)  * 0.25)
-        )
+        let bottomItems = DataManager.shared.getWear(type: BottomWear.self,
+                                                     forSeason: outfit.season)
+        
+        let shoes = DataManager.shared.getWear(type: Shoes.self,
+                                               forSeason: outfit.season)
+
+        topCollectionView = ItemsCollectionView(items: topItems)
+        bottomCollectionView = ItemsCollectionView(items: bottomItems)
+        shoesCollectionView = ItemsCollectionView(items: shoes)
         
         if let currentTopWearIndex = topItems.firstIndex(where: { $0.image?.pngData() == outfit.topWear.image?.pngData() }) {
             topCollectionView.scrollTo(index: currentTopWearIndex)
         }
         
-        
-        let bottomItems = DataManager.shared.getWear(type: BottomWear.self,
-                                                     forSeason: outfit.season)
-        
-        bottomCollectionView = createCollectionView(
-            withItems: bottomItems,
-            frame: CGRect(x: 0,
-                          y: topCollectionView.frame.maxY + 4,
-                          width: view.bounds.width,
-                          height: (view.bounds.height - 120) * 0.4)
-        )
-        
         if let currentBottomWearIndex = bottomItems.firstIndex(where: { $0.image?.pngData() == outfit.bottomWear.image?.pngData() }) {
             bottomCollectionView.scrollTo(index: currentBottomWearIndex)
         }
-        
-        let shoes = DataManager.shared.getWear(type: Shoes.self,
-                                               forSeason: outfit.season)
-        
-        shoesCollectionView = createCollectionView(
-            withItems: shoes,
-            frame: CGRect(x: 0,
-                          y: bottomCollectionView.frame.maxY + 4,
-                          width: view.bounds.width,
-                          height: (view.bounds.height - 120) * 0.15)
-        )
-        
+
         if let currentShoesIndex = shoes.firstIndex(where: { $0.image?.pngData() == outfit.shoes.image?.pngData() }) {
             shoesCollectionView.scrollTo(index: currentShoesIndex)
         }
@@ -98,20 +77,39 @@ class ELViewController: ViewController {
     override func layout() {
         super.layout()
         
-        view.addSubview(topCollectionView)
-        view.addSubview(bottomCollectionView)
+        topCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        bottomCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        shoesCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        
+        
         view.addSubview(shoesCollectionView)
+        view.addSubview(bottomCollectionView)
+        view.addSubview(topCollectionView)
+        
+        NSLayoutConstraint.activate([
+            topCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            topCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            topCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            topCollectionView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor,
+                                                      multiplier: 0.36),
+            
+            
+            bottomCollectionView.topAnchor.constraint(equalTo: topCollectionView.bottomAnchor),
+            bottomCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            bottomCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            bottomCollectionView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor,
+                                                         multiplier: 0.47),
+            
+            
+            shoesCollectionView.topAnchor.constraint(equalTo: bottomCollectionView.bottomAnchor),
+            shoesCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            shoesCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            shoesCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        ])
     }
     
     @objc
     private func nextTapped() {
-        //        let look = UIImage(named: "look-example")
-        //
-        //        coordinator.eventOccured(.preview(look))
-        
-        // MARK: - TODO !!!
-        
-        
         DataManager.shared.updateOutfit {
             self.outfit.topWear = self.topCollectionView.selectedItem as? TopWear
             self.outfit.bottomWear = self.bottomCollectionView.selectedItem as? BottomWear
@@ -119,13 +117,6 @@ class ELViewController: ViewController {
         }
         
         coordinator.eventOccured(.preview(outfit))
-    }
-    
-    private func createCollectionView(withItems items: [Wear], frame: CGRect) -> ItemsCollectionView {
-        let collectionView = ItemsCollectionView(items: items)
-        //        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        
-        return collectionView
     }
     
 }

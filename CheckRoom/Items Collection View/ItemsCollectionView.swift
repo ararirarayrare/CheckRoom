@@ -53,6 +53,8 @@ class ItemsCollectionView: UICollectionView {
         contentInset = .zero
         
         clipsToBounds = false
+        
+        
 
         showsVerticalScrollIndicator = false
         showsHorizontalScrollIndicator = false
@@ -68,39 +70,20 @@ class ItemsCollectionView: UICollectionView {
         register(cellClass, forCellWithReuseIdentifier: identifier)
     }
     
-//    init(items: [Wear], frame: CGRect) {
-//        self.items = items
-//
-//        let layout = ItemsCollectionViewLayout()
-//        layout.scrollDirection = .horizontal
-//        layout.itemSize = CGSize(width: frame.width * 0.75,
-//                                 height: frame.height)
-//
-//        layout.spacing = 0
-//
-//        super.init(frame: frame, collectionViewLayout: layout)
-//
-//        contentInset = .zero
-//
-//        clipsToBounds = false
-//
-//        showsVerticalScrollIndicator = false
-//        showsHorizontalScrollIndicator = false
-//
-//        delegate = self
-//        dataSource = self
-//
-//        let cellClass = COItemsCollectionViewCell.self
-//        let identifier = String(describing: cellClass)
-//
-//        register(cellClass, forCellWithReuseIdentifier: identifier)
-//    }
-    
     func scrollTo(index: Int) {
         self.scrollToItem(at: IndexPath(item: index, section: 0),
                           at: [.centeredVertically, .centeredHorizontally],
                           animated: true)
         self.selectedIndex = index
+    }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        
+        if let cell = visibleCells.first(where: { $0.alpha > 0.99 }),
+           let index = indexPath(for: cell)?.item {
+            
+            selectedIndex = index
+        }
     }
     
     required init?(coder: NSCoder) {
@@ -127,14 +110,6 @@ extension ItemsCollectionView: UICollectionViewDelegate, UICollectionViewDataSou
         cell.itemsAligment = self.itemsAligment
         
         return cell
-    }
-    
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        if let cell = visibleCells.first(where: { $0.alpha > 0.99 }),
-           let index = indexPath(for: cell)?.item {
-            
-            selectedIndex = index
-        }
     }
 
 //    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
