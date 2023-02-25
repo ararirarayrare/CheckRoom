@@ -84,55 +84,88 @@ class OutfitView: UIView {
         bottomImageView.contentMode = .scaleToFill
         shoesImageView.contentMode = .scaleToFill
         accessoryImageView.contentMode = .scaleToFill
+        
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        guard let topImageSize = topImageView.image?.size,
+              let bottomImageSize = bottomImageView.image?.size,
+              let shoesImageSize = shoesImageView.image?.size,
+              bounds != .zero else {
+            return
+        }
+        
+        let topAspectRatio = topImageSize.width / topImageSize.height
+        let bottomAspectRatio = bottomImageSize.width / bottomImageSize.height
+        let shoesAspectRatio = shoesImageSize.width / shoesImageSize.height
+        
+        
+        let topHeight = bounds.height * 0.38
+        let topWidth = topHeight * topAspectRatio
+        topImageView.frame.size = CGSize(width: topWidth, height: topHeight)
+        
+        let bottomWidth = topWidth * 0.85
+        let bottomHeight = bottomWidth / bottomAspectRatio
+        
+        if bottomHeight > (bounds.height * 0.62 - 16) {
+            
+            let newBottomHeight = (bounds.height * 0.62 - 16)
+            let newBottomWidth = newBottomHeight * bottomAspectRatio
+            
+            bottomImageView.frame.size = CGSize(width: newBottomWidth, height: newBottomHeight)
+            
+        } else {
+            bottomImageView.frame.size = CGSize(width: bottomWidth, height: bottomHeight)
+        }
+        
+        
+        let shoesWidth = (bounds.width * 0.4)
+        let shoesHeight = shoesWidth / shoesAspectRatio
+        shoesImageView.frame.size = CGSize(width: shoesWidth, height: shoesHeight)
+        
+                
+        topImageView.frame.origin.y = 8
+        bottomImageView.frame.origin.y = topImageView.frame.maxY
+        shoesImageView.frame.origin.y = (bounds.height - shoesHeight - 24)
+        
+        topImageView.frame.origin.x = (bounds.width - topImageView.bounds.width) / 2
+        bottomImageView.frame.origin.x = (bounds.width - bottomImageView.bounds.width) / 2
+        shoesImageView.frame.origin.x = (bounds.midX + bounds.width * 0.05)
+    }
+    
+    
     private func layout() {
-        topImageView.translatesAutoresizingMaskIntoConstraints = false
-        bottomImageView.translatesAutoresizingMaskIntoConstraints = false
-        shoesImageView.translatesAutoresizingMaskIntoConstraints = false
-        accessoryImageView.translatesAutoresizingMaskIntoConstraints = false
+//        topImageView.translatesAutoresizingMaskIntoConstraints = false
+//        bottomImageView.translatesAutoresizingMaskIntoConstraints = false
+//        shoesImageView.translatesAutoresizingMaskIntoConstraints = false
+//        accessoryImageView.translatesAutoresizingMaskIntoConstraints = false
+        
         
         addSubview(topImageView)
         addSubview(bottomImageView)
         addSubview(shoesImageView)
-        addSubview(accessoryImageView)
+//        addSubview(accessoryImageView)
         
-        fatalError("REDO LAYOUT !!!! LIKE IN ITEMS COLLECTION VIEW!!! ACCOORDING TO IMAGE ASPECT RATIO")
-        //MARK: - TODO !!!
-        NSLayoutConstraint.activate([
-//            topImageView.topAnchor.constraint(equalTo: topAnchor,
-//                                              constant: 8),
-//            topImageView.heightAnchor.constraint(equalTo: heightAnchor,
-//                                                 multiplier: 0.35),
-//            topImageView.widthAnchor.constraint(equalTo: topImageView.heightAnchor),
+                
+//        NSLayoutConstraint.activate([
+//            topImageView.topAnchor.constraint(equalTo: topAnchor, constant: 8),
+//            topImageView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.4),
 //            topImageView.centerXAnchor.constraint(equalTo: centerXAnchor),
 //
 //
-//            bottomImageView.topAnchor.constraint(equalTo: topImageView.bottomAnchor,
-//                                                 constant: 4),
-//            bottomImageView.bottomAnchor.constraint(equalTo: bottomAnchor,
-//                                                    constant: -8),
-//            bottomImageView.widthAnchor.constraint(equalTo: bottomImageView.heightAnchor),
+//            bottomImageView.topAnchor.constraint(equalTo: topImageView.bottomAnchor),
+//            bottomImageView.widthAnchor.constraint(equalTo: topImageView.widthAnchor,
+//                                                   multiplier: 0.85),
 //            bottomImageView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            
-            
-//            shoesImageView.trailingAnchor.constraint(equalTo: trailingAnchor,
-//                                                     constant: -24),
-//            shoesImageView.bottomAnchor.constraint(equalTo: bottomAnchor,
-//                                                   constant: -24),
-//            shoesImageView.widthAnchor.constraint(equalTo: widthAnchor,
-//                                                  multiplier: 0.3),
-//            shoesImageView.heightAnchor.constraint(equalTo: shoesImageView.widthAnchor),
 //
 //
-//            accessoryImageView.trailingAnchor.constraint(equalTo: trailingAnchor,
-//                                                     constant: -24),
-//            accessoryImageView.bottomAnchor.constraint(equalTo: shoesImageView.topAnchor,
-//                                                   constant: -24),
-//            accessoryImageView.widthAnchor.constraint(equalTo: widthAnchor,
-//                                                  multiplier: 0.3),
-//            accessoryImageView.heightAnchor.constraint(equalTo: accessoryImageView.widthAnchor),
-        ])
+//            shoesImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -24),
+//            shoesImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -24),
+//            shoesImageView.leadingAnchor.constraint(equalTo: centerXAnchor,
+//                                                    constant: 24)
+//        ])
     }
     
 }

@@ -157,11 +157,6 @@ class COItemsCollectionViewCell: UICollectionViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-//        guard true == false else {
-//            imageView.frame = contentView.bounds
-//            return
-//        }
-        
         guard let imageSize = imageView.image?.size, contentView.bounds != .zero else {
             return
         }
