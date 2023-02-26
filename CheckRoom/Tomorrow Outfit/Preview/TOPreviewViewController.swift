@@ -113,6 +113,9 @@ class TOPreviewViewController: ViewController {
     @objc
     private func saveTapped() {
         //MARK: - TODO !!! what after????
+                
+        DataManager.shared.setTomorrowOutfit(outfit)
         coordinator.eventOccured(.saved)
     }
+    
 }

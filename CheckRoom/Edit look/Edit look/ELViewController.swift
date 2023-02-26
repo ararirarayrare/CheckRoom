@@ -30,6 +30,35 @@ class ELViewController: ViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+//        guard let topCollectionView = topCollectionView,
+//              let bottomCollectionView = bottomCollectionView,
+//              let shoesCollectionView = shoesCollectionView else {
+//            return
+//        }
+        
+        topCollectionView.itemSize = CGSize(width: topCollectionView.bounds.width * 0.65,
+                                            height: topCollectionView.bounds.height)
+        bottomCollectionView.itemSize = CGSize(width: bottomCollectionView.bounds.width * 0.5,
+                                               height: bottomCollectionView.bounds.height)
+        shoesCollectionView.itemSize = CGSize(width: shoesCollectionView.bounds.width * 0.45,
+                                              height: shoesCollectionView.bounds.height)
+        
+        topCollectionView.spacing = 0
+        bottomCollectionView.spacing = 24
+        shoesCollectionView.spacing = 32
+        
+        topCollectionView.itemsAligment = .bottom
+        bottomCollectionView.itemsAligment = .top
+        shoesCollectionView.itemsAligment = .top
+        
+        topCollectionView.possibleHeightDelta = 0
+        bottomCollectionView.possibleHeightDelta = 16.0
+        shoesCollectionView.possibleHeightDelta = 0.0
+    }
+    
     override func setup() {
         super.setup()
         

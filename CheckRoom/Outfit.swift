@@ -21,6 +21,32 @@ class Outfit: Object {
     
     @objc dynamic private var seasonRawValue: String = ""
     
+    var key: String? {
+        
+        if let topData = topWear.image?.pngData()?.base64EncodedString(),
+           let bottomData = bottomWear.image?.pngData()?.base64EncodedString(),
+           let shoesData = shoes.image?.pngData()?.base64EncodedString() {
+            
+//            let topString = String(decoding: topData, as: UTF8.self).replacingOccurrences(of: " ", with: "")
+//            let bottomString = String(decoding: bottomData, as: UTF8.self).replacingOccurrences(of: " ", with: "")
+//            let shoesString = String(decoding: shoesData, as: UTF8.self).replacingOccurrences(of: " ", with: "")
+            
+//            let cutTop = String(topString.dropLast(topString.count - 20))
+//            let cutBottom = String(topString.dropLast(bottomString.count - 20))
+//            let cutShoes = String(topString.dropLast(shoesString.count - 20))
+            
+            
+            
+            let top = String(topData.replacingOccurrences(of: " ", with: "").dropLast(topData.count - 16))
+            let bottom = String(bottomData.replacingOccurrences(of: " ", with: "").dropLast(bottomData.count - 16))
+            let shoes = String(shoesData.replacingOccurrences(of: " ", with: "").dropLast(shoesData.count - 16))
+            
+            return top + bottom + shoes
+        }
+        
+        return nil
+    }
+    
     var season: Season {
         get {
             return Season(rawValue: Int(seasonRawValue)! )!

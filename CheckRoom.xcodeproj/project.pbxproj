@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		042FD66029AB70B8003CE55B /* MainOutfitsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042FD65F29AB70B8003CE55B /* MainOutfitsView.swift */; };
 		04309BEA296F353400A439D4 /* TOLooksCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04309BE9296F353400A439D4 /* TOLooksCollectionView.swift */; };
 		04309C1429733BF700A439D4 /* TOLooksPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04309C1329733BF700A439D4 /* TOLooksPreviewViewController.swift */; };
 		04309C1629733C8200A439D4 /* TOLookImageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04309C1529733C8200A439D4 /* TOLookImageModel.swift */; };
@@ -87,6 +88,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		042FD65F29AB70B8003CE55B /* MainOutfitsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainOutfitsView.swift; sourceTree = "<group>"; };
 		04309BE9296F353400A439D4 /* TOLooksCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TOLooksCollectionView.swift; sourceTree = "<group>"; };
 		04309C1329733BF700A439D4 /* TOLooksPreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TOLooksPreviewViewController.swift; sourceTree = "<group>"; };
 		04309C1529733C8200A439D4 /* TOLookImageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TOLookImageModel.swift; sourceTree = "<group>"; };
@@ -222,6 +224,7 @@
 			children = (
 				04E6B81E296C539C00E50AA8 /* MainViewController.swift */,
 				04E6B835296C593600E50AA8 /* MainHeaderView.swift */,
+				042FD65F29AB70B8003CE55B /* MainOutfitsView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -754,6 +757,7 @@
 				0443945C297B2D2000FAFD09 /* ELBuilder.swift in Sources */,
 				04C9C3C3296DEA7D005C7003 /* SuccessViewController.swift in Sources */,
 				04E6B81B296C539C00E50AA8 /* AppDelegate.swift in Sources */,
+				042FD66029AB70B8003CE55B /* MainOutfitsView.swift in Sources */,
 				04C9C3AA296C7E0C005C7003 /* ViewController.swift in Sources */,
 				04C9C3BB296DE856005C7003 /* AISubcategoryViewController.swift in Sources */,
 				04C9C3B2296C849A005C7003 /* CategoryCollectionView.swift in Sources */,

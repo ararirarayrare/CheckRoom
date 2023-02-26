@@ -71,6 +71,8 @@ class COPreviewViewController: ViewController {
     override func setup() {
         super.setup()
         
+        navigationItem.largeTitleDisplayMode = .always
+        
         title = "Preview"
         
         saveButton.addTarget(self, action: #selector(saveTapped), for: .touchUpInside)

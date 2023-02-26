@@ -18,12 +18,8 @@ class MainViewController: ViewController {
         return imageView
     }()
     
-    private let headerView: MainHeaderView = {
-        let headerView = MainHeaderView()
-        headerView.translatesAutoresizingMaskIntoConstraints = false
-        
-        return headerView
-    }()
+    private let headerView = MainHeaderView()
+    private var outfitsView: MainOutfitsView?
     
     let coordinator: MainCoordinator
     
@@ -36,17 +32,33 @@ class MainViewController: ViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
-
     override func setup() {
         super.setup()
         
         navigationItem.largeTitleDisplayMode = .never
         
         headerView.coordinator = self.coordinator
+        
+        if let savedOutfits = DataManager.shared.savedOutfits() {
+            
+            let outfitsView = MainOutfitsView()
+            
+            if let today = savedOutfits.first(where: { Date() > $0.key })?.value {
+                outfitsView.outfitViewToday = today.createPreview()
+            }
+            
+            if let tomorrow = savedOutfits.first(where: { $0.key > Date() })?.value {
+                outfitsView.outfitViewTomorrow = tomorrow.createPreview()                
+            }
+            
+            self.outfitsView = outfitsView
+        }
     }
     
     override func layout() {
         super.layout()
+        
+        headerView.translatesAutoresizingMaskIntoConstraints = false
         
         view.addSubview(logoImageView)
         view.addSubview(headerView)
@@ -67,6 +79,21 @@ class MainViewController: ViewController {
             headerView.topAnchor.constraint(equalTo: logoImageView.bottomAnchor,
                                             constant: 32)
         ])
+        
+        if let outfitsView = self.outfitsView {
+            outfitsView.translatesAutoresizingMaskIntoConstraints = false
+
+            view.addSubview(outfitsView)
+
+            NSLayoutConstraint.activate([
+                outfitsView.leadingAnchor.constraint(equalTo: headerView.leadingAnchor),
+                outfitsView.trailingAnchor.constraint(equalTo: headerView.trailingAnchor),
+                outfitsView.topAnchor.constraint(equalTo: headerView.bottomAnchor,
+                                                 constant: 24),
+                outfitsView.heightAnchor.constraint(equalTo: outfitsView.widthAnchor,
+                                                    multiplier: 0.7)
+            ])
+        }
     }
     
 }

@@ -29,6 +29,8 @@ class TOLooksViewController: ViewController {
     override func setup() {
         super.setup()
         
+        navigationItem.largeTitleDisplayMode = .always
+        
         title = season.title + " season"
         
         let anotherSeasonBarButton = UIBarButtonItem(title: "Another season",
