@@ -42,34 +42,36 @@ class DataManager {
     //        }
     //    }
     
-    func tomorrowOutfit() -> Outfit? {
-        let standard = UserDefaults.standard
-        
-        if let keyDate = (standard.dictionary(forKey: "tomorrowOutfit") as? [String : Date])?.first,
-           keyDate.value > Date() {
-            
-            realm?.beginWrite()
-            let outfit = realm.objects(Outfit.self).first(where: { $0.key == keyDate.key })
-            try? realm?.commitWrite()
-            
-            return outfit
-        }
-        
-        return nil
-    }
+//    func tomorrowOutfit() -> Outfit? {
+//        let standard = UserDefaults.standard
+//        
+//        if let keyDate = (standard.dictionary(forKey: "tomorrowOutfit") as? [String : Date])?.first,
+//           keyDate.value > Date() {
+//            
+//            realm?.beginWrite()
+//            let outfit = realm.objects(Outfit.self).first(where: { $0.key == keyDate.key })
+//            try? realm?.commitWrite()
+//            
+//            return outfit
+//        }
+//        
+//        return nil
+//    }
     
     func savedOutfits() -> [Date : Outfit]? {
         
         if let data = UserDefaults.standard.data(forKey: "savedOutfits"),
            let dateKeys = try? JSONDecoder().decode([Date : String].self, from: data) {
             
+            let datesRange: ClosedRange<Date> = (.todayMidnight)...(.tomorrowMidnight)
+            
             let dateOutfits = dateKeys.compactMapValues { key in
                 realm?.beginWrite()
                 let outfit = realm?.objects(Outfit.self).first(where: { $0.key == key })
                 try? realm.commitWrite()
                 return outfit
-            }
-            
+            }.filter { datesRange.contains($0.key) }
+
             return dateOutfits
             
         }
@@ -82,31 +84,25 @@ class DataManager {
         let defaults = UserDefaults.standard
         
         if let savedOutfitsData = defaults.data(forKey: "savedOutfits"),
-           var savedOutfits = try? JSONDecoder().decode([Date : String].self, from: savedOutfitsData),
+           let savedOutfits = try? JSONDecoder().decode([Date : String].self, from: savedOutfitsData),
            let outfitKey = outfit.key {
             
-            if let tomorrowDate = Calendar.current.date(byAdding: .minute, value: 5, to: Date()) {
-                savedOutfits.updateValue(outfitKey, forKey: tomorrowDate)
-            }
+            let datesRange: ClosedRange<Date> = (.todayMidnight)...(.tomorrowMidnight)
             
-            // MARK: - keep 2 objects in dict, should work with midnight dates.
+            var filteredOutfits = savedOutfits.filter({ datesRange.contains($0.key) })
+            filteredOutfits.updateValue(outfitKey, forKey: Date.tomorrowMidnight)
             
-            fatalError("CHECK COMMENT!")
-            
-            if let data = try? JSONEncoder().encode(savedOutfits) {
+                        
+            if let data = try? JSONEncoder().encode(filteredOutfits) {
                 defaults.set(data, forKey: "savedOutfits")
             }
             
         } else {
             
             if let outfitKey = outfit.key,
-               let tomorrowDate = Calendar.current.date(byAdding: .minute, value: 5, to: Date()) {
+               let data = try? JSONEncoder().encode([Date.tomorrowMidnight : outfitKey]) {
                 
-//                let tomorrowMidnight = Calendar.current.startOfDay(for: tomorrowDate)
-                
-                if let data = try? JSONEncoder().encode([tomorrowDate : outfitKey]) {
-                    defaults.set(data, forKey: "savedOutfits")
-                }
+                defaults.set(data, forKey: "savedOutfits")
                 
             }
             
