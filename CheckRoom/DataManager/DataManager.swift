@@ -68,6 +68,9 @@ class DataManager {
             let dateOutfits = dateKeys.compactMapValues { key in
                 realm?.beginWrite()
                 let outfit = realm?.objects(Outfit.self).first(where: { $0.key == key })
+                
+                print(realm!.objects(Outfit.self).filter({ $0.key == key }).count)
+            
                 try? realm.commitWrite()
                 return outfit
             }.filter { datesRange.contains($0.key) }
@@ -87,7 +90,7 @@ class DataManager {
            let savedOutfits = try? JSONDecoder().decode([Date : String].self, from: savedOutfitsData),
            let outfitKey = outfit.key {
             
-            let datesRange: ClosedRange<Date> = (.todayMidnight)...(.tomorrowMidnight)
+            let datesRange: ClosedRange<Date> = (.todayMidnight)...(Date())
             
             var filteredOutfits = savedOutfits.filter({ datesRange.contains($0.key) })
             filteredOutfits.updateValue(outfitKey, forKey: Date.tomorrowMidnight)
