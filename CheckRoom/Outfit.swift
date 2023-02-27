@@ -10,6 +10,16 @@ import RealmSwift
 
 class Outfit: Object {
     
+    func getCopy() -> Outfit {
+        let copy = Outfit(season: self.season)
+        copy.topWear = self.topWear.getCopy()
+        copy.bottomWear = self.bottomWear.getCopy()
+        copy.shoes = self.shoes.getCopy()
+        copy.outwear = self.outwear?.getCopy()
+        
+        return copy
+    }
+    
     private var lock = pthread_rwlock_t()
     private var lockAttributes = pthread_rwlockattr_t()
 
@@ -21,7 +31,7 @@ class Outfit: Object {
     
     @objc dynamic private var seasonRawValue: String = ""
     
-    @objc dynamic private(set) var key: String!
+    @objc dynamic private(set) var key: String! = ""
 //    {
 //
 //        if let topData = topWear.image?.pngData(),

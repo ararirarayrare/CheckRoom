@@ -55,6 +55,8 @@ class ELOutwearViewController: ViewController {
     override func setup() {
         super.setup()
         
+        view.clipsToBounds = true
+        navigationItem.largeTitleDisplayMode = .never
         
         let outwearItems = DataManager.shared.getWear(type: TopWear.self,
                                                       forSeason: outfit.season)
@@ -116,6 +118,7 @@ class ELOutwearViewController: ViewController {
     private func setupOops() {
         navigationItem.backButtonDisplayMode = .minimal
         navigationItem.title = "Oops..."
+        navigationItem.largeTitleDisplayMode = .always
         
         let label = UILabel()
         label.font = .poppinsFont(ofSize: 16)

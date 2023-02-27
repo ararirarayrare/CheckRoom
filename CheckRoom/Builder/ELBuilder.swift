@@ -14,8 +14,15 @@ class ELBuilder: Builder {
         return vc
     }
     
-    func createPreview(outfit: Outfit, coordinator: ELCoordinator) -> ELPreviewViewController {
-        let vc = ELPreviewViewController(coordinator: coordinator, outfit: outfit)
+    func createPreview(outfit: Outfit,
+                       outfitView: OutfitView,
+                       coordinator: ELCoordinator,
+                       updateHandler: @escaping (Outfit) -> Void) -> ELPreviewViewController {
+        
+        let vc = ELPreviewViewController(coordinator: coordinator,
+                                         outfit: outfit,
+                                         outfitView: outfitView,
+                                         updateHandler: updateHandler)
         return vc
     }
     

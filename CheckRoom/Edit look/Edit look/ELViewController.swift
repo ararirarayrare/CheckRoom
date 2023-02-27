@@ -6,14 +6,14 @@
 //
 
 import UIKit
-
+import Combine
 
 class ELViewController: ViewController {
     
+    private var nextBarButton: UIBarButtonItem!
+        
     private var topCollectionView: ItemsCollectionView!
-    
     private var bottomCollectionView: ItemsCollectionView!
-    
     private var shoesCollectionView: ItemsCollectionView!
     
     let coordinator: ELCoordinator
@@ -33,12 +33,6 @@ class ELViewController: ViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-//        guard let topCollectionView = topCollectionView,
-//              let bottomCollectionView = bottomCollectionView,
-//              let shoesCollectionView = shoesCollectionView else {
-//            return
-//        }
-        
         topCollectionView.itemSize = CGSize(width: topCollectionView.bounds.width * 0.65,
                                             height: topCollectionView.bounds.height)
         bottomCollectionView.itemSize = CGSize(width: bottomCollectionView.bounds.width * 0.5,
@@ -57,10 +51,27 @@ class ELViewController: ViewController {
         topCollectionView.possibleHeightDelta = 0
         bottomCollectionView.possibleHeightDelta = 16.0
         shoesCollectionView.possibleHeightDelta = 0.0
+        
+        if let currentTopWearIndex = topCollectionView.items.firstIndex(where: { $0.image?.pngData() == outfit.topWear.image?.pngData() }) {
+            
+            topCollectionView.scrollTo(index: currentTopWearIndex)
+        }
+        
+        if let currentBottomWearIndex = bottomCollectionView.items.firstIndex(where: { $0.image?.pngData() == outfit.bottomWear.image?.pngData() }) {
+            bottomCollectionView.scrollTo(index: currentBottomWearIndex)
+        }
+
+        if let currentShoesIndex = shoesCollectionView.items.firstIndex(where: { $0.image?.pngData() == outfit.shoes.image?.pngData() }) {
+            shoesCollectionView.scrollTo(index: currentShoesIndex)
+        }
     }
+    
     
     override func setup() {
         super.setup()
+        
+        view.clipsToBounds = true
+        navigationItem.largeTitleDisplayMode = .never
         
         let topItems = DataManager.shared.getWear(type: TopWear.self,
                                                   forSeason: outfit.season)
@@ -76,17 +87,6 @@ class ELViewController: ViewController {
         bottomCollectionView = ItemsCollectionView(items: bottomItems)
         shoesCollectionView = ItemsCollectionView(items: shoes)
         
-        if let currentTopWearIndex = topItems.firstIndex(where: { $0.image?.pngData() == outfit.topWear.image?.pngData() }) {
-            topCollectionView.scrollTo(index: currentTopWearIndex)
-        }
-        
-        if let currentBottomWearIndex = bottomItems.firstIndex(where: { $0.image?.pngData() == outfit.bottomWear.image?.pngData() }) {
-            bottomCollectionView.scrollTo(index: currentBottomWearIndex)
-        }
-
-        if let currentShoesIndex = shoes.firstIndex(where: { $0.image?.pngData() == outfit.shoes.image?.pngData() }) {
-            shoesCollectionView.scrollTo(index: currentShoesIndex)
-        }
         
         let nextBarButton = UIBarButtonItem(title: "Next",
                                             style: .plain,
@@ -101,6 +101,23 @@ class ELViewController: ViewController {
         )
         
         navigationItem.rightBarButtonItem = nextBarButton
+        
+        self.nextBarButton = nextBarButton
+        
+        var nextButtonEnabledPublisher: AnyPublisher<Bool, Never> {
+            return Publishers.CombineLatest3(topCollectionView.$isScrolling,
+                                             bottomCollectionView.$isScrolling,
+                                             shoesCollectionView.$isScrolling)
+            .compactMap { top, bottom, shoes in
+                !top && !bottom && !shoes
+            }
+            .eraseToAnyPublisher()
+        }
+        
+        nextButtonEnabledPublisher
+            .receive(on: RunLoop.main)
+            .assign(to: \.isEnabled, on: nextBarButton)
+            .store(in: &cancellables)
     }
     
     override func layout() {
@@ -139,13 +156,26 @@ class ELViewController: ViewController {
     
     @objc
     private func nextTapped() {
-        DataManager.shared.updateOutfit {
-            self.outfit.topWear = self.topCollectionView.selectedItem as? TopWear
-            self.outfit.bottomWear = self.bottomCollectionView.selectedItem as? BottomWear
-            self.outfit.shoes = self.shoesCollectionView.selectedItem as? Shoes
+        guard nextBarButton.isEnabled else {
+            return
+        }
+
+        let updateHandler: (Outfit) -> Void = { outfit in
+            outfit.topWear = self.topCollectionView.selectedItem as? TopWear
+            outfit.bottomWear = self.bottomCollectionView.selectedItem as? BottomWear
+            outfit.shoes = self.shoesCollectionView.selectedItem as? Shoes
         }
         
-        coordinator.eventOccured(.preview(outfit))
+        let outfitCopy = outfit.getCopy()
+        updateHandler(outfitCopy)
+        
+        let outfitView = outfitCopy.createPreview()
+        
+        coordinator.eventOccured(
+            .preview(outfit: self.outfit,
+                     outfitView: outfitView,
+                     updateHandler: updateHandler)
+        )
     }
     
 }

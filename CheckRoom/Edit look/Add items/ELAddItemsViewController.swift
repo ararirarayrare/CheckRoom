@@ -37,6 +37,9 @@ class ELAddItemsViewController: ViewController {
 
     override func setup() {
         super.setup()
+        
+        navigationItem.largeTitleDisplayMode = .always
+        
         title = "Choose subcategory"
         
         collectionView.selectionDelegate = self

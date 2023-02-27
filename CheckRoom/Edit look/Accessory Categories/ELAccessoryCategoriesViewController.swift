@@ -54,6 +54,9 @@ class ELAccessoryCategoriesViewController: ViewController {
     
     override func setup() {
         super.setup()
+        
+        navigationItem.largeTitleDisplayMode = .always
+        
         title = "Add accessories"
         
         collectionView.selectionDelegate = self

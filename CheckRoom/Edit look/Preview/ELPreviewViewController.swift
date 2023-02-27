@@ -43,10 +43,17 @@ class ELPreviewViewController: ViewController {
     
     private let outfitView: OutfitView
     
-    init(coordinator: ELCoordinator, outfit: Outfit) {
+    private let updateHandler: (Outfit) -> Void
+    
+    init(coordinator: ELCoordinator,
+         outfit: Outfit,
+         outfitView: OutfitView,
+         updateHandler: @escaping (Outfit) -> Void) {
+        
         self.coordinator = coordinator
         self.outfit = outfit
-        self.outfitView = outfit.createPreview()
+        self.updateHandler = updateHandler
+        self.outfitView = outfitView
         super.init(nibName: nil, bundle: nil)
         
     }
@@ -57,6 +64,8 @@ class ELPreviewViewController: ViewController {
     
     override func setup() {
         super.setup()
+        
+        navigationItem.largeTitleDisplayMode = .always
         
         title = "Preview"
         
@@ -113,6 +122,16 @@ class ELPreviewViewController: ViewController {
     
     @objc
     private func saveTapped() {
+        if DataManager.shared.contains(outfit) {
+            DataManager.shared.updateOutfit {
+                self.updateHandler(self.outfit)
+            }
+        } else {
+            DataManager.shared.updateOutfit {
+                self.updateHandler(self.outfit)
+            }
+            DataManager.shared.save(outfit: outfit)
+        }
         
         coordinator.eventOccured(.saved)
     }

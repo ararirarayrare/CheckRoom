@@ -1,11 +1,18 @@
 import UIKit
+import Combine
 
 class ItemsCollectionView: UICollectionView {
     
-   private(set) var selectedIndex: Int = 0
+    @Published
+    private(set) var isScrolling: Bool = false
+    
+    private(set) var selectedIndex: Int = 0
     
     var selectedItem: Wear! {
-        return items.isEmpty ? nil : items[selectedIndex]
+//        return items.isEmpty ? nil : items[selectedIndex]
+        let image = (visibleCells.first(where: { $0.alpha > 0.5 }) as? COItemsCollectionViewCell)?.imageView.image
+        
+        return items.first(where: { $0.image?.pngData() == image?.pngData() }) ?? items[selectedIndex]
     }
     
     enum ItemsAligment {
@@ -54,7 +61,6 @@ class ItemsCollectionView: UICollectionView {
         
         clipsToBounds = false
         
-        
 
         showsVerticalScrollIndicator = false
         showsHorizontalScrollIndicator = false
@@ -71,10 +77,11 @@ class ItemsCollectionView: UICollectionView {
     }
     
     func scrollTo(index: Int) {
-        self.scrollToItem(at: IndexPath(item: index, section: 0),
-                          at: [.centeredVertically, .centeredHorizontally],
-                          animated: true)
+        let indexPath = IndexPath(item: index, section: 0)
+        
+        scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
         self.selectedIndex = index
+        
     }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
@@ -83,7 +90,13 @@ class ItemsCollectionView: UICollectionView {
            let index = indexPath(for: cell)?.item {
             
             selectedIndex = index
+            
+            isScrolling = false
         }
+    }
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        if !isScrolling { isScrolling = true }
     }
     
     required init?(coder: NSCoder) {

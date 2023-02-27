@@ -14,9 +14,9 @@ class MainOutfitsView: UIView {
     
     var outfitViewToday: OutfitView? {
         didSet {
+            oldValue?.removeFromSuperview()
             
             guard let view = outfitViewToday else {
-                oldValue?.removeFromSuperview()
                 return
             }
             
@@ -49,9 +49,9 @@ class MainOutfitsView: UIView {
     
     var outfitViewTomorrow: OutfitView? {
         didSet {
+            oldValue?.removeFromSuperview()
             
             guard let view = outfitViewTomorrow else {
-                oldValue?.removeFromSuperview()
                 return
             }
             

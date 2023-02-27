@@ -137,6 +137,8 @@ class TOLooksViewController: ViewController {
     }
     
     private func setupOops() {
+        navigationItem.largeTitleDisplayMode = .always
+        
         let label = UILabel()
         label.font = .poppinsFont(ofSize: 16)
         label.textAlignment = .center

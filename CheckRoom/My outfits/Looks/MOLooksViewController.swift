@@ -142,6 +142,7 @@ class MOLooksViewController: ViewController {
     
     private func setupOops() {
 //        navigationItem.backButtonDisplayMode = .minimal
+        navigationItem.largeTitleDisplayMode = .always
         
         let label = UILabel()
         label.font = .poppinsFont(ofSize: 16)

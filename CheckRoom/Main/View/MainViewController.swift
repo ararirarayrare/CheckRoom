@@ -36,12 +36,20 @@ class MainViewController: ViewController {
     
     private var outfitsView: MainOutfitsView? {
         didSet {
-            oldValue?.removeFromSuperview()
             
             guard let outfitsView = self.outfitsView else {
+                UIView.animate(withDuration: 0.2) {
+                    oldValue?.alpha = 0
+                } completion: { _ in
+                    oldValue?.removeFromSuperview()
+                }
                 return
             }
             
+            outfitsView.alpha = 0
+            
+            oldValue?.removeFromSuperview()
+
             outfitsView.translatesAutoresizingMaskIntoConstraints = false
             
             containerView.addSubview(outfitsView)
@@ -56,6 +64,10 @@ class MainViewController: ViewController {
                 outfitsView.bottomAnchor.constraint(lessThanOrEqualTo: containerView.bottomAnchor,
                                                     constant: -40)
             ])
+            
+            UIView.animate(withDuration: 0.2) {
+                outfitsView.alpha = 1
+            }
         }
     }
     
@@ -193,7 +205,15 @@ class MainViewController: ViewController {
             
             print("SavED :",savedOutfits.count)
             
-            let outfitsView = MainOutfitsView()
+            var outfitsView: MainOutfitsView {
+                if let view = self.outfitsView {
+                    return view
+                } else {
+                    let view = MainOutfitsView()
+                    self.outfitsView = view
+                    return view
+                }
+            }
             
             if let today = savedOutfits.first(where: { Date() > $0.key })?.value {
                 outfitsView.outfitViewToday = today.createPreview()
@@ -206,7 +226,6 @@ class MainViewController: ViewController {
                 return
             }
             
-            self.outfitsView = outfitsView
         }
     }
 }

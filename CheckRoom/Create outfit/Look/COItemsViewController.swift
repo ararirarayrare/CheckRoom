@@ -6,8 +6,11 @@
 //
 
 import UIKit
+import Combine
 
 class COItemsViewController: ViewController {
+    
+    private var nextBarButton: UIBarButtonItem?
     
     private var topCollectionView: ItemsCollectionView?
     private var bottomCollectionView: ItemsCollectionView?
@@ -104,12 +107,28 @@ class COItemsViewController: ViewController {
         )
         
         navigationItem.rightBarButtonItem = nextBarButton
+        
+        self.nextBarButton = nextBarButton
     
 
         let topCollectionView = ItemsCollectionView(items: topItems)
         let bottomCollectionView = ItemsCollectionView(items: bottomItems)
         let shoesCollectionView = ItemsCollectionView(items: shoes)
         
+        var nextButtonEnabledPublisher: AnyPublisher<Bool, Never> {
+            return Publishers.CombineLatest3(topCollectionView.$isScrolling,
+                                             bottomCollectionView.$isScrolling,
+                                             shoesCollectionView.$isScrolling)
+            .compactMap { top, bottom, shoes in
+                !top && !bottom && !shoes
+            }.eraseToAnyPublisher()
+        }
+        
+        nextButtonEnabledPublisher
+            .receive(on: RunLoop.main)
+            .assign(to: \.isEnabled, on: nextBarButton)
+            .store(in: &cancellables)
+
         
         self.topCollectionView = topCollectionView
         self.bottomCollectionView = bottomCollectionView
@@ -159,6 +178,10 @@ class COItemsViewController: ViewController {
     
     @objc
     private func nextTapped() {
+        guard nextBarButton?.isEnabled == true else {
+            return
+        }
+        
         let outfit = Outfit(season: season)
 
         outfit.topWear = topCollectionView?.selectedItem as? TopWear
@@ -176,6 +199,7 @@ class COItemsViewController: ViewController {
     private func setupOops() {
         navigationItem.title = "Oops..."
         navigationItem.backButtonDisplayMode = .minimal
+        navigationItem.largeTitleDisplayMode = .always
         
         let label = UILabel()
         label.font = .poppinsFont(ofSize: 16)

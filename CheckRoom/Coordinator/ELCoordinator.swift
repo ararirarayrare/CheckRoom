@@ -10,7 +10,7 @@ import UIKit
 class ELCoordinator: Coordinator {
     
     enum Event {
-        case preview(Outfit),
+        case preview(outfit: Outfit, outfitView: OutfitView, updateHandler: (Outfit) -> Void),
              addItems(Outfit),
              outwear(Outfit),
              accessoryCategories(Outfit),
@@ -45,8 +45,11 @@ class ELCoordinator: Coordinator {
     
     func eventOccured(_ event: Event) {
         switch event {
-        case .preview(let outfit):
-            let vc = builder.createPreview(outfit: outfit, coordinator: self)
+        case .preview(let outfit, let outfitView, let handler):
+            let vc = builder.createPreview(outfit: outfit,
+                                           outfitView: outfitView,
+                                           coordinator: self,
+                                           updateHandler: handler)
             navigationController?.pushViewController(vc, animated: true)
             
         case .addItems(let outfit):

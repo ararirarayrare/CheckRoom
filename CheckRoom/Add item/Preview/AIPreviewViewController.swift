@@ -71,6 +71,12 @@ class AIPreviewViewController: ViewController {
         NotificationCenter.default.addObserver(forName: UIApplication.didBecomeActiveNotification,
                                                object: nil,
                                                queue: .main) { _ in
+            
+            guard self.navigationController?.topViewController == self else {
+                UIPasteboard.general.image = nil
+                return
+            }
+            
             guard let image = UIPasteboard.general.image else {
                 return
             }
@@ -92,6 +98,8 @@ class AIPreviewViewController: ViewController {
                                              action: #selector(self.editTapped))
             editButton.tintColor = UIColor(red: 133/255, green: 133/255, blue: 133/255, alpha: 1.0)
             self.navigationItem.rightBarButtonItem = editButton
+            
+            UIPasteboard.general.image = nil
         }
         
 //        if let image = UIPasteboard.general.image {
@@ -138,6 +146,8 @@ class AIPreviewViewController: ViewController {
     }
 
     private func setupOops() {
+        navigationItem.largeTitleDisplayMode = .always
+        
         let label = UILabel()
         label.font = .poppinsFont(ofSize: 16)
         label.textAlignment = .center
