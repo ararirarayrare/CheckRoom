@@ -14,7 +14,7 @@ class TOPreviewViewController: ViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         
         button.backgroundColor = .clear
-        button.titleLabel?.font = .boldSystemFont(ofSize: 22)
+        button.titleLabel?.font = .semiBoldPoppinsFont(ofSize: 20)
         button.setTitleColor(.black, for: .normal)
         button.setTitle("Edit look", for: .normal)
         
@@ -28,7 +28,7 @@ class TOPreviewViewController: ViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         
         button.backgroundColor = .black
-        button.titleLabel?.font = .boldSystemFont(ofSize: 22)
+        button.titleLabel?.font = .semiBoldPoppinsFont(ofSize: 20)
         button.setTitleColor(.white, for: .normal)
         button.setTitle("Save", for: .normal)
         

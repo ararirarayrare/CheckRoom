@@ -9,7 +9,7 @@ class ItemsCollectionView: UICollectionView {
     }
     
     enum ItemsAligment {
-        case top, bottom
+        case top, bottom, center
     }
     
     var itemsAligment: ItemsAligment = .top
@@ -199,6 +199,8 @@ class COItemsCollectionViewCell: UICollectionViewCell {
                 imageView.frame.origin.y = 0
             case .bottom:
                 imageView.frame.origin.y = (bounds.height - newSize.height)
+            case .center:
+                imageView.center.y = bounds.midY
             }
         }
     

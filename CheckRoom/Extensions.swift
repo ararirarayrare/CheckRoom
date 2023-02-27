@@ -15,6 +15,14 @@ extension UIFont {
         return UIFont(name: "Poppins-Regular", size: size)
     }
     
+    static func mediumPoppinsFont(ofSize size: CGFloat) -> UIFont? {
+        return UIFont(name: "Poppins-Medium", size: size)
+    }
+    
+    static func semiBoldPoppinsFont(ofSize size: CGFloat) -> UIFont? {
+        return UIFont(name: "Poppins-SemiBold", size: size)
+    }
+
 }
 
 extension Date {

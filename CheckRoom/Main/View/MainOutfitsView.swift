@@ -116,7 +116,7 @@ class MainOutfitsView: UIView {
     private func createLabel(text: String) -> UILabel {
         let label = UILabel()
         
-        label.font = .boldSystemFont(ofSize: 18)
+        label.font = .mediumPoppinsFont(ofSize: 16)
         label.textColor = .black
         label.textAlignment = .left
         label.text = text

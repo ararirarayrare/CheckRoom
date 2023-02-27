@@ -22,7 +22,7 @@ class TOLooksCollectionViewCell: UICollectionViewCell {
             outfitView.layer.cornerRadius = 20
             outfitView.layer.shadowColor = UIColor.black.cgColor
             outfitView.layer.shadowRadius = 8
-            outfitView.layer.shadowOpacity = 0.2
+            outfitView.layer.shadowOpacity = 0.1
             outfitView.layer.shadowOffset.height = 2
             
             outfitView.translatesAutoresizingMaskIntoConstraints = false

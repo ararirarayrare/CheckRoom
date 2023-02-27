@@ -51,7 +51,7 @@ class ELAccessoryViewController: ViewController {
         collectionView = AccessoryCollectionView(accessories: accessories)
         
         addButton.backgroundColor = .black
-        addButton.titleLabel?.font = .boldSystemFont(ofSize: 22)
+        addButton.titleLabel?.font = .semiBoldPoppinsFont(ofSize: 20)
         addButton.setTitleColor(.white, for: .normal)
         addButton.setTitle("Add", for: .normal)
         addButton.layer.cornerRadius = 28
@@ -128,7 +128,7 @@ class ELAccessoryViewController: ViewController {
         let addItemButton = UIButton(type: .system)
         addItemButton.translatesAutoresizingMaskIntoConstraints = false
         addItemButton.backgroundColor = .black
-        addItemButton.titleLabel?.font = .boldSystemFont(ofSize: 22)
+        addItemButton.titleLabel?.font = .semiBoldPoppinsFont(ofSize: 20)
         addItemButton.setTitleColor(.white, for: .normal)
         addItemButton.setTitle("Create a look", for: .normal)
         addItemButton.layer.cornerRadius = 28

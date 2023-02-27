@@ -16,7 +16,7 @@ class ELOutwearViewController: ViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         
         button.backgroundColor = .black
-        button.titleLabel?.font = .boldSystemFont(ofSize: 22)
+        button.titleLabel?.font = .semiBoldPoppinsFont(ofSize: 20)
         button.setTitleColor(.white, for: .normal)
         button.setTitle("Save", for: .normal)
         
@@ -39,6 +39,19 @@ class ELOutwearViewController: ViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        guard let collectionView = collectionView else {
+            return
+        }
+        
+        collectionView.itemSize = CGSize(width: collectionView.bounds.width * 0.65,
+                                            height: collectionView.bounds.height)
+        collectionView.spacing = 0
+        collectionView.itemsAligment = .top
+    }
+    
     override func setup() {
         super.setup()
         
@@ -52,13 +65,7 @@ class ELOutwearViewController: ViewController {
             return
         }
         
-        collectionView = ItemsCollectionView(
-            items: outwearItems
-//            frame: CGRect(x: 0,
-//                          y: 140,
-//                          width: view.bounds.width,
-//                          height: view.bounds.width * 1.25)
-        )
+        collectionView = ItemsCollectionView(items: outwearItems)
         
         saveButton.addTarget(self, action: #selector(saveTapped), for: .touchUpInside)
     }
@@ -70,6 +77,8 @@ class ELOutwearViewController: ViewController {
             return
         }
         
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        
         view.addSubview(collectionView)
         view.addSubview(saveButton)
         
@@ -78,7 +87,15 @@ class ELOutwearViewController: ViewController {
                                                constant: -32),
             saveButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             saveButton.widthAnchor.constraint(equalToConstant: 140),
-            saveButton.heightAnchor.constraint(equalToConstant: 56)
+            saveButton.heightAnchor.constraint(equalToConstant: 56),
+            
+            
+            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,
+                                               constant: 32),
+            collectionView.bottomAnchor.constraint(equalTo: saveButton.topAnchor,
+                                                   constant: -32)
         ])
     }
     
@@ -111,7 +128,7 @@ class ELOutwearViewController: ViewController {
         let addItemButton = UIButton(type: .system)
         addItemButton.translatesAutoresizingMaskIntoConstraints = false
         addItemButton.backgroundColor = .black
-        addItemButton.titleLabel?.font = .boldSystemFont(ofSize: 22)
+        addItemButton.titleLabel?.font = .semiBoldPoppinsFont(ofSize: 20)
         addItemButton.setTitleColor(.white, for: .normal)
         addItemButton.setTitle("Add item", for: .normal)
         addItemButton.layer.cornerRadius = 28

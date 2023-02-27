@@ -109,7 +109,7 @@ class MainHeaderViewButton: UIView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         
-        label.font = .systemFont(ofSize: 18)
+        label.font = .poppinsFont(ofSize: 16)
         label.textAlignment = .center
         label.textColor = UIColor(red: 134/255, green: 134/255, blue: 134/255, alpha: 1.0)
         

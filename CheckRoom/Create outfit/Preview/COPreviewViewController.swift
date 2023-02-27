@@ -9,20 +9,6 @@ import UIKit
 
 class COPreviewViewController: ViewController {
     
-//    let imageView: UIImageView = {
-//        let imageView = UIImageView()
-//        imageView.translatesAutoresizingMaskIntoConstraints = false
-//
-//        imageView.layer.cornerRadius = 20
-//
-//        imageView.layer.shadowColor = UIColor.black.cgColor
-//        imageView.layer.shadowRadius = 20
-//        imageView.layer.shadowOpacity = 0.2
-//        imageView.layer.shadowOffset.height = 2
-//
-//        return imageView
-//    }()
-    
     private let outfitView: OutfitView
     
     private let addItemsButton: UIButton = {
@@ -30,7 +16,7 @@ class COPreviewViewController: ViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         
         button.backgroundColor = .clear
-        button.titleLabel?.font = .boldSystemFont(ofSize: 22)
+        button.titleLabel?.font = .semiBoldPoppinsFont(ofSize: 20)
         button.setTitleColor(.black, for: .normal)
         button.setTitle("Add items", for: .normal)
         
@@ -44,7 +30,7 @@ class COPreviewViewController: ViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         
         button.backgroundColor = .black
-        button.titleLabel?.font = .boldSystemFont(ofSize: 22)
+        button.titleLabel?.font = .semiBoldPoppinsFont(ofSize: 20)
         button.setTitleColor(.white, for: .normal)
         button.setTitle("Save", for: .normal)
         
@@ -84,15 +70,7 @@ class COPreviewViewController: ViewController {
         outfitView.layer.shadowRadius = 20
         outfitView.layer.shadowOpacity = 0.2
         outfitView.layer.shadowOffset.height = 2
-        
-//        outfitView.topImageView.image = outfit.topWearImage
-//        outfitView.bottomImageView.image = outfit.bottomWearImage
-//        outfitView.shoesImageView.image = outfit.shoesImage
-        
-//        outfitView.topImageView.image = outfit.topWear.image
-//        outfitView.bottomImageView.image = outfit.bottomWear.image
-//        outfitView.shoesImageView.image = outfit.shoes.image
-        
+
     }
     
     override func layout() {

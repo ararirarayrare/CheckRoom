@@ -189,7 +189,7 @@ class COItemsViewController: ViewController {
         let addItemButton = UIButton(type: .system)
         addItemButton.translatesAutoresizingMaskIntoConstraints = false
         addItemButton.backgroundColor = .black
-        addItemButton.titleLabel?.font = .boldSystemFont(ofSize: 22)
+        addItemButton.titleLabel?.font = .semiBoldPoppinsFont(ofSize: 20)
         addItemButton.setTitleColor(.white, for: .normal)
         addItemButton.setTitle("Add item", for: .normal)
         addItemButton.layer.cornerRadius = 28

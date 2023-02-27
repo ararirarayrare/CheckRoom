@@ -14,7 +14,7 @@ class ELPreviewViewController: ViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         
         button.backgroundColor = .clear
-        button.titleLabel?.font = .boldSystemFont(ofSize: 22)
+        button.titleLabel?.font = .semiBoldPoppinsFont(ofSize: 20)
         button.setTitleColor(.black, for: .normal)
         button.setTitle("Add items", for: .normal)
         
@@ -28,7 +28,7 @@ class ELPreviewViewController: ViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         
         button.backgroundColor = .black
-        button.titleLabel?.font = .boldSystemFont(ofSize: 22)
+        button.titleLabel?.font = .semiBoldPoppinsFont(ofSize: 20)
         button.setTitleColor(.white, for: .normal)
         button.setTitle("Save", for: .normal)
         

@@ -22,7 +22,7 @@ class SuccessViewController: ViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         
-        label.font = .systemFont(ofSize: 20)
+        label.font = .poppinsFont(ofSize: 18)
         label.textAlignment = .center
         label.textColor = UIColor(red: 82/255, green: 82/255, blue: 82/255, alpha: 1.0)
         label.numberOfLines = 0
@@ -37,7 +37,7 @@ class SuccessViewController: ViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         
         button.backgroundColor = .black
-        button.titleLabel?.font = .boldSystemFont(ofSize: 22)
+        button.titleLabel?.font = .semiBoldPoppinsFont(ofSize: 20)
         button.titleLabel?.adjustsFontSizeToFitWidth = true
         button.setTitleColor(.white, for: .normal)
         button.setTitle("Back to main screen", for: .normal)
@@ -90,10 +90,10 @@ class SuccessViewController: ViewController {
             
             titleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor,
                                             constant: 32),
-            titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor,
-                                                constant: 32),
-            titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor,
-                                                 constant: -32),
+            titleLabel.leadingAnchor.constraint(equalTo: imageView.leadingAnchor,
+                                               constant: -12),
+            titleLabel.trailingAnchor.constraint(equalTo: imageView.trailingAnchor,
+                                                constant: 12),
             
             
             menuButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor,

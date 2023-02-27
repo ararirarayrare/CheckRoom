@@ -41,7 +41,7 @@ class AISeasonViewController: ViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         
         button.backgroundColor = .black
-        button.titleLabel?.font = .boldSystemFont(ofSize: 22)
+        button.titleLabel?.font = .semiBoldPoppinsFont(ofSize: 20)
         button.setTitleColor(.white, for: .normal)
         button.setTitle("Save", for: .normal)
         
@@ -95,13 +95,7 @@ class AISeasonViewController: ViewController {
                     newWear.season = season
                     DataManager.shared.save(wear: newWear)
                 }
-                
-//                let newWear = wear.getCopy()
-//                newWear.season = season
-//                DataManager.shared.save(wear: newWear)
-//
-//                print(DataManager.shared.getWear(type: Shoes.self, forSeason: season).count)
-                
+
                 group.leave()
             }
             
@@ -110,15 +104,7 @@ class AISeasonViewController: ViewController {
         group.notify(queue: .main) {
             self.coordinator.eventOccured(.saved)
         }
-        
-//        if let season = Season(rawValue: collectionView.selectedItems.first!) {
-//
-//            wear.season = season
-//
-//            DataManager.shared.save(wear: wear)
-//
-//            coordinator.eventOccured(.saved)
-//        }
+
     }
     
     override func setup() {

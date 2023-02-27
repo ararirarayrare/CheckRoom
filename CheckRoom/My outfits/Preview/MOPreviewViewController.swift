@@ -13,7 +13,7 @@ class MOPreviewViewController: ViewController {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         
-        button.titleLabel?.font = .boldSystemFont(ofSize: 22)
+        button.titleLabel?.font = .semiBoldPoppinsFont(ofSize: 20)
         button.setTitleColor(.black, for: .normal)
         button.setTitle("Edit look", for: .normal)
                 
@@ -24,7 +24,7 @@ class MOPreviewViewController: ViewController {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         
-        button.titleLabel?.font = .boldSystemFont(ofSize: 22)
+        button.titleLabel?.font = .semiBoldPoppinsFont(ofSize: 20)
         button.setTitleColor(.black, for: .normal)
         button.setTitle("Change season", for: .normal)
                 

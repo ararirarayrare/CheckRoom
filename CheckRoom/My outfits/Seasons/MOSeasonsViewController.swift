@@ -67,7 +67,7 @@ class MOSeasonsViewController: ViewController {
             saveButton = UIButton()
             saveButton?.translatesAutoresizingMaskIntoConstraints = false
             saveButton?.backgroundColor = .black
-            saveButton?.titleLabel?.font = .boldSystemFont(ofSize: 22)
+            saveButton?.titleLabel?.font = .semiBoldPoppinsFont(ofSize: 20)
             saveButton?.setTitleColor(.white, for: .normal)
             saveButton?.setTitle("Save", for: .normal)
             saveButton?.layer.cornerRadius = 28

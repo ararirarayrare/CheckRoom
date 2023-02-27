@@ -9,6 +9,9 @@ import UIKit
 
 class MainViewController: ViewController {
     
+    private var activityIndicator: UIActivityIndicatorView? = UIActivityIndicatorView(style: .large)
+    
+    private let refreshControl = UIRefreshControl()
     
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -68,23 +71,12 @@ class MainViewController: ViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        if let savedOutfits = DataManager.shared.savedOutfits() {
-            
-            print("SavED :",savedOutfits.count)
-            
-            let outfitsView = MainOutfitsView()
-            
-            if let today = savedOutfits.first(where: { Date() > $0.key })?.value {
-                outfitsView.outfitViewToday = today.createPreview()
-            }
-            
-            if let tomorrow = savedOutfits.first(where: { $0.key > Date() })?.value {
-                outfitsView.outfitViewTomorrow = tomorrow.createPreview()
-            }
-            
-            self.outfitsView = outfitsView
-        }
+        checkSavedOutfits()
+        
+        activityIndicator?.removeFromSuperview()
+        activityIndicator = nil
     }
+    
 
     override func setup() {
         super.setup()
@@ -93,6 +85,11 @@ class MainViewController: ViewController {
         
         headerView.coordinator = self.coordinator
         
+        activityIndicator?.color = .darkGray
+        activityIndicator?.startAnimating()
+        
+        refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
+        scrollView.refreshControl = refreshControl
     }
     
     override func layout() {
@@ -124,7 +121,7 @@ class MainViewController: ViewController {
             
             
             logoImageView.topAnchor.constraint(equalTo: containerView.safeAreaLayoutGuide.topAnchor,
-                                               constant: 24),
+                                               constant: 0),
             logoImageView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
             logoImageView.widthAnchor.constraint(equalToConstant: 80),
             logoImageView.heightAnchor.constraint(equalTo: logoImageView.widthAnchor,
@@ -151,6 +148,42 @@ class MainViewController: ViewController {
             contentViewHeight
         ])
         
+        
+        if let activityIndicator = self.activityIndicator {
+            activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+            
+            containerView.addSubview(activityIndicator)
+            
+            NSLayoutConstraint.activate([
+                activityIndicator.topAnchor.constraint(equalTo: headerView.bottomAnchor,
+                                                       constant: 72),
+                activityIndicator.centerXAnchor.constraint(equalTo: containerView.centerXAnchor)
+            ])
+        }
     }
     
+    @objc
+    private func refresh(_ sender: UIRefreshControl) {
+        checkSavedOutfits()
+        sender.endRefreshing()
+    }
+    
+    private func checkSavedOutfits() {
+        if let savedOutfits = DataManager.shared.savedOutfits() {
+            
+            print("SavED :",savedOutfits.count)
+            
+            let outfitsView = MainOutfitsView()
+            
+            if let today = savedOutfits.first(where: { Date() > $0.key })?.value {
+                outfitsView.outfitViewToday = today.createPreview()
+            }
+            
+            if let tomorrow = savedOutfits.first(where: { $0.key > Date() })?.value {
+                outfitsView.outfitViewTomorrow = tomorrow.createPreview()
+            }
+            
+            self.outfitsView = outfitsView
+        }
+    }
 }

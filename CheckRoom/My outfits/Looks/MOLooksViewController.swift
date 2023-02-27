@@ -155,7 +155,7 @@ class MOLooksViewController: ViewController {
         let createLookButton = UIButton(type: .system)
         createLookButton.translatesAutoresizingMaskIntoConstraints = false
         createLookButton.backgroundColor = .black
-        createLookButton.titleLabel?.font = .boldSystemFont(ofSize: 22)
+        createLookButton.titleLabel?.font = .semiBoldPoppinsFont(ofSize: 20)
         createLookButton.setTitleColor(.white, for: .normal)
         createLookButton.setTitle("Create a look", for: .normal)
         createLookButton.layer.cornerRadius = 28
@@ -180,7 +180,7 @@ class MOLooksViewController: ViewController {
             createLookButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor,
                                                constant: -32),
             createLookButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            createLookButton.widthAnchor.constraint(equalToConstant: 180),
+            createLookButton.widthAnchor.constraint(equalToConstant: 200),
             createLookButton.heightAnchor.constraint(equalToConstant: 56)
         ])
     }

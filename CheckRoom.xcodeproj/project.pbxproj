@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		042FD66029AB70B8003CE55B /* MainOutfitsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042FD65F29AB70B8003CE55B /* MainOutfitsView.swift */; };
+		042FD66229ACD465003CE55B /* Poppins-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 042FD66129ACD465003CE55B /* Poppins-Medium.ttf */; };
+		042FD66429ACD4EC003CE55B /* Poppins-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 042FD66329ACD4EC003CE55B /* Poppins-SemiBold.ttf */; };
 		04309BEA296F353400A439D4 /* TOLooksCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04309BE9296F353400A439D4 /* TOLooksCollectionView.swift */; };
 		04309C1429733BF700A439D4 /* TOLooksPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04309C1329733BF700A439D4 /* TOLooksPreviewViewController.swift */; };
 		04309C1629733C8200A439D4 /* TOLookImageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04309C1529733C8200A439D4 /* TOLookImageModel.swift */; };
@@ -89,6 +91,8 @@
 
 /* Begin PBXFileReference section */
 		042FD65F29AB70B8003CE55B /* MainOutfitsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainOutfitsView.swift; sourceTree = "<group>"; };
+		042FD66129ACD465003CE55B /* Poppins-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Medium.ttf"; sourceTree = "<group>"; };
+		042FD66329ACD4EC003CE55B /* Poppins-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-SemiBold.ttf"; sourceTree = "<group>"; };
 		04309BE9296F353400A439D4 /* TOLooksCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TOLooksCollectionView.swift; sourceTree = "<group>"; };
 		04309C1329733BF700A439D4 /* TOLooksPreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TOLooksPreviewViewController.swift; sourceTree = "<group>"; };
 		04309C1529733C8200A439D4 /* TOLookImageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TOLookImageModel.swift; sourceTree = "<group>"; };
@@ -337,7 +341,9 @@
 		0455BE1E29A11BDF00FBBD40 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				042FD66129ACD465003CE55B /* Poppins-Medium.ttf */,
 				0455BE1F29A11BFA00FBBD40 /* Poppins-Regular.ttf */,
+				042FD66329ACD4EC003CE55B /* Poppins-SemiBold.ttf */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -676,7 +682,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				042FD66429ACD4EC003CE55B /* Poppins-SemiBold.ttf in Resources */,
 				0455BE2029A11BFA00FBBD40 /* Poppins-Regular.ttf in Resources */,
+				042FD66229ACD465003CE55B /* Poppins-Medium.ttf in Resources */,
 				04E6B827296C539F00E50AA8 /* LaunchScreen.storyboard in Resources */,
 				04E6B824296C539F00E50AA8 /* Assets.xcassets in Resources */,
 			);

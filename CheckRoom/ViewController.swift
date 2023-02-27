@@ -52,6 +52,10 @@ class NavigationController: UINavigationController {
         navigationBar.standardAppearance = appearance
         navigationBar.scrollEdgeAppearance = appearance
         
+        appearance.largeTitleTextAttributes = [
+            .font : UIFont.semiBoldPoppinsFont(ofSize: 32) ?? .boldSystemFont(ofSize: 32)
+        ]
+        
         navigationBar.barTintColor = .black
         navigationBar.tintColor = .black
         

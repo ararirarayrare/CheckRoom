@@ -23,7 +23,7 @@ class AIPreviewViewController: ViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         
         button.backgroundColor = .black
-        button.titleLabel?.font = .boldSystemFont(ofSize: 22)
+        button.titleLabel?.font = .semiBoldPoppinsFont(ofSize: 20)
         button.setTitleColor(.white, for: .normal)
         button.setTitle("Save", for: .normal)
         
@@ -149,7 +149,7 @@ class AIPreviewViewController: ViewController {
         let openGalleryButton = UIButton(type: .system)
         openGalleryButton.translatesAutoresizingMaskIntoConstraints = false
         openGalleryButton.backgroundColor = .black
-        openGalleryButton.titleLabel?.font = .boldSystemFont(ofSize: 22)
+        openGalleryButton.titleLabel?.font = .semiBoldPoppinsFont(ofSize: 20)
         openGalleryButton.setTitleColor(.white, for: .normal)
         openGalleryButton.setTitle("Open Gallery", for: .normal)
         openGalleryButton.layer.cornerRadius = 28
@@ -171,9 +171,9 @@ class AIPreviewViewController: ViewController {
         
         NSLayoutConstraint.activate([
             label.leadingAnchor.constraint(equalTo: view.leadingAnchor,
-                                           constant: 48),
+                                           constant: 64),
             label.trailingAnchor.constraint(equalTo: view.trailingAnchor,
-                                            constant: -48),
+                                            constant: -64),
             label.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,
                                        constant: 40),
             

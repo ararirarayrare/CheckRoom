@@ -50,7 +50,7 @@ class AICategoryViewController: ViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         
         button.backgroundColor = .black
-        button.titleLabel?.font = .boldSystemFont(ofSize: 22)
+        button.titleLabel?.font = .semiBoldPoppinsFont(ofSize: 20)
         button.setTitleColor(.white, for: .normal)
         button.setTitle("Save", for: .normal)
         
@@ -76,7 +76,7 @@ class AICategoryViewController: ViewController {
     @objc
     private func saveTapped() {
         //MARK: - REDO!!!
-        switch collectionView.selectedItems.first! {
+        switch collectionView.selectedItems.first {
         case 0:
             coordinator.eventOccured(.subcategoryTop(image: self.image))
         case 1:
