@@ -52,7 +52,9 @@ class MainViewController: ViewController {
                 outfitsView.topAnchor.constraint(equalTo: headerView.bottomAnchor,
                                                  constant: 24),
                 outfitsView.heightAnchor.constraint(equalTo: outfitsView.widthAnchor,
-                                                    multiplier: 0.7)
+                                                    multiplier: 0.7),
+                outfitsView.bottomAnchor.constraint(lessThanOrEqualTo: containerView.bottomAnchor,
+                                                    constant: -40)
             ])
         }
     }
@@ -88,6 +90,7 @@ class MainViewController: ViewController {
         activityIndicator?.color = .darkGray
         activityIndicator?.startAnimating()
         
+        refreshControl.tintColor = .clear
         refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
         scrollView.refreshControl = refreshControl
     }
@@ -133,7 +136,9 @@ class MainViewController: ViewController {
             headerView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor,
                                                  constant: -20),
             headerView.topAnchor.constraint(equalTo: logoImageView.bottomAnchor,
-                                            constant: 32)
+                                            constant: 32),
+            headerView.bottomAnchor.constraint(lessThanOrEqualTo: containerView.bottomAnchor,
+                                               constant: -40)
         ])
         
         let contentViewCenterY = containerView.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor)
@@ -165,7 +170,22 @@ class MainViewController: ViewController {
     @objc
     private func refresh(_ sender: UIRefreshControl) {
         checkSavedOutfits()
-        sender.endRefreshing()
+
+        
+        UIView.animate(withDuration: 0.2) {
+            self.logoImageView.transform = CGAffineTransform(scaleX: 1.25, y: 1.25)
+        } completion: { _ in
+//            self.scrollView.panGestureRecognizer.state = .ended
+//            sender.endRefreshing()
+            
+            UIView.animate(withDuration: 0.2) {
+                self.logoImageView.transform = .identity
+            } completion: { _ in
+                self.scrollView.panGestureRecognizer.state = .ended
+                sender.endRefreshing()
+            }
+        }
+        
     }
     
     private func checkSavedOutfits() {
@@ -177,10 +197,13 @@ class MainViewController: ViewController {
             
             if let today = savedOutfits.first(where: { Date() > $0.key })?.value {
                 outfitsView.outfitViewToday = today.createPreview()
-            }
-            
-            if let tomorrow = savedOutfits.first(where: { $0.key > Date() })?.value {
+            } else if let tomorrow = savedOutfits.first(where: { $0.key > Date() })?.value {
                 outfitsView.outfitViewTomorrow = tomorrow.createPreview()
+                headerView.tomorrowOutfitView.titleLabel.text = "Choose new outfit for tomorrow"
+            } else {
+                self.outfitsView = nil
+                headerView.tomorrowOutfitView.titleLabel.text = "Choose outfit for tomorrow"
+                return
             }
             
             self.outfitsView = outfitsView

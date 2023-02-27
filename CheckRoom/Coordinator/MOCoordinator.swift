@@ -14,7 +14,7 @@ class MOCoordinator: Coordinator {
              looks(Season),
              chooseSeason,
              changeSeason(forOutfit: Outfit),
-             saved
+             saved, deleted
     }
     
     weak var parent: Coordinator?
@@ -61,6 +61,15 @@ class MOCoordinator: Coordinator {
             
         case .saved:
             let vc = builder.createSuccess(title: "Congratulations, the item was saved!",
+                                           coordinator: self)
+            
+            vc.modalTransitionStyle = .coverVertical
+            vc.modalPresentationStyle = .overFullScreen
+            
+            navigationController?.present(vc, animated: true)
+            
+        case .deleted:
+            let vc = builder.createSuccess(title: "Success!\n The outfit was deleted!",
                                            coordinator: self)
             
             vc.modalTransitionStyle = .coverVertical

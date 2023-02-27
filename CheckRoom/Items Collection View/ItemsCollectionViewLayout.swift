@@ -21,7 +21,7 @@ class ItemsCollectionViewLayout: UICollectionViewFlowLayout {
     }
     
     var sideItemScale: CGFloat = 0.6
-    var sideItemAlpha: CGFloat = 0.7
+    var sideItemAlpha: CGFloat = 0.2
     var sideItemShift: CGFloat = 0.0
     var spacing: CGFloat = 32
     

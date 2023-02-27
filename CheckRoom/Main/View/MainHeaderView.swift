@@ -9,6 +9,11 @@ import UIKit
 
 class MainHeaderView: UIView {
     
+    private(set) var addItemView: MainHeaderViewButton!
+    private(set) var createOutfitView: MainHeaderViewButton!
+    private(set) var myOutfitsView: MainHeaderViewButton!
+    private(set) var tomorrowOutfitView: MainHeaderViewButton!
+    
     private let leftStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -41,30 +46,33 @@ class MainHeaderView: UIView {
     }
     
     private func setup() {
-        let addItemView = MainHeaderViewButton(title: "Add an item",
+        addItemView = MainHeaderViewButton(title: "Add an item",
                                                image: Icons.addItem) { [weak self] in
             
             self?.coordinator?.eventOccured(.addItem)
         }
         
-        let createOutfitView = MainHeaderViewButton(title: "Create outfit",
+        createOutfitView = MainHeaderViewButton(title: "Create outfit",
                                                     image: Icons.createOutfit) { [weak self] in
             
             self?.coordinator?.eventOccured(.createOutfit)
         }
         
-        let myOutfitsView = MainHeaderViewButton(title: "My outfits",
+        myOutfitsView = MainHeaderViewButton(title: "My outfits",
                                                  image: Icons.myOutfits) { [weak self] in
             
             self?.coordinator?.eventOccured(.myOutfits)
         }
-        let tomorrowOutfit = MainHeaderViewButton(title: "Choose outfit for tomorrow",
+        
+        tomorrowOutfitView = MainHeaderViewButton(title: "Choose outfit for tomorrow",
                                                   image: Icons.tomorrowOutfit) { [weak self] in
             
             self?.coordinator?.eventOccured(.tomorrowOutfit)
         }
         
-        [addItemView, createOutfitView, myOutfitsView, tomorrowOutfit].enumerated().forEach { index, view in
+        let views: [MainHeaderViewButton] = [addItemView, createOutfitView, myOutfitsView, tomorrowOutfitView]
+        
+        views.enumerated().forEach { index, view in
             ((index + 1) % 2 == 0 ? rightStackView : leftStackView).addArrangedSubview(view)
         }
     }
@@ -105,7 +113,7 @@ class MainHeaderViewButton: UIView {
         return imageView
     }()
     
-    private let titleLabel: UILabel = {
+    let titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         

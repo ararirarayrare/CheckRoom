@@ -31,6 +31,18 @@ class MOPreviewViewController: ViewController {
         return button
     }()
     
+    private let deleteButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        
+        button.titleLabel?.font = .mediumPoppinsFont(ofSize: 20)
+        let customGray = UIColor(red: 114/255, green: 114/255, blue: 114/255, alpha: 1.0)
+        button.setTitleColor(customGray, for: .normal)
+        button.setTitle("Delete outfit", for: .normal)
+                
+        return button
+    }()
+    
     private let outfitView: OutfitView
     
     let outfit: Outfit
@@ -60,6 +72,7 @@ class MOPreviewViewController: ViewController {
         outfitView.layer.shadowOpacity = 0.2
         outfitView.layer.shadowOffset.height = 2
         
+        deleteButton.addTarget(self, action: #selector(deleteTapped), for: .touchUpInside)
         changeSeasonButton.addTarget(self, action: #selector(changeSeasonTapped), for: .touchUpInside)
         editButton.addTarget(self, action: #selector(editTapped), for: .touchUpInside)
     }
@@ -72,32 +85,39 @@ class MOPreviewViewController: ViewController {
         view.addSubview(outfitView)
         view.addSubview(editButton)
         view.addSubview(changeSeasonButton)
+        view.addSubview(deleteButton)
+        
         
         NSLayoutConstraint.activate([
-            changeSeasonButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor,
-                                                       constant: -32),
-            changeSeasonButton.heightAnchor.constraint(equalToConstant: 56),
-            changeSeasonButton.leadingAnchor.constraint(equalTo: view.leadingAnchor,
-                                                        constant: 32),
-            changeSeasonButton.trailingAnchor.constraint(equalTo: view.trailingAnchor,
-                                                         constant: -32),
+            deleteButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor,
+                                                 constant: -12),
+            deleteButton.heightAnchor.constraint(equalToConstant: 48),
+            deleteButton.widthAnchor.constraint(equalToConstant: 160),
+            deleteButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            
+            
+            changeSeasonButton.bottomAnchor.constraint(equalTo: deleteButton.topAnchor,
+                                                       constant: -12),
+            changeSeasonButton.heightAnchor.constraint(equalToConstant: 48),
+            changeSeasonButton.widthAnchor.constraint(equalToConstant: 200),
+            changeSeasonButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
             
             editButton.bottomAnchor.constraint(equalTo: changeSeasonButton.topAnchor,
                                                constant: -12),
             editButton.widthAnchor.constraint(equalToConstant: 140),
-            editButton.heightAnchor.constraint(equalToConstant: 56),
+            editButton.heightAnchor.constraint(equalToConstant: 48),
             editButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
 
 
             outfitView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,
-                                           constant: 40),
+                                           constant: 20),
             outfitView.leadingAnchor.constraint(equalTo: view.leadingAnchor,
                                                constant: 20),
             outfitView.trailingAnchor.constraint(equalTo: view.trailingAnchor,
                                                 constant: -20),
             outfitView.bottomAnchor.constraint(equalTo: editButton.topAnchor,
-                                              constant: -32)
+                                              constant: -20)
         ])
     }
     
@@ -109,6 +129,27 @@ class MOPreviewViewController: ViewController {
     @objc
     private func changeSeasonTapped() {
         coordinator.eventOccured(.changeSeason(forOutfit: outfit))
+    }
+    
+    @objc
+    private func deleteTapped() {
+        
+        let alert = UIAlertController(title: "Warning!",
+                                      message: "Are you sure you want to delete this outfit?",
+                                      preferredStyle: .alert)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        
+        let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { _ in
+            DataManager.shared.deleteOutfit(self.outfit)
+            self.coordinator.eventOccured(.deleted)
+        }
+        
+        alert.addAction(cancelAction)
+        alert.addAction(deleteAction)
+        
+        present(alert, animated: true)
+        
     }
 }
 
