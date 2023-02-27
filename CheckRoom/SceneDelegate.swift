@@ -19,10 +19,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.overrideUserInterfaceStyle = .light
         window?.makeKeyAndVisible()
         
-        let builder = MainBuilder()
-        let coordinator = MainCoordinator(builder: builder,
-                                          window: window)
-        coordinator.start()
+        
+        let loader = LoaderViewController { [weak self] in
+            let builder = MainBuilder()
+            let coordinator = MainCoordinator(builder: builder,
+                                              window: self?.window)
+            coordinator.start()
+        }
+        
+        window?.rootViewController = loader
     }
 }
 

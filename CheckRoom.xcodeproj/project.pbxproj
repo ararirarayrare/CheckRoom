@@ -10,6 +10,7 @@
 		042FD66029AB70B8003CE55B /* MainOutfitsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042FD65F29AB70B8003CE55B /* MainOutfitsView.swift */; };
 		042FD66229ACD465003CE55B /* Poppins-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 042FD66129ACD465003CE55B /* Poppins-Medium.ttf */; };
 		042FD66429ACD4EC003CE55B /* Poppins-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 042FD66329ACD4EC003CE55B /* Poppins-SemiBold.ttf */; };
+		042FD66729ACEDD5003CE55B /* LoaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042FD66629ACEDD5003CE55B /* LoaderViewController.swift */; };
 		04309BEA296F353400A439D4 /* TOLooksCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04309BE9296F353400A439D4 /* TOLooksCollectionView.swift */; };
 		04309C1429733BF700A439D4 /* TOLooksPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04309C1329733BF700A439D4 /* TOLooksPreviewViewController.swift */; };
 		04309C1629733C8200A439D4 /* TOLookImageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04309C1529733C8200A439D4 /* TOLookImageModel.swift */; };
@@ -93,6 +94,7 @@
 		042FD65F29AB70B8003CE55B /* MainOutfitsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainOutfitsView.swift; sourceTree = "<group>"; };
 		042FD66129ACD465003CE55B /* Poppins-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Medium.ttf"; sourceTree = "<group>"; };
 		042FD66329ACD4EC003CE55B /* Poppins-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-SemiBold.ttf"; sourceTree = "<group>"; };
+		042FD66629ACEDD5003CE55B /* LoaderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoaderViewController.swift; sourceTree = "<group>"; };
 		04309BE9296F353400A439D4 /* TOLooksCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TOLooksCollectionView.swift; sourceTree = "<group>"; };
 		04309C1329733BF700A439D4 /* TOLooksPreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TOLooksPreviewViewController.swift; sourceTree = "<group>"; };
 		04309C1529733C8200A439D4 /* TOLookImageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TOLookImageModel.swift; sourceTree = "<group>"; };
@@ -188,6 +190,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		042FD66529ACEDC2003CE55B /* Loader */ = {
+			isa = PBXGroup;
+			children = (
+				042FD66629ACEDD5003CE55B /* LoaderViewController.swift */,
+			);
+			path = Loader;
+			sourceTree = "<group>";
+		};
 		04309C1729733C8700A439D4 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -540,6 +550,7 @@
 		04E6B819296C539C00E50AA8 /* CheckRoom */ = {
 			isa = PBXGroup;
 			children = (
+				042FD66529ACEDC2003CE55B /* Loader */,
 				04980073297B357500069BEA /* Items Collection View */,
 				04E6B81A296C539C00E50AA8 /* AppDelegate.swift */,
 				04E6B81C296C539C00E50AA8 /* SceneDelegate.swift */,
@@ -764,6 +775,7 @@
 				0455BE04299A862700FBBD40 /* ELAccessoryViewController.swift in Sources */,
 				0443945C297B2D2000FAFD09 /* ELBuilder.swift in Sources */,
 				04C9C3C3296DEA7D005C7003 /* SuccessViewController.swift in Sources */,
+				042FD66729ACEDD5003CE55B /* LoaderViewController.swift in Sources */,
 				04E6B81B296C539C00E50AA8 /* AppDelegate.swift in Sources */,
 				042FD66029AB70B8003CE55B /* MainOutfitsView.swift in Sources */,
 				04C9C3AA296C7E0C005C7003 /* ViewController.swift in Sources */,
