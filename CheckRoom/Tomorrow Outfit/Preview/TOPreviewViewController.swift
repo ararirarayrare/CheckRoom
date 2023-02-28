@@ -23,14 +23,14 @@ class TOPreviewViewController: ViewController {
         return button
     }()
     
-    private let saveButton: UIButton = {
+    private let chooseButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         
         button.backgroundColor = .black
         button.titleLabel?.font = .semiBoldPoppinsFont(ofSize: 20)
         button.setTitleColor(.white, for: .normal)
-        button.setTitle("Save", for: .normal)
+        button.setTitle("Choose", for: .normal)
         
         button.layer.cornerRadius = 28
         
@@ -66,7 +66,7 @@ class TOPreviewViewController: ViewController {
         outfitView.layer.shadowOpacity = 0.2
         outfitView.layer.shadowOffset.height = 2
         
-        saveButton.addTarget(self, action: #selector(saveTapped), for: .touchUpInside)
+        chooseButton.addTarget(self, action: #selector(chooseTapped), for: .touchUpInside)
         editButton.addTarget(self, action: #selector(editTapped), for: .touchUpInside)
     }
     
@@ -77,17 +77,17 @@ class TOPreviewViewController: ViewController {
         
         view.addSubview(outfitView)
         view.addSubview(editButton)
-        view.addSubview(saveButton)
+        view.addSubview(chooseButton)
         
         NSLayoutConstraint.activate([
-            saveButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor,
+            chooseButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor,
                                                constant: -32),
-            saveButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            saveButton.widthAnchor.constraint(equalToConstant: 140),
-            saveButton.heightAnchor.constraint(equalToConstant: 56),
+            chooseButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            chooseButton.widthAnchor.constraint(equalToConstant: 180),
+            chooseButton.heightAnchor.constraint(equalToConstant: 56),
             
             
-            editButton.bottomAnchor.constraint(equalTo: saveButton.topAnchor,
+            editButton.bottomAnchor.constraint(equalTo: chooseButton.topAnchor,
                                                constant: -16),
             editButton.widthAnchor.constraint(equalToConstant: 140),
             editButton.heightAnchor.constraint(equalToConstant: 56),
@@ -111,7 +111,7 @@ class TOPreviewViewController: ViewController {
     }
     
     @objc
-    private func saveTapped() {
+    private func chooseTapped() {
         //MARK: - TODO !!! what after????
                 
         DataManager.shared.setTomorrowOutfit(outfit)
