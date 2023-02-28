@@ -128,7 +128,19 @@ class MOSeasonsViewController: ViewController {
             outfit.season = newSeason
         }
         
-        coordinator.eventOccured(.saved)
+        let alert = UIAlertController(title: "Attention!",
+                                      message: "All items from this outfit were moved to a new season!",
+                                      preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(title: "OK", style: .default) { _ in
+            self.coordinator.eventOccured(.saved)
+        }
+        
+        alert.addAction(okAction)
+        
+        present(alert, animated: true)
+        
+//        coordinator.eventOccured(.saved)
     }
     
 }

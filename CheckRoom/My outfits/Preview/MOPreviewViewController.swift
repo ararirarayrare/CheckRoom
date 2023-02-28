@@ -60,6 +60,27 @@ class MOPreviewViewController: ViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if !DataManager.shared.containsOutfit(outfit) {
+            
+            let alert = UIAlertController(title: "Something went wrong..",
+                                          message: nil,
+                                          preferredStyle: .alert)
+            
+            let okAction = UIAlertAction(title: "OK", style: .cancel) { _ in
+                self.coordinator.pop()
+            }
+            
+            alert.addAction(okAction)
+            
+            self.present(alert, animated: true)
+            
+        }
+        
+    }
+    
     override func setup() {
         super.setup()
         

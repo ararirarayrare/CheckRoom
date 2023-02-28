@@ -27,6 +27,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             coordinator.start()
         }
         
+    
+        
         window?.rootViewController = loader
     }
 }

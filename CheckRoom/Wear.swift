@@ -51,6 +51,18 @@ class Wear: Object {
     fileprivate func setup() {
         pthread_rwlock_init(&lock, &lockAttributes)
     }
+    
+    @objc dynamic fileprivate(set) var key: String! = ""
+    
+    override init() {
+        super.init()
+        
+        self.key = .randomString(length: 64)
+    }
+    
+    func isEqual(toWear wear: Wear?) -> Bool {
+        return (self.key == wear?.key && self.season == wear?.season && self.image?.pngData() == wear?.image?.pngData())
+    }
 }
 
 class TopWear: Wear {
@@ -58,6 +70,7 @@ class TopWear: Wear {
     func getCopy() -> TopWear {
         let copy = TopWear(image: self.image, category: self.category)
         if let season = self.season { copy.season = season }
+        copy.key = key
         return copy
     }
     
@@ -86,7 +99,9 @@ class TopWear: Wear {
         
         self.category = category
         self.image = image
-
+        
+//        self.key = .randomString(length: 64)
+        
 //        self.season = season
     }
 }
@@ -98,11 +113,14 @@ class BottomWear: Wear {
         self.init()
         
         self.image = image
+        
+//        self.key = .randomString(length: 64)
     }
 
     func getCopy() -> BottomWear {
         let copy = BottomWear(image: self.image)
         if let season = self.season { copy.season = season }
+        copy.key = key
         return copy
     }
 }
@@ -113,11 +131,14 @@ class Shoes: Wear {
         self.init()
         
         self.image = image
+        
+//        self.key = .randomString(length: 64)
     }
     
     func getCopy() -> Shoes {
         let copy = Shoes(image: self.image)
         if let season = self.season { copy.season = season }
+        copy.key = key
         return copy
     }
 }
@@ -127,6 +148,7 @@ class Accessory: Wear {
     func getCopy() -> Accessory {
         let copy = Accessory(image: self.image, category: self.category)
         if let season = self.season { copy.season = season }
+        copy.key = key
         return copy
     }
     
@@ -157,6 +179,8 @@ class Accessory: Wear {
         
         self.category = category
         self.image = image
+        
+//        self.key = .randomString(length: 64)
 //        self.season = season
     }
     

@@ -9,23 +9,20 @@ import UIKit
 import RealmSwift
 
 class DataManager {
-
     
     static let shared = DataManager()
     
     private let realm: Realm! = try! Realm()
     
-    func contains(_ object: Object) -> Bool {
-        realm.beginWrite()
-        defer {
-            try! realm.commitWrite()
-        }
+    func containsOutfit(_ outfit: Outfit) -> Bool {
+        let outfits = getOutfits(forSeason: outfit.season)
         
-        return realm.objects(type(of: object)).contains(where: { $0 == object })
+        return outfits.contains(where: { outfit.isEqual(toOutfit: $0) })
     }
     
+    
     func save(wear: Wear) {
-        try! realm.write {
+        try? realm.write {
             self.realm?.add(wear)
         }
     }
@@ -37,14 +34,21 @@ class DataManager {
         
         var array = [T]()
         objects?.filter { $0.season == season }
-        //            .compactMap { $0 as? T }
-            .forEach { array.append($0) }
+            .forEach { object in
+                if !array.contains(where: { wear in wear.isEqual(toWear: object) }) {
+                    array.append(object)
+                }
+            }
         
         return array
     }
     
+    func deleteWear(_ wear: Wear) {
+        try? realm?.write { self.realm?.delete(wear) }
+    }
+    
     func save(outfit: Outfit) {
-        try! realm.write {
+        try? realm.write {
             self.realm?.add(outfit)
         }
     }
@@ -52,7 +56,7 @@ class DataManager {
     func getOutfits(forSeason season: Season) -> [Outfit] {
         realm?.beginWrite()
         let objects = realm?.objects(Outfit.self)
-        try! realm?.commitWrite()
+        try? realm?.commitWrite()
         
         var array = Array<Outfit>()
         
@@ -63,11 +67,11 @@ class DataManager {
     }
     
     func updateOutfit(_ updateHandler: () -> Void) {
-        try! realm.write { updateHandler() }
+        try? realm.write { updateHandler() }
     }
     
     func deleteOutfit(_ outfit: Outfit) {
-        try! realm.write { self.realm.delete(outfit) }
+        try? realm.write { self.realm.delete(outfit) }
     }
     
     func savedOutfits() -> [Date : Outfit]? {
@@ -81,7 +85,6 @@ class DataManager {
                 realm?.beginWrite()
                 let outfit = realm?.objects(Outfit.self).first(where: { $0.key == key })
                 
-                print(realm!.objects(Outfit.self).filter({ $0.key == key }).count)
             
                 try? realm.commitWrite()
                 return outfit

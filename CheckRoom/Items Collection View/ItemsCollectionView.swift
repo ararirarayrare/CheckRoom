@@ -10,9 +10,9 @@ class ItemsCollectionView: UICollectionView {
     
     var selectedItem: Wear! {
 //        return items.isEmpty ? nil : items[selectedIndex]
-        let image = (visibleCells.first(where: { $0.alpha > 0.5 }) as? COItemsCollectionViewCell)?.imageView.image
-        
-        return items.first(where: { $0.image?.pngData() == image?.pngData() }) ?? items[selectedIndex]
+        let wear = (visibleCells.first(where: { $0.alpha > 0.6 }) as? ItemsCollectionViewCell)?.wear
+        return wear
+//        return items.first(where: { $0.image?.pngData() == image?.pngData() }) ?? items[selectedIndex]
     }
     
     enum ItemsAligment {
@@ -43,7 +43,7 @@ class ItemsCollectionView: UICollectionView {
     
     var possibleHeightDelta: CGFloat = 16.0
     
-    let items: [Wear]
+    private(set) var items: [Wear]
     
     init(items: [Wear]) {
         self.items = items
@@ -70,7 +70,7 @@ class ItemsCollectionView: UICollectionView {
         
         backgroundColor = .clear
         
-        let cellClass = COItemsCollectionViewCell.self
+        let cellClass = ItemsCollectionViewCell.self
         let identifier = String(describing: cellClass)
         
         register(cellClass, forCellWithReuseIdentifier: identifier)
@@ -93,10 +93,19 @@ class ItemsCollectionView: UICollectionView {
             
             isScrolling = false
         }
+        
     }
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         if !isScrolling { isScrolling = true }
+    }
+    
+    override func deleteItems(at indexPaths: [IndexPath]) {
+        indexPaths.forEach { self.items.remove(at: $0.item) }
+        
+        super.deleteItems(at: indexPaths)
+        
+        reloadData()
     }
     
     required init?(coder: NSCoder) {
@@ -113,17 +122,20 @@ extension ItemsCollectionView: UICollectionViewDelegate, UICollectionViewDataSou
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let identifier = String(describing: COItemsCollectionViewCell.self)
+        let identifier = String(describing: ItemsCollectionViewCell.self)
         
-        guard let cell = dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as? COItemsCollectionViewCell else {
-            return COItemsCollectionViewCell()
+        guard let cell = dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as? ItemsCollectionViewCell else {
+            return ItemsCollectionViewCell()
         }
         
         cell.imageView.image = items[indexPath.item].image
         cell.itemsAligment = self.itemsAligment
+        cell.wear = items[indexPath.item]
         
         return cell
     }
+    
+
 
 //    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
 //
@@ -137,9 +149,9 @@ extension ItemsCollectionView: UICollectionViewDelegate, UICollectionViewDataSou
 //    }
 }
 
-class COItemsCollectionViewCell: UICollectionViewCell {
+class ItemsCollectionViewCell: UICollectionViewCell {
     
-    fileprivate let imageView: UIImageView = {
+    let imageView: UIImageView = {
         let imageView = UIImageView()
 //        imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleToFill
@@ -148,6 +160,8 @@ class COItemsCollectionViewCell: UICollectionViewCell {
         
         return imageView
     }()
+    
+    fileprivate(set) var wear: Wear!
     
     fileprivate var itemsAligment: ItemsCollectionView.ItemsAligment = .top
     fileprivate var possibleHeightDelta: CGFloat = 20.0
@@ -220,7 +234,7 @@ class COItemsCollectionViewCell: UICollectionViewCell {
     }
     
     private func layout() {
-        addSubview(imageView)
+        contentView.addSubview(imageView)
     }
     
 }

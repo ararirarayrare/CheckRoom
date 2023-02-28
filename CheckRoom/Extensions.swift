@@ -9,6 +9,16 @@ import UIKit
 import CoreGraphics
 import Accelerate
 
+
+extension UIView {
+    func contains(_ point: CGPoint) -> Bool {
+        let xRange = (frame.minX...frame.maxX)
+        let yRange = (frame.minY...frame.maxY)
+        
+        return xRange.contains(point.x) && yRange.contains(point.y)
+    }
+}
+
 extension UIFont {
     
     static func poppinsFont(ofSize size: CGFloat) -> UIFont? {

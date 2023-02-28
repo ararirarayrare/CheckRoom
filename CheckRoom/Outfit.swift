@@ -32,24 +32,7 @@ class Outfit: Object {
     @objc dynamic private var seasonRawValue: String = ""
     
     @objc dynamic private(set) var key: String! = ""
-//    {
-//
-//        if let topData = topWear.image?.pngData(),
-//           let bottomData = bottomWear.image?.pngData(),
-//           let shoesData = shoes.image?.pngData() {
-//
-////            let top = String(topData.replacingOccurrences(of: " ", with: "").dropFirst(topData.count - 16))
-////            let bottom = String(bottomData.replacingOccurrences(of: " ", with: "").dropFirst(bottomData.count - 16))
-////            let shoes = String(shoesData.replacingOccurrences(of: " ", with: "").dropFirst(shoesData.count - 16))
-////
-////            print(top + bottom + shoes + String(describing: season))
-////            return top + bottom + shoes + String(describing: season)
-//
-//            return ""
-//        }
-//
-//        return nil
-//    }
+
     
     var season: Season {
         get {
@@ -73,8 +56,16 @@ class Outfit: Object {
         
         self.season = season
         self.key = .randomString(length: 64)
-                
+        
         pthread_rwlock_init(&lock, &lockAttributes)
+    }
+    
+    func isEqual(toOutfit outfit: Outfit?) -> Bool {
+        let equals = topWear.isEqual(toWear: outfit?.topWear) &&
+        bottomWear.isEqual(toWear: outfit?.bottomWear) &&
+        shoes.isEqual(toWear: outfit?.shoes)
+        
+        return equals
     }
     
     func createPreview() -> OutfitView {

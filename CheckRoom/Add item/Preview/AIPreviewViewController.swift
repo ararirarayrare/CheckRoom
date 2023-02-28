@@ -72,10 +72,10 @@ class AIPreviewViewController: ViewController {
                                                object: nil,
                                                queue: .main) { _ in
             
-            guard self.navigationController?.topViewController == self else {
-                UIPasteboard.general.image = nil
-                return
-            }
+//            guard self.navigationController?.topViewController == self else {
+//                UIPasteboard.general.image = nil
+//                return
+//            }
             
             guard let image = UIPasteboard.general.image else {
                 return
@@ -99,7 +99,8 @@ class AIPreviewViewController: ViewController {
             editButton.tintColor = UIColor(red: 133/255, green: 133/255, blue: 133/255, alpha: 1.0)
             self.navigationItem.rightBarButtonItem = editButton
             
-            UIPasteboard.general.image = nil
+            
+//            UIPasteboard.general.image = nil
         }
         
 //        if let image = UIPasteboard.general.image {

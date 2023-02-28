@@ -16,6 +16,8 @@ struct Icons {
     static let myOutfits: UIImage? = UIImage(named: "my-outfits-icon")
     static let tomorrowOutfit: UIImage? = UIImage(named: "tomorrow-outfit-icon")
     
+    static let delete: UIImage? = UIImage(named: "delete")
+    
     
     static let editPicture: UIImage? = UIImage(named: "edit-picture-icon")
     

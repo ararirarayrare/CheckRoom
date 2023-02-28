@@ -56,11 +56,10 @@ class MainViewController: ViewController {
             
             NSLayoutConstraint.activate([
                 outfitsView.leadingAnchor.constraint(equalTo: headerView.leadingAnchor),
-                outfitsView.trailingAnchor.constraint(equalTo: headerView.trailingAnchor),
+                outfitsView.trailingAnchor.constraint(equalTo: view.centerXAnchor,
+                                                      constant: 32),
                 outfitsView.topAnchor.constraint(equalTo: headerView.bottomAnchor,
                                                  constant: 24),
-                outfitsView.heightAnchor.constraint(equalTo: outfitsView.widthAnchor,
-                                                    multiplier: 0.7),
                 outfitsView.bottomAnchor.constraint(lessThanOrEqualTo: containerView.bottomAnchor,
                                                     constant: -40)
             ])

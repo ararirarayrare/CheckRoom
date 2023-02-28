@@ -122,7 +122,7 @@ class ELPreviewViewController: ViewController {
     
     @objc
     private func saveTapped() {
-        if DataManager.shared.contains(outfit) {
+        if DataManager.shared.containsOutfit(outfit) {
             DataManager.shared.updateOutfit {
                 self.updateHandler(self.outfit)
             }

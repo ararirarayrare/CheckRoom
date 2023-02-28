@@ -97,7 +97,7 @@ class ELAccessoryViewController: ViewController {
                 self.outfit.hat = accessory
             }
             
-            if !DataManager.shared.contains(outfit) {
+            if !DataManager.shared.containsOutfit(outfit) {
                 DataManager.shared.save(outfit: outfit)
             }
             
