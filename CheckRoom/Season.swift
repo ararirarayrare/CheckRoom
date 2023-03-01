@@ -21,11 +21,11 @@ enum Season: Int, CaseIterable {
         case 12, 0...2:
             return .winter
         case 3...5:
-            return .autumn
+            return .spring
         case 6...8:
             return .summer
         case 9...11:
-            return .spring
+            return .autumn
             
         default:
             return .summer
