@@ -14,6 +14,14 @@ class DataManager {
     
     private let realm: Realm! = try! Realm()
     
+    var isNewUser: Bool {
+        return !UserDefaults.standard.bool(forKey: .hasSeenOnboardingKey)
+    }
+    
+    func userHasSeenOnboarding() {
+        UserDefaults.standard.set(true, forKey: .hasSeenOnboardingKey)
+    }
+    
     func containsOutfit(_ outfit: Outfit) -> Bool {
         let outfits = getOutfits(forSeason: outfit.season)
         
@@ -127,4 +135,8 @@ class DataManager {
         }
         
     }
+}
+
+extension String {
+    static let hasSeenOnboardingKey = "hasSeenOnboardingKey"
 }

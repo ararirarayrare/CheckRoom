@@ -19,17 +19,29 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.overrideUserInterfaceStyle = .light
         window?.makeKeyAndVisible()
         
-        
         let loader = LoaderViewController { [weak self] in
-            let builder = MainBuilder()
-            let coordinator = MainCoordinator(builder: builder,
-                                              window: self?.window)
-            coordinator.start()
+            
+            if DataManager.shared.isNewUser {
+                let vc = OnboardingPageViewController { [weak self] in
+                    DataManager.shared.userHasSeenOnboarding()
+                    self?.startApplication()
+                }
+                
+                self?.window?.rootViewController = vc
+            } else {
+                self?.startApplication()
+            }
+        
         }
-        
     
-        
         window?.rootViewController = loader
+    }
+    
+    private func startApplication() {
+        let builder = MainBuilder()
+        let coordinator = MainCoordinator(builder: builder,
+                                          window: self.window)
+        coordinator.start()
     }
 }
 

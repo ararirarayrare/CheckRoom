@@ -139,7 +139,10 @@ class MainCoordinator: Coordinator {
     func start() {
         let vc = builder.createMain(coordinator: self)
         navigationController = NavigationController(rootViewController: vc)
-        window?.rootViewController = navigationController
+        navigationController?.modalPresentationStyle = .fullScreen
+        navigationController?.modalTransitionStyle = .crossDissolve
+//        window?.rootViewController = navigationController
+        window?.rootViewController?.present(navigationController!, animated: true)
     }
     
 }
