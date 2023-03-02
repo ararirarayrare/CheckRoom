@@ -19,6 +19,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.overrideUserInterfaceStyle = .light
         window?.makeKeyAndVisible()
         
+        let objcTest = ObjcTest()
+        objcTest.testFunc()
+        
         let loader = LoaderViewController { [weak self] in
             
             if DataManager.shared.isNewUser {

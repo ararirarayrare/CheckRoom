@@ -12,6 +12,8 @@
 		042FD66429ACD4EC003CE55B /* Poppins-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 042FD66329ACD4EC003CE55B /* Poppins-SemiBold.ttf */; };
 		042FD66729ACEDD5003CE55B /* LoaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042FD66629ACEDD5003CE55B /* LoaderViewController.swift */; };
 		042FD66C29AFC1A8003CE55B /* OnboardingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042FD66B29AFC1A8003CE55B /* OnboardingPageViewController.swift */; };
+		042FD67029B00ADF003CE55B /* ObjcTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 042FD66F29B00ADF003CE55B /* ObjcTest.m */; };
+		042FD67229B0DAE1003CE55B /* Poppins-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 042FD67129B0DAE1003CE55B /* Poppins-Bold.ttf */; };
 		04309BEA296F353400A439D4 /* TOLooksCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04309BE9296F353400A439D4 /* TOLooksCollectionView.swift */; };
 		04309C1429733BF700A439D4 /* TOLooksPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04309C1329733BF700A439D4 /* TOLooksPreviewViewController.swift */; };
 		04309C1629733C8200A439D4 /* TOLookImageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04309C1529733C8200A439D4 /* TOLookImageModel.swift */; };
@@ -97,6 +99,10 @@
 		042FD66329ACD4EC003CE55B /* Poppins-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-SemiBold.ttf"; sourceTree = "<group>"; };
 		042FD66629ACEDD5003CE55B /* LoaderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoaderViewController.swift; sourceTree = "<group>"; };
 		042FD66B29AFC1A8003CE55B /* OnboardingPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageViewController.swift; sourceTree = "<group>"; };
+		042FD66D29B00ADE003CE55B /* CheckRoom-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CheckRoom-Bridging-Header.h"; sourceTree = "<group>"; };
+		042FD66E29B00ADF003CE55B /* ObjcTest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjcTest.h; sourceTree = "<group>"; };
+		042FD66F29B00ADF003CE55B /* ObjcTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ObjcTest.m; sourceTree = "<group>"; };
+		042FD67129B0DAE1003CE55B /* Poppins-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Bold.ttf"; sourceTree = "<group>"; };
 		04309BE9296F353400A439D4 /* TOLooksCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TOLooksCollectionView.swift; sourceTree = "<group>"; };
 		04309C1329733BF700A439D4 /* TOLooksPreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TOLooksPreviewViewController.swift; sourceTree = "<group>"; };
 		04309C1529733C8200A439D4 /* TOLookImageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TOLookImageModel.swift; sourceTree = "<group>"; };
@@ -361,6 +367,7 @@
 		0455BE1E29A11BDF00FBBD40 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				042FD67129B0DAE1003CE55B /* Poppins-Bold.ttf */,
 				042FD66129ACD465003CE55B /* Poppins-Medium.ttf */,
 				0455BE1F29A11BFA00FBBD40 /* Poppins-Regular.ttf */,
 				042FD66329ACD4EC003CE55B /* Poppins-SemiBold.ttf */,
@@ -589,6 +596,9 @@
 				043FDD422989849C000A4C2D /* Wear.swift */,
 				0455BDE42993C80200FBBD40 /* Outfit.swift */,
 				0455BDF82999117F00FBBD40 /* Extensions.swift */,
+				042FD66E29B00ADF003CE55B /* ObjcTest.h */,
+				042FD66F29B00ADF003CE55B /* ObjcTest.m */,
+				042FD66D29B00ADE003CE55B /* CheckRoom-Bridging-Header.h */,
 			);
 			path = CheckRoom;
 			sourceTree = "<group>";
@@ -678,6 +688,7 @@
 				TargetAttributes = {
 					04E6B816296C539C00E50AA8 = {
 						CreatedOnToolsVersion = 14.2;
+						LastSwiftMigration = 1420;
 					};
 				};
 			};
@@ -705,6 +716,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				042FD66429ACD4EC003CE55B /* Poppins-SemiBold.ttf in Resources */,
+				042FD67229B0DAE1003CE55B /* Poppins-Bold.ttf in Resources */,
 				0455BE2029A11BFA00FBBD40 /* Poppins-Regular.ttf in Resources */,
 				042FD66229ACD465003CE55B /* Poppins-Medium.ttf in Resources */,
 				04E6B827296C539F00E50AA8 /* LaunchScreen.storyboard in Resources */,
@@ -804,6 +816,7 @@
 				04E6B81D296C539C00E50AA8 /* SceneDelegate.swift in Sources */,
 				049800BC297DD74A00069BEA /* CVPixelBuffer+Create.swift in Sources */,
 				049800B7297DD74A00069BEA /* CGImagePropertyOrientation.swift in Sources */,
+				042FD67029B00ADF003CE55B /* ObjcTest.m in Sources */,
 				04309C1429733BF700A439D4 /* TOLooksPreviewViewController.swift in Sources */,
 				04C9C3E4296F2FFC005C7003 /* Season.swift in Sources */,
 				049800B3297DD74A00069BEA /* Math.swift in Sources */,
@@ -974,6 +987,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = FCFHS2BVLY;
@@ -997,6 +1011,8 @@
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "CheckRoom/CheckRoom-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1008,6 +1024,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = FCFHS2BVLY;
@@ -1031,6 +1048,7 @@
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "CheckRoom/CheckRoom-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

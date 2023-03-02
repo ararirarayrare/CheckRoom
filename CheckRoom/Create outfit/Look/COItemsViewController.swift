@@ -10,12 +10,14 @@ import Combine
 
 class COItemsViewController: ViewController {
     
+    private var missingCategories = [String]()
+    
     private var nextBarButton: UIBarButtonItem?
     
     private var topCollectionView: ItemsCollectionView?
     private var bottomCollectionView: ItemsCollectionView?
     private var shoesCollectionView: ItemsCollectionView?
-        
+            
     let coordinator: COCoordinator
     let season: Season
     private let dataManager = DataManager.shared
@@ -89,6 +91,12 @@ class COItemsViewController: ViewController {
         
         
         guard !topItems.isEmpty && !bottomItems.isEmpty && !shoes.isEmpty else {
+            
+            if topItems.isEmpty { missingCategories.append("Top") }
+            if bottomItems.isEmpty { missingCategories.append("Bottom") }
+            if shoes.isEmpty { missingCategories.append("Shoes") }
+            
+            
             setupOops()
             return
         }
@@ -213,7 +221,59 @@ class COItemsViewController: ViewController {
         label.textColor = UIColor(red: 114/255, green: 114/255, blue: 114/255, alpha: 1.0)
         label.numberOfLines = 0
         
-        label.text = "Unfortunately, you don't have enough items to create a look :(\n\nTake a photo or add an item from your gallery!"
+        
+        if !self.missingCategories.isEmpty {
+            
+            var missingCategoriesString = NSMutableAttributedString(string: "")
+            
+            missingCategories.forEach { category in
+                let string = missingCategoriesString.string.isEmpty ? category : ", \(category)"
+                let attrString = NSAttributedString(
+                    string: string,
+                    attributes: [
+                        .foregroundColor : UIColor.black,
+                        .font : UIFont.boldPoppinsFont(ofSize: 16) ?? .boldSystemFont(ofSize: 16)
+                    ]
+                )
+            
+                missingCategoriesString.append(attrString)
+            }
+            
+            let endingString = (self.missingCategories.count == 1) ? " category" : " categories"
+            let attrString = NSAttributedString(
+                string: endingString
+//                attributes: [
+//                    .foregroundColor : UIColor.black
+//                ]
+            )
+            missingCategoriesString.append(attrString)
+            
+            
+            let attributedText = NSMutableAttributedString(
+                string: "Unfortunately, there are not enough items to create outfit :(\n\nAdd items to the ",
+                attributes: [
+                    .foregroundColor : UIColor(red: 114/255, green: 114/255, blue: 114/255, alpha: 1.0)
+                ]
+            )
+            
+            attributedText.append(missingCategoriesString)
+            
+            let attributedTextEnding = NSAttributedString(
+                string: " to create an outfit. Just take a photo and add an item from your gallery!",
+                attributes: [
+                    .foregroundColor : UIColor(red: 114/255, green: 114/255, blue: 114/255, alpha: 1.0)
+                ]
+            )
+            
+            attributedText.append(attributedTextEnding)
+            
+            
+            label.attributedText = attributedText
+        } else {
+            
+            label.text = "Unfortunately, you don't have enough items to create a look :(\n\nTake a photo or add an item from your gallery!"
+            
+        }
         
         
         let addItemButton = UIButton(type: .system)

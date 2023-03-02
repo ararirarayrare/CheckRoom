@@ -32,6 +32,10 @@ extension UIFont {
     static func semiBoldPoppinsFont(ofSize size: CGFloat) -> UIFont? {
         return UIFont(name: "Poppins-SemiBold", size: size)
     }
+    
+    static func boldPoppinsFont(ofSize size: CGFloat) -> UIFont? {
+        return UIFont(name: "Poppins-Bold", size: size)
+    }
 
 }
 
