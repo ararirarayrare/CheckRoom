@@ -91,10 +91,21 @@ class ELAccessoryViewController: ViewController {
     @objc
     private func addTapped() {
         
-        if let accessory = collectionView?.selectedItem, accessory.category == .hat {
+        if let accessory = collectionView?.selectedItem {
             
             DataManager.shared.updateOutfit {
-                self.outfit.hat = accessory
+                
+                switch self.accessoryCategory {
+                case .hat:
+                    self.outfit.hat = accessory
+                case .glasses:
+                    self.outfit.glasses = accessory
+                case .scraves:
+                    self.outfit.scarves = accessory
+                case .jewelery:
+                    self.outfit.jewelery = accessory
+                }
+                
             }
             
             if !DataManager.shared.containsOutfit(outfit) {

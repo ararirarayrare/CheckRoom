@@ -15,7 +15,14 @@ class Outfit: Object {
         copy.topWear = self.topWear.getCopy()
         copy.bottomWear = self.bottomWear.getCopy()
         copy.shoes = self.shoes.getCopy()
+        
+        copy.hat = self.hat?.getCopy()
+        copy.glasses = self.glasses?.getCopy()
+        copy.jewelery = self.jewelery?.getCopy()
+        copy.scarves = self.scarves?.getCopy()
+        
         copy.outwear = self.outwear?.getCopy()
+        
         
         return copy
     }
@@ -26,7 +33,12 @@ class Outfit: Object {
     @objc dynamic var topWear: TopWear!
     @objc dynamic var bottomWear: BottomWear!
     @objc dynamic var shoes: Shoes!
+    
+    @objc dynamic var jewelery: Accessory?
     @objc dynamic var hat: Accessory?
+    @objc dynamic var scarves: Accessory?
+    @objc dynamic var glasses: Accessory?
+    
     @objc dynamic var outwear: TopWear?
     
     @objc dynamic private var seasonRawValue: String = ""
@@ -43,9 +55,19 @@ class Outfit: Object {
             pthread_rwlock_wrlock(&lock)
             seasonRawValue = String(describing: newValue.rawValue)
             
-            topWear?.season = newValue
-            bottomWear?.season = newValue
-            shoes?.season = newValue
+            
+            let items = [topWear, bottomWear, shoes, hat, jewelery, glasses, scarves]
+            items.forEach { $0?.season = newValue }
+        
+            
+//            topWear?.season = newValue
+//            bottomWear?.season = newValue
+//            shoes?.season = newValue
+//
+//            hat?.season = newValue
+//            jewelery?.season = newValue
+//            glasses?.season = newValue
+//            scarves?.season = newValue
             
             pthread_rwlock_unlock(&lock)
         }
@@ -74,7 +96,33 @@ class Outfit: Object {
         view.topImageView.image = topWear.image
         view.bottomImageView.image = bottomWear.image
         view.shoesImageView.image = shoes.image
-        view.accessoryImageView.image = hat?.image
+        
+        if let hat = self.hat {
+            let imageView = UIImageView()
+            imageView.image = hat.image
+            view.hatImageView = imageView
+        }
+        
+        if let jewelery = self.jewelery {
+            let imageView = UIImageView()
+            imageView.image = jewelery.image
+            view.jeweleryImageView = imageView
+        }
+        
+        if let scarves = self.scarves {
+            let imageView = UIImageView()
+            imageView.image = scarves.image
+            view.scarvesImageView = imageView
+        }
+        
+        if let glasses = self.glasses {
+            let imageView = UIImageView()
+            imageView.image = glasses.image
+            view.glassesImageView = imageView
+        }
+        
+        view.setup()
+        view.layout()
         
         return view
     }
@@ -86,26 +134,34 @@ class OutfitView: UIView {
     let bottomImageView = UIImageView()
     let shoesImageView = UIImageView()
     
-    let accessoryImageView = UIImageView()
+    var hatImageView: UIImageView?
+    var jeweleryImageView: UIImageView?
+    var scarvesImageView: UIImageView?
+    var glassesImageView: UIImageView?
     
-    init() {
-        super.init(frame: .zero)
-        
-        setup()
-        layout()
-    }
+//    init() {
+//        super.init(frame: .zero)
+//
+//        setup()
+//        layout()
+//    }
+//
+//    required init?(coder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    private func setup() {
+    fileprivate func setup() {
         backgroundColor = .white
+        
+        let imageViews = [
+            topImageView, bottomImageView, shoesImageView, hatImageView, jeweleryImageView, scarvesImageView, glassesImageView
+        ]
     
-        topImageView.contentMode = .scaleToFill
-        bottomImageView.contentMode = .scaleToFill
-        shoesImageView.contentMode = .scaleToFill
-        accessoryImageView.contentMode = .scaleToFill
+//        topImageView.contentMode = .scaleToFill
+//        bottomImageView.contentMode = .scaleToFill
+//        shoesImageView.contentMode = .scaleToFill
+        
+        imageViews.forEach { $0?.contentMode = .scaleToFill }
         
     }
     
@@ -155,10 +211,84 @@ class OutfitView: UIView {
         topImageView.frame.origin.x = (bounds.width - topImageView.bounds.width) / 2
         bottomImageView.frame.origin.x = (bounds.width - bottomImageView.bounds.width) / 2
         shoesImageView.frame.origin.x = (bounds.midX + bounds.width * 0.05)
+        
+        
+        if let hatImageView = hatImageView,
+           let imageSize = hatImageView.image?.size {
+            
+            let aspectRatio = imageSize.width / imageSize.height
+            
+            let width = bounds.width * 0.2
+            let height = width / aspectRatio
+            
+            hatImageView.frame = CGRect(x: (bounds.width * 0.95) - width,
+                                        y: 24,
+                                        width: width,
+                                        height: height)
+        }
+        
+        if let glassesImageView = glassesImageView,
+           let imageSize = glassesImageView.image?.size {
+            
+            
+            let aspectRatio = imageSize.width / imageSize.height
+            
+            let width = bounds.width * 0.2
+            let height = width / aspectRatio
+            
+            glassesImageView.frame = CGRect(x: bounds.width * 0.05,
+                                            y: 24,
+                                            width: width,
+                                            height: height)
+            
+        }
+
+        
+        if let scarvesImageView = scarvesImageView,
+           let imageSize = scarvesImageView.image?.size {
+            
+            let aspectRatio = imageSize.width / imageSize.height
+            
+            let width = bounds.width * 0.2
+            let height = width / aspectRatio
+            
+            scarvesImageView.frame.size = CGSize(width: width, height: height)
+            
+            if let hatImageView = self.hatImageView {
+                scarvesImageView.frame.origin.y = hatImageView.frame.maxY + 8
+                scarvesImageView.center.x = hatImageView.frame.midX
+            } else {
+                scarvesImageView.frame.origin.y = 32
+                scarvesImageView.frame.origin.x = (bounds.width * 0.9) - width
+            }
+            
+        }
+        
+        if let jeweleryImageView = jeweleryImageView,
+           let imageSize = jeweleryImageView.image?.size {
+            
+            
+            let aspectRatio = imageSize.width / imageSize.height
+            
+            let width = bounds.width * 0.2
+            let height = width / aspectRatio
+            
+            jeweleryImageView.frame.size = CGSize(width: width, height: height)
+            
+            if let glassesImageView = self.glassesImageView {
+                jeweleryImageView.frame.origin.y = glassesImageView.frame.maxY + 8
+                jeweleryImageView.center.x = glassesImageView.frame.midX
+            } else {
+                jeweleryImageView.frame.origin.y = 32
+                jeweleryImageView.frame.origin.x = bounds.width * 0.1
+            }
+            
+        }
+        
     }
     
     
-    private func layout() {
+    fileprivate func layout() {
 //        topImageView.translatesAutoresizingMaskIntoConstraints = false
 //        bottomImageView.translatesAutoresizingMaskIntoConstraints = false
 //        shoesImageView.translatesAutoresizingMaskIntoConstraints = false
@@ -168,6 +298,11 @@ class OutfitView: UIView {
         addSubview(topImageView)
         addSubview(bottomImageView)
         addSubview(shoesImageView)
+        
+        [hatImageView, glassesImageView, jeweleryImageView, scarvesImageView]
+            .compactMap { $0 }
+            .forEach { addSubview($0) }
+        
 //        addSubview(accessoryImageView)
         
                 

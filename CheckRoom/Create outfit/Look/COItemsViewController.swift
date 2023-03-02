@@ -223,8 +223,8 @@ class COItemsViewController: ViewController {
         
         
         if !self.missingCategories.isEmpty {
-            
-            var missingCategoriesString = NSMutableAttributedString(string: "")
+    
+            let missingCategoriesString = NSMutableAttributedString(string: "")
             
             missingCategories.forEach { category in
                 let string = missingCategoriesString.string.isEmpty ? category : ", \(category)"
