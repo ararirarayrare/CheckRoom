@@ -70,6 +70,11 @@ class ELOutwearViewController: ViewController {
         collectionView = ItemsCollectionView(items: outwearItems)
         
         saveButton.addTarget(self, action: #selector(saveTapped), for: .touchUpInside)
+        
+        
+        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(longPressed(_:)))
+        longPressGesture.minimumPressDuration = 0.2
+        view.addGestureRecognizer(longPressGesture)
     }
     
     override func layout() {
@@ -115,6 +120,9 @@ class ELOutwearViewController: ViewController {
         (coordinator.parent as? MainCoordinator)?.eventOccured(.addItem)
     }
     
+    private var oopsLabel: UILabel?
+    private var addItemButton: UIButton?
+    
     private func setupOops() {
         navigationItem.backButtonDisplayMode = .minimal
         navigationItem.title = "Oops..."
@@ -159,5 +167,270 @@ class ELOutwearViewController: ViewController {
             addItemButton.widthAnchor.constraint(equalToConstant: 180),
             addItemButton.heightAnchor.constraint(equalToConstant: 56)
         ])
+        
+        self.oopsLabel = label
+        self.addItemButton = addItemButton
     }
+    
+    private var selectedWear: Wear?
+    
+    private var selectedCell: ItemsCollectionViewCell?
+    
+    private var cellImageView: UIImageView? {
+        return selectedCell?.imageView
+    }
+    
+    private var selectedItemPosition = CGPoint()
+    
+    private var movedImageView: UIImageView?
+    
+    private var initialTouchPosition = CGPoint()
+    
+    private var deleteImageView: UIImageView?
+    
+    
+    @objc
+    private func longPressed(_ recognizer: UILongPressGestureRecognizer) {
+        
+        guard collectionView?.isScrolling == false else {
+            return
+        }
+
+        let touchLocation = recognizer.location(in: view)
+
+        switch recognizer.state {
+        case .began:
+
+            guard let collectionView = self.collectionView else {
+                return
+            }
+
+            guard let indexPath = collectionView.indexPathForItem(at: recognizer.location(in: collectionView)),
+                  let cell = collectionView.cellForItem(at: indexPath) as? ItemsCollectionViewCell else {
+                return
+            }
+            
+            collectionView.isScrollEnabled = false
+
+            let wear = collectionView.selectedItem
+            
+            let imageOriginConvertedToCollectionView = cell.convert(cell.imageView.frame.origin, to: collectionView)
+            let imageOriginConvertedToView = collectionView.convert(imageOriginConvertedToCollectionView, to: view)
+
+//            self.cellImageView = cell.imageView
+            self.selectedCell = cell
+            self.selectedWear = wear
+            self.selectedItemPosition = imageOriginConvertedToView
+            self.initialTouchPosition = touchLocation
+
+ 
+            let deleteImageView = UIImageView()
+            deleteImageView.image = Icons.delete
+            deleteImageView.contentMode = .scaleAspectFit
+            
+            deleteImageView.alpha = 0
+            view.insertSubview(deleteImageView, aboveSubview: collectionView)
+            deleteImageView.frame.size = CGSize(width: 48, height: 48)
+            deleteImageView.center.x = view.center.x
+            
+            if let statusBarMaxY = view.window?.windowScene?.statusBarManager?.statusBarFrame.maxY {
+                deleteImageView.frame.origin.y = statusBarMaxY + 6
+            }
+            
+            UIView.animate(withDuration: 0.2) { deleteImageView.alpha = 1 }
+            
+            self.deleteImageView = deleteImageView
+            
+            
+            let imageSize = cell.imageView.frame.size
+
+            let newImageView = UIImageView()
+            newImageView.image = cell.imageView.image
+            newImageView.contentMode = cell.imageView.contentMode
+            newImageView.frame.size = imageSize
+            newImageView.frame.origin = imageOriginConvertedToView
+//            newImageView.frame.origin = collectionView.convert(cell.imageView.frame.origin, to: view)
+            newImageView.isUserInteractionEnabled = true
+                    
+            view.insertSubview(newImageView, aboveSubview: deleteImageView)
+            
+            self.cellImageView?.isHidden = true
+            self.movedImageView = newImageView
+            
+        case .changed:
+    
+            let dx = touchLocation.x - self.initialTouchPosition.x
+            let dy = touchLocation.y - self.initialTouchPosition.y
+
+            self.movedImageView?.frame.origin = CGPoint(x: self.selectedItemPosition.x + dx,
+                                                        y: self.selectedItemPosition.y + dy)
+                        
+        case .ended:
+            
+            if let deleteImageView = self.deleteImageView, deleteImageView.contains(touchLocation) {
+                
+                UIView.animate(withDuration: 0.2) {
+                    self.movedImageView?.transform = CGAffineTransform(scaleX: 0, y: 0)
+                    self.deleteImageView?.alpha = 0
+                } completion: { _ in
+                    
+                    self.movedImageView?.removeFromSuperview()
+                    self.deleteImageView?.removeFromSuperview()
+                    self.deleteImageView = nil
+                    
+                    guard let selectedWear = self.selectedWear,
+                          let collectionView = self.collectionView else {
+                        return
+                    }
+                    
+                    
+//                    collectionViews.forEach { collectionView in
+                        
+                        if let itemIndex = collectionView.items.firstIndex(where: { selectedWear == $0 }) {
+                            
+                            let outfits = DataManager.shared.getOutfits(forSeason: self.outfit.season)
+                                .filter {
+                                    $0.outwear?.isEqual(toWear: selectedWear) ?? false
+                                }
+                            
+                            
+                            if outfits.isEmpty {
+                                
+                                let indexPath = IndexPath(item: itemIndex, section: 0)
+                                collectionView.deleteItems(at: [indexPath])
+                                DataManager.shared.deleteWear(selectedWear)
+                                
+                                self.selectedWear = nil
+                                self.selectedCell = nil
+                                self.movedImageView = nil
+                                
+                                collectionView.isScrollEnabled = true
+                                
+                                if collectionView.items.isEmpty {
+                                    collectionView.removeFromSuperview()
+                                    
+                                    self.setupOops()
+                                    self.oopsLabel?.alpha = 0
+                                    self.addItemButton?.alpha = 0
+                                    
+                                    
+                                    UIView.animate(withDuration: 0.3) {
+                                        self.oopsLabel?.alpha = 1
+                                        self.addItemButton?.alpha = 1
+                                    }
+                                }
+                                
+                            } else {
+                                
+                                let currentOutfitContainsSelectedAccessory = outfits.contains(where: { $0.isEqual(toOutfit: self.outfit) })
+                                
+                                let alert = UIAlertController(title: "Warning!",
+                                                              message: "You have outfits with this outwear!\nIt will be deleted from all of them! Are you sure you want to continue?",
+                                                              preferredStyle: .alert)
+                                
+                                let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in
+                                    
+                                    self.selectedCell?.isHidden = false
+                                    
+                                    self.selectedWear = nil
+                                    self.selectedCell = nil
+                                    
+                                    collectionView.isScrollEnabled = true
+                                }
+                                
+                                let deleteAbsolutelyAction = UIAlertAction(title: "Delete absolutely",
+                                                                           style: .destructive) { _ in
+                                    
+                                    
+                                    outfits.forEach { outfit in
+                                        DataManager.shared.updateOutfit {
+                                            outfit.outwear = nil
+                                        }
+                                    }
+
+                                    let indexPath = IndexPath(item: itemIndex, section: 0)
+                                    collectionView.deleteItems(at: [indexPath])
+                                    DataManager.shared.deleteWear(selectedWear)
+                                    
+                                    self.selectedWear = nil
+                                    self.selectedCell = nil
+                                    self.movedImageView = nil
+                                    
+                                    collectionView.isScrollEnabled = true
+                                    
+                                    if collectionView.items.isEmpty {
+                                        collectionView.removeFromSuperview()
+                                        
+                                        self.setupOops()
+                                        self.oopsLabel?.alpha = 0
+                                        self.addItemButton?.alpha = 0
+                                        
+                                        
+                                        UIView.animate(withDuration: 0.3) {
+                                            self.oopsLabel?.alpha = 1
+                                            self.addItemButton?.alpha = 1
+                                        }
+                                    }
+                                }
+                                
+                                alert.addAction(cancelAction)
+                                alert.addAction(deleteAbsolutelyAction)
+                                
+                                
+                                if currentOutfitContainsSelectedAccessory {
+                                    
+                                    alert.message = "The outfit you are editing contains this accessory! Delete it absolutely or remove only from edited outfit?"
+                                    
+                                    let removeFromCurrentAction = UIAlertAction(title: "Remove from edited outfit",
+                                                                            style: .destructive) { _ in
+                                        
+                                        DataManager.shared.updateOutfit {
+                                            self.outfit.outwear = nil
+                                        }
+
+                                        self.coordinator.eventOccured(.saved)
+                                    }
+                                    
+                                    alert.addAction(removeFromCurrentAction)
+                                }
+                                
+                                self.present(alert, animated: true)
+                                
+                            }
+
+                            
+                        }
+                        
+//                    }
+                    
+                }
+                
+            } else {
+                
+                UIView.animate(withDuration: 0.3) {
+                    self.movedImageView?.frame.origin = self.selectedItemPosition
+                    self.deleteImageView?.alpha = 0
+                } completion: { _ in
+                    self.cellImageView?.isHidden = false
+                    self.movedImageView?.removeFromSuperview()
+                    self.deleteImageView?.removeFromSuperview()
+                    
+                    self.deleteImageView = nil
+                    self.selectedWear = nil
+                    self.selectedCell = nil
+                    self.movedImageView = nil
+                    
+                    self.collectionView?.isScrollEnabled = true
+                }
+                
+            }
+            
+        
+            
+        default:
+            break
+        }
+                
+    }
+
 }
