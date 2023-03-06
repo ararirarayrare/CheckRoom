@@ -13,6 +13,8 @@ class AccessoryCollectionViewCell: UICollectionViewCell {
     
     let containerView = UIView()
     
+    var accessory: Accessory!
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         

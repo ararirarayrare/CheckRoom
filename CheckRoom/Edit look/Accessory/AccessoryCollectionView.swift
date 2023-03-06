@@ -10,9 +10,29 @@ import UIKit
 class AccessoryCollectionView: UICollectionView {
     
     
-    let accessories: [Accessory]
+    private(set) var accessories: [Accessory]
     
-    var selectedIndex: Int = 0
+    var selectedIndex: Int = 0 {
+        didSet {
+            
+            visibleCells.compactMap { $0 as? AccessoryCollectionViewCell }
+                .forEach {
+                    $0.containerView.layer.borderColor = UIColor.clear.cgColor
+                    $0.containerView.layer.shadowOpacity = 0.2
+                }
+            
+            let indexPath = IndexPath(item: selectedIndex, section: 0)
+                
+            if let cell = cellForItem(at: indexPath) as? AccessoryCollectionViewCell {
+                
+                cell.containerView.layer.borderColor = UIColor.black.cgColor
+                cell.containerView.layer.borderWidth = 1.75
+                cell.containerView.layer.shadowOpacity = 0
+                
+//                selectedIndex = indexPath.item
+            }
+        }
+    }
     
     var selectedItem: Accessory? {
         return (selectedIndex >= 0 && !accessories.isEmpty) ? accessories[selectedIndex] : nil
@@ -44,6 +64,15 @@ class AccessoryCollectionView: UICollectionView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func deleteItems(at indexPaths: [IndexPath]) {
+        indexPaths.forEach { self.accessories.remove(at: $0.item) }
+        
+        super.deleteItems(at: indexPaths)
+        
+        reloadData()
+        
+        self.selectedIndex = 0
+    }
 }
 
 extension AccessoryCollectionView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -61,6 +90,7 @@ extension AccessoryCollectionView: UICollectionViewDelegate, UICollectionViewDat
         }
 
         cell.imageView.image = accessories[indexPath.item].image
+        cell.accessory = accessories[indexPath.item]
         
         if indexPath.item == selectedIndex {
             cell.containerView.layer.borderColor = UIColor.black.cgColor
@@ -86,20 +116,7 @@ extension AccessoryCollectionView: UICollectionViewDelegate, UICollectionViewDat
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        visibleCells.compactMap { $0 as? AccessoryCollectionViewCell }
-            .forEach {
-                $0.containerView.layer.borderColor = UIColor.clear.cgColor
-                $0.containerView.layer.shadowOpacity = 0.2
-            }
-            
-        if let cell = cellForItem(at: indexPath) as? AccessoryCollectionViewCell {
-            
-            cell.containerView.layer.borderColor = UIColor.black.cgColor
-            cell.containerView.layer.borderWidth = 1.75
-            cell.containerView.layer.shadowOpacity = 0
-            
-            selectedIndex = indexPath.item
-        }
+        selectedIndex = indexPath.item
         
     }
     

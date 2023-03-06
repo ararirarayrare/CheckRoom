@@ -55,19 +55,8 @@ class Outfit: Object {
             pthread_rwlock_wrlock(&lock)
             seasonRawValue = String(describing: newValue.rawValue)
             
-            
             let items = [topWear, bottomWear, shoes, hat, jewelery, glasses, scarves]
             items.forEach { $0?.season = newValue }
-        
-            
-//            topWear?.season = newValue
-//            bottomWear?.season = newValue
-//            shoes?.season = newValue
-//
-//            hat?.season = newValue
-//            jewelery?.season = newValue
-//            glasses?.season = newValue
-//            scarves?.season = newValue
             
             pthread_rwlock_unlock(&lock)
         }
