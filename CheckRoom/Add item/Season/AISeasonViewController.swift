@@ -114,6 +114,8 @@ class AISeasonViewController: ViewController {
         
         saveButton.addTarget(self, action: #selector(saveTapped), for: .touchUpInside)
         
+        collectionView.selectedItems = [Season.current.rawValue]
+        
         collectionView.$selectedItems
             .receive(on: RunLoop.main)
             .compactMap({ $0.isEmpty })

@@ -331,7 +331,10 @@ class ELAccessoryViewController: ViewController {
             if let deleteImageView = self.deleteImageView, deleteImageView.contains(touchLocation) {
                 
                 UIView.animate(withDuration: 0.2) {
-                    self.movedImageView?.transform = CGAffineTransform(scaleX: 0, y: 0)
+                    self.movedImageView?.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
+                    self.movedImageView?.center = deleteImageView.center
+                    self.movedImageView?.alpha = 0
+                    
                     self.deleteImageView?.alpha = 0
                 } completion: { _ in
                     

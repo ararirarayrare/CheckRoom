@@ -99,10 +99,13 @@ class ELOutwearViewController: ViewController {
             
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,
-                                               constant: 32),
-            collectionView.bottomAnchor.constraint(equalTo: saveButton.topAnchor,
-                                                   constant: -32)
+            collectionView.heightAnchor.constraint(equalTo: view.heightAnchor,
+                                                   multiplier: 0.4),
+            collectionView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+//            collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,
+//                                               constant: 32),
+//            collectionView.bottomAnchor.constraint(equalTo: saveButton.topAnchor,
+//                                                   constant: -32)
         ])
     }
     
@@ -268,9 +271,13 @@ class ELOutwearViewController: ViewController {
         case .ended:
             
             if let deleteImageView = self.deleteImageView, deleteImageView.contains(touchLocation) {
-                
+
                 UIView.animate(withDuration: 0.2) {
-                    self.movedImageView?.transform = CGAffineTransform(scaleX: 0, y: 0)
+                    
+                    self.movedImageView?.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
+                    self.movedImageView?.center = deleteImageView.center
+                    self.movedImageView?.alpha = 0
+                    
                     self.deleteImageView?.alpha = 0
                 } completion: { _ in
                     
