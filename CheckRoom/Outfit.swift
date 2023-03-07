@@ -110,6 +110,12 @@ class Outfit: Object {
             view.glassesImageView = imageView
         }
         
+        if let outwear = self.outwear {
+            let imageView = UIImageView()
+            imageView.image = outwear.image
+            view.outwearImageView = imageView
+        }
+        
         view.setup()
         view.layout()
         
@@ -128,22 +134,13 @@ class OutfitView: UIView {
     var scarvesImageView: UIImageView?
     var glassesImageView: UIImageView?
     
-//    init() {
-//        super.init(frame: .zero)
-//
-//        setup()
-//        layout()
-//    }
-//
-//    required init?(coder: NSCoder) {
-//        fatalError("init(coder:) has not been implemented")
-//    }
+    var outwearImageView: UIImageView?
     
     fileprivate func setup() {
         backgroundColor = .white
         
         let imageViews = [
-            topImageView, bottomImageView, shoesImageView, hatImageView, jeweleryImageView, scarvesImageView, glassesImageView
+            topImageView, bottomImageView, shoesImageView, hatImageView, jeweleryImageView, scarvesImageView, glassesImageView, outwearImageView
         ]
     
 //        topImageView.contentMode = .scaleToFill
@@ -256,7 +253,6 @@ class OutfitView: UIView {
         if let jeweleryImageView = jeweleryImageView,
            let imageSize = jeweleryImageView.image?.size {
             
-            
             let aspectRatio = imageSize.width / imageSize.height
             
             let width = bounds.width * 0.2
@@ -274,15 +270,26 @@ class OutfitView: UIView {
             
         }
         
+        
+        if let outwearImageView = outwearImageView,
+           let imageSize = outwearImageView.image?.size {
+            
+            let aspectRatio = imageSize.width / imageSize.height
+            
+            let width = topWidth * 1.1
+            let height = width / aspectRatio
+            
+            outwearImageView.frame.size = CGSize(width: width, height: height)
+            
+            outwearImageView.frame.origin.x = 4 /* topImageView.frame.origin.x - 12 */
+            outwearImageView.frame.origin.y = 4 /* topImageView.frame.origin.y - 12 */
+            
+        }
+        
     }
     
     
     fileprivate func layout() {
-//        topImageView.translatesAutoresizingMaskIntoConstraints = false
-//        bottomImageView.translatesAutoresizingMaskIntoConstraints = false
-//        shoesImageView.translatesAutoresizingMaskIntoConstraints = false
-//        accessoryImageView.translatesAutoresizingMaskIntoConstraints = false
-        
         
         addSubview(topImageView)
         addSubview(bottomImageView)
@@ -292,26 +299,10 @@ class OutfitView: UIView {
             .compactMap { $0 }
             .forEach { addSubview($0) }
         
-//        addSubview(accessoryImageView)
+        if let outwearImageView = outwearImageView {
+            insertSubview(outwearImageView, belowSubview: topImageView)
+        }
         
-                
-//        NSLayoutConstraint.activate([
-//            topImageView.topAnchor.constraint(equalTo: topAnchor, constant: 8),
-//            topImageView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.4),
-//            topImageView.centerXAnchor.constraint(equalTo: centerXAnchor),
-//
-//
-//            bottomImageView.topAnchor.constraint(equalTo: topImageView.bottomAnchor),
-//            bottomImageView.widthAnchor.constraint(equalTo: topImageView.widthAnchor,
-//                                                   multiplier: 0.85),
-//            bottomImageView.centerXAnchor.constraint(equalTo: centerXAnchor),
-//
-//
-//            shoesImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -24),
-//            shoesImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -24),
-//            shoesImageView.leadingAnchor.constraint(equalTo: centerXAnchor,
-//                                                    constant: 24)
-//        ])
     }
     
 }

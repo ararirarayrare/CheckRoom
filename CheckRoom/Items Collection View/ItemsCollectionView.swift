@@ -158,7 +158,7 @@ class ItemsCollectionViewCell: UICollectionViewCell {
         
         clipsToBounds = false
         
-        contentView.backgroundColor = .yellow.withAlphaComponent(0.5)
+//        contentView.backgroundColor = .yellow.withAlphaComponent(0.5)
 //        imageView.backgroundColor = .blue.withAlphaComponent(0.5)
 
         layout()

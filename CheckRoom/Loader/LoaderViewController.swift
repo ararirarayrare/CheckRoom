@@ -75,7 +75,6 @@ class LoaderViewController: ViewController {
         progressView.frame.origin.y = view.bounds.height - 180
         
         logoTitleImageView.translatesAutoresizingMaskIntoConstraints = false
-//        hangerImageView.translatesAutoresizingMaskIntoConstraints = false
         loadingLabel.translatesAutoresizingMaskIntoConstraints = false
         
         view.addSubview(logoTitleImageView)
