@@ -134,26 +134,13 @@ extension ItemsCollectionView: UICollectionViewDelegate, UICollectionViewDataSou
         
         return cell
     }
-    
 
-
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-//
-//        return UIEdgeInsets(top: 0, left: bounds.width / 4, bottom: 0, right: 0)
-//    }
-    
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//
-//        return CGSize(width: bounds.width * 0.5,
-//                      height: bounds.height)
-//    }
 }
 
 class ItemsCollectionViewCell: UICollectionViewCell {
     
     let imageView: UIImageView = {
         let imageView = UIImageView()
-//        imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleToFill
         
         imageView.clipsToBounds = false
@@ -171,7 +158,7 @@ class ItemsCollectionViewCell: UICollectionViewCell {
         
         clipsToBounds = false
         
-//        contentView.backgroundColor = .yellow.withAlphaComponent(0.5)
+        contentView.backgroundColor = .yellow.withAlphaComponent(0.5)
 //        imageView.backgroundColor = .blue.withAlphaComponent(0.5)
 
         layout()

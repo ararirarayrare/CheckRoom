@@ -9,7 +9,9 @@ import UIKit
 
 class LoaderViewController: ViewController {
     
-    private let logoImageView = UIImageView()
+    private let logoTitleImageView = UIImageView()
+    private let hangerImageView = UIImageView()
+    
     private let progressView = UIProgressView()
     private let loadingLabel = UILabel()
     
@@ -24,6 +26,19 @@ class LoaderViewController: ViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        hangerImageView.frame.size = CGSize(width: logoTitleImageView.bounds.width * 0.8264,
+                                            height: logoTitleImageView.bounds.height * 1.8575)
+        
+        hangerImageView.frame.origin.x = logoTitleImageView.frame.origin.x + (logoTitleImageView.bounds
+            .width * 0.1449)
+        hangerImageView.center.y = logoTitleImageView.frame.origin.y + (logoTitleImageView.bounds.height * 0.815)
+        
+        print(logoTitleImageView.frame.origin.y)
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
@@ -35,8 +50,11 @@ class LoaderViewController: ViewController {
         
         view.backgroundColor = .white
         
-        logoImageView.image = Icons.logo
-        logoImageView.contentMode = .scaleAspectFit
+        logoTitleImageView.image = Icons.logoTitle
+        logoTitleImageView.contentMode = .scaleAspectFit
+        
+        hangerImageView.image = Icons.hanger
+        hangerImageView.contentMode = .scaleAspectFit
         
         progressView.trackTintColor = UIColor(red: 238/255, green: 238/255, blue: 238/255, alpha: 1.0)
         progressView.progressTintColor = .black
@@ -56,20 +74,24 @@ class LoaderViewController: ViewController {
         progressView.center.x = view.center.x
         progressView.frame.origin.y = view.bounds.height - 180
         
-        logoImageView.translatesAutoresizingMaskIntoConstraints = false
+        logoTitleImageView.translatesAutoresizingMaskIntoConstraints = false
+//        hangerImageView.translatesAutoresizingMaskIntoConstraints = false
         loadingLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        view.addSubview(logoImageView)
+        view.addSubview(logoTitleImageView)
+        view.addSubview(hangerImageView)
         view.addSubview(progressView)
         view.addSubview(loadingLabel)
         
+        
         NSLayoutConstraint.activate([
-            logoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            logoImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor,
-                                                  constant: -64),
-            logoImageView.widthAnchor.constraint(equalTo: view.widthAnchor,
+            logoTitleImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            logoTitleImageView.topAnchor.constraint(equalTo: view.centerYAnchor,
+                                                    constant: -160),
+            logoTitleImageView.widthAnchor.constraint(equalTo: view.widthAnchor,
                                                  multiplier: 0.5),
-            logoImageView.heightAnchor.constraint(equalTo: logoImageView.widthAnchor),
+            logoTitleImageView.heightAnchor.constraint(equalTo: logoTitleImageView.widthAnchor,
+                                                       multiplier: 0.533),
             
             
             loadingLabel.topAnchor.constraint(equalTo: progressView.bottomAnchor,
@@ -83,6 +105,16 @@ class LoaderViewController: ViewController {
 
         let displayLink = CADisplayLink(target: self, selector: #selector(updateProgress(_:)))
         displayLink.add(to: .main, forMode: .default)
+        
+        let anim = CABasicAnimation(keyPath: "transform.rotation.z")
+        anim.fromValue = -0.25
+        anim.toValue = 0.25
+        anim.duration = 0.5
+        anim.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+        anim.repeatCount = .infinity
+        anim.autoreverses = true
+        
+        self.hangerImageView.layer.add(anim, forKey: "rotationAnimation")
     }
     
     @objc

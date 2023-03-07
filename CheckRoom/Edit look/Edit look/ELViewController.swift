@@ -39,7 +39,7 @@ class ELViewController: ViewController {
             return
         }
         
-        topCollectionView.itemSize = CGSize(width: topCollectionView.bounds.width * 0.65,
+        topCollectionView.itemSize = CGSize(width: topCollectionView.bounds.width * 0.55,
                                             height: topCollectionView.bounds.height)
         bottomCollectionView.itemSize = CGSize(width: bottomCollectionView.bounds.width * 0.5,
                                                height: bottomCollectionView.bounds.height)
@@ -70,6 +70,7 @@ class ELViewController: ViewController {
         if let currentShoesIndex = shoesCollectionView.items.firstIndex(where: { $0.image?.pngData() == outfit.shoes.image?.pngData() }) {
             shoesCollectionView.scrollTo(index: currentShoesIndex)
         }
+        
         
         self.layouted = true
     }

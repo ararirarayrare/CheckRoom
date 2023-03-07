@@ -9,6 +9,9 @@ import UIKit
 
 struct Icons {
     
+    static let logoTitle: UIImage? = UIImage(named: "logo-title")
+    static let hanger: UIImage? = UIImage(named: "hanger")
+    
     static let logo: UIImage? = UIImage(named: "logo")
     
     static let addItem: UIImage? = UIImage(named: "add-item-icon")
